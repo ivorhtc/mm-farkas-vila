@@ -1,0 +1,15 @@
+[
+  {"type": "story", "story": "teretana"},
+  {"type": "rule", "cond": "2000", "out": "2000", "desc": "Teretana"},
+  {"type": "rule", "cond": "2001", "out": "2001", "desc": "Bučice"},
+  {"type": "rule", "cond": "2002", "out": "2002", "desc": "Sprave"},
+  {"type": "rule", "cond": "2003", "out": "2003", "desc": "Prostirke"},
+  {"type": "rule", "cond": "2004", "out": "2004", "desc": "Police s opremom - posjetnica Davor i Radojka Fit, admin dobiva flag 20000"},
+  {"type": "rule", "cond": "2005", "out": "2005", "desc": "Prozor teretane"},
+  {"type": "item", "key": "2000", "value": "Moderna soba za vježbanje s bučicama, spravama i velikim prozorom. Možete pretražiti: bučice (2001), sprave (2002), prostirke (2003), police s opremom (2004), prozor (2005)."},
+  {"type": "item", "key": "2001", "value": "Bučice su uredno posložene po težini."},
+  {"type": "item", "key": "2002", "value": "Sprave za vježbanje izgledaju rijetko korištene."},
+  {"type": "item", "key": "2003", "value": "Prostirke za vježbanje smotane su u kutu."},
+  {"type": "item", "key": "2004", "value": "Na policama su ručnici i sportske boce. Između ručnika nalazite vizitku: 'Davor i Radojka Fit — personalni treninzi'. Na vizitki je i Instagram profil: @davoriradojkafit. Možete posjetiti profil (20001).", "global": "20000"},
+  {"type": "item", "key": "2005", "value": "Kroz prozor se vidi balkon na katu."}
+]

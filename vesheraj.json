@@ -1,0 +1,19 @@
+[
+  {"type": "story", "story": "vesheraj"},
+  {"type": "rule", "cond": "12000", "out": "12000", "desc": "Vešeraj"},
+  {"type": "rule", "cond": "12001", "out": "12001", "desc": "Perilica"},
+  {"type": "rule", "cond": "12002", "out": "12002", "desc": "Sušilica"},
+  {"type": "rule", "cond": "12003", "out": "12003", "desc": "Police vešeraja"},
+  {"type": "rule", "cond": "12004", "out": "12004", "desc": "Pod vešeraja"},
+  {"type": "rule", "cond": "12005", "out": "12005", "desc": "Pegla i daska"},
+  {"type": "rule", "cond": "12006 AND NOT 88771", "out": "12006", "desc": "Odvijač - nedavno korišten, bez otisaka"},
+  {"type": "rule", "cond": "12006 AND 88771", "out": "120061", "desc": "Odvijač - otisci prstiju, admin kaže da su Zeleni"},
+  {"type": "item", "key": "12000", "value": "Vešeraj s perilicom i sušilicom. Možete pretražiti: perilicu (12001), sušilicu (12002), police (12003), pod (12004), peglu i dasku (12005), alat (12006)."},
+  {"type": "item", "key": "12001", "value": "Perilica je puna ručnika."},
+  {"type": "item", "key": "12002", "value": "Sušilica je još topla."},
+  {"type": "item", "key": "12003", "value": "Na policama su deterdženti."},
+  {"type": "item", "key": "12004", "value": "Pod je mokar."},
+  {"type": "item", "key": "12005", "value": "Pegla i daska stoje u kutu."},
+  {"type": "item", "key": "12006", "value": "Na polici u kutu stoji odvijač — izgleda kao da je nedavno korišten."},
+  {"type": "item", "key": "120061", "value": "Na polici u kutu stoji odvijač — izgleda kao da je nedavno korišten. Uzimate pribor za otiske i provjerate odvijač. Na njemu su jasni otisci prstiju.", "admin": "Otisci na odvijаču pripadaju Zelenom (Davoru)."}
+]

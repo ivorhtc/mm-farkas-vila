@@ -1,0 +1,15 @@
+[
+  {"type": "story", "story": "spavaca_soba"},
+  {"type": "rule", "cond": "5000", "out": "5000", "desc": "Spavaća soba"},
+  {"type": "rule", "cond": "5001", "out": "5001", "desc": "Krevet"},
+  {"type": "rule", "cond": "5002", "out": "5002", "desc": "Ormar"},
+  {"type": "rule", "cond": "5003", "out": "5003", "desc": "Noćni ormarić - kutija tableta, ali su vitamini"},
+  {"type": "rule", "cond": "5004", "out": "5004", "desc": "Prozor spavaće"},
+  {"type": "rule", "cond": "5005", "out": "5005", "desc": "Pod spavaće"},
+  {"type": "item", "key": "5000", "value": "Velika spavaća soba s krevetom i noćnim ormarićima. Možete pretražiti: krevet (5001), ormar (5002), noćni ormarić (5003), prozor (5004), pod (5005)."},
+  {"type": "item", "key": "5001", "value": "Krevet je uredno pospremljen."},
+  {"type": "item", "key": "5002", "value": "Ormar je pun skupih odijela."},
+  {"type": "item", "key": "5003", "value": "U noćnom ormariću nalazi se kutija tableta za srce — ali kad je otvorite, unutra su samo vitamini. Netko je zamijenio tablete."},
+  {"type": "item", "key": "5004", "value": "Prozor gleda prema vrtu."},
+  {"type": "item", "key": "5005", "value": "Pod je čist, ali se vidi mali trag kapljice vina."}
+]

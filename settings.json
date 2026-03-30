@@ -1,0 +1,31 @@
+[
+  {"p1": "Samir", "color": "#b4acac",
+     "attr": { "icon": "⚫", "n": "Crni", "g": "Crnog", "d": "Crnom", "a": "Crnog", "v":"Crni", "l":"Crnom", "i":"Crnim" }},
+  {"p2": "Igor", "color": "#b4acac",
+    "attr": { "icon": "🟡", "n": "Zuti", "g": "Zutog", "d": "Zutom", "a": "Zutog", "v":"Zuti", "l":"Zutom", "i":"Zutim" }},
+  {"p3": "Viktor", "color": "#b4acac",
+     "attr": { "icon": "🔵", "n": "Plavi", "g": "Plavog", "d": "Plavom", "a": "Plavog", "v":"Plavi", "l":"Plavom", "i":"Plavim" }},
+  {"p4": "Radomir", "color": "#b4acac",
+     "attr": { "icon": "🔴", "n": "Crveni", "g": "Crvenog", "d": "Crvenom", "a": "Crvenog", "v":"Crveni", "l":"Crvenom", "i":"Crvenim" }},
+  {"p5": "Davor", "color": "#b4acac",
+     "attr": { "icon": "🟢", "n": "Zeleni", "g": "Zelenog", "d": "Zelenom", "a": "Zelenog", "v":"Zeleni", "l":"Zelenom", "i":"Zelenim" }},
+  {"p6": "Oliver", "color": "#b4acac",
+     "attr": { "icon": "🟣", "n": "Ljubicasti", "g": "Ljubicastog", "d": "Ljubicastom", "a": "Ljubicastog", "v":"Ljubicasti", "l":"Ljubicastom", "i":"Ljubicastim" }},
+  {"p7": "Voditelj", "color": "#E6E6FA",
+     "attr": { "icon": "⚠️", "n": "Voditelj", "g": "Voditelja", "d": "Voditelju", "a": "Voditelja", "v":"Voditelju", "l":"Voditelju", "i":"Voditeljem" }},
+  {"rooms": {
+    "1000": ["1001", "1002", "1003", "1004"],
+    "2000": ["2001", "2002", "2003", "2004", "2005"],
+    "3000": ["3001", "3002", "3003", "3004", "3005", "3006"],
+    "4000": ["4001", "4002", "4003", "4004", "4005"],
+    "5000": ["5001", "5002", "5003", "5004", "5005"],
+    "6000": ["6001", "6002", "6003", "6004"],
+    "7000": ["7001", "7002", "7003", "7004"],
+    "8000": ["8001", "8002", "8003", "8004", "8005", "8006"],
+    "8100": ["8101", "8102", "8103", "8104"],
+    "9000": ["9001", "9002", "9003", "9004", "9005"],
+    "10000": ["10001", "10002", "10003", "10004", "10005", "10006"],
+    "11000": ["11001", "11002", "11003"],
+    "12000": ["12001", "12002", "12003", "12004", "12005", "12006"]
+  }}
+]

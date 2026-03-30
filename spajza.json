@@ -1,0 +1,14 @@
+[
+  {"type": "story", "story": "spajza"},
+  {"type": "rule", "cond": "7000", "out": "7000", "desc": "Spajza"},
+  {"type": "rule", "cond": "7001", "out": "7001", "desc": "Police spajze"},
+  {"type": "rule", "cond": "7002", "out": "7002", "desc": "Tegle i konzerve"},
+  {"type": "rule", "cond": "7003", "out": "7003", "desc": "Pod spajze"},
+  {"type": "rule", "cond": "7004 AND NOT 40040", "out": "7004", "desc": "Ormar spajze - nalaze pajser, admin daje fizički pajser i flag 40040"},
+  {"type": "rule", "cond": "7004 AND 40040", "out": "7004", "desc": "Ormar spajze - pajser već nađen"},
+  {"type": "item", "key": "7000", "value": "Mala spajza puna tegli i konzervirane hrane. Možete pretražiti: police (7001), tegle i konzerve (7002), pod (7003), ormar (7004)."},
+  {"type": "item", "key": "7001", "value": "Police su prepune hrane — konzerve, tegle, paketi tjestenine."},
+  {"type": "item", "key": "7002", "value": "Jedna tegla je pala i razbila se na podu, staklo je pometeno u kut."},
+  {"type": "item", "key": "7003", "value": "Na podu su sitne mrvice stakla od razbijene tegle."},
+  {"type": "item", "key": "7004", "value": "U ormaru su vreće brašna i šećera. Iza njih, naslonjen uz zid, stoji metalni pajser.", "p7": "Dajte igračima pajser. Global +40040"}
+]

@@ -1,0 +1,20 @@
+[
+  {"type": "story", "story": "kuhinja"},
+  {"type": "rule", "cond": "1000", "out": "1000", "desc": "Kuhinja - opis"},
+  {"type": "rule", "cond": "1001 AND p2 AND NOT p6 AND NOT 1001771 AND NOT 88772", "out": "1001", "desc": "Ladice - Žuti uzima injekciju sam"},
+  {"type": "rule", "cond": "1001 AND p2 AND p6 AND NOT 1001771 AND NOT 88772", "out": "1001883", "desc": "Ladice - Žuti uzima injekciju, Ljubičasti primjećuje"},
+  {"type": "rule", "cond": "1001 AND NOT p2 AND NOT 1001771 AND NOT 88772", "out": "1001881", "desc": "Ladice - nema Žutog, nalaze praznu injekciju"},
+  {"type": "rule", "cond": "1001 AND 1001771", "out": "1001882", "desc": "Ladice - injekcija već uzeta"},
+  {"type": "rule", "cond": "1001 AND 88772 AND NOT 1001771", "out": "1001882", "desc": "Ladice - injekcija već nađena bez Žutog"},
+  {"type": "rule", "cond": "1002", "out": "1002", "desc": "Police sa začinima i čašama"},
+  {"type": "rule", "cond": "1003", "out": "1003", "desc": "Frižider"},
+  {"type": "rule", "cond": "1004", "out": "1004", "desc": "Sudoper"},
+  {"type": "item", "key": "1000", "value": "Prostrana moderna kuhinja s ladicama, policama i velikim srebrnim frižiderom. Možete pretražiti: ladice (1001), police sa začinima i čašama (1002), frižider (1003), sudoper (1004)."},
+  {"type": "item", "key": "1001", "value": "U ladicama su noževi i kuhinjski pribor.", "p2": "Spremaš injekciju u džep bez da itko vidi.", "global": "1001771"},
+  {"type": "item", "key": "1001881", "value": "U ladicama uz noževe i kuhinjski pribor nalazite praznu injekciju.", "global": "88772"},
+  {"type": "item", "key": "1001882", "value": "U ladicama su noževi i kuhinjski pribor."},
+  {"type": "item", "key": "1001883", "value": "U ladicama su noževi i kuhinjski pribor.", "p2": "Spremaš injekciju u džep i nadaš se da nitko nije vidio.", "p6": "Primjećuješ da 🟡 Žuti sprema neku injekciju u džep.", "global": "1001771"},
+  {"type": "item", "key": "1002", "value": "Police su pune začina i čaša za vino, sve uredno posloženo."},
+  {"type": "item", "key": "1003", "value": "Frižider je gotovo prazan osim nekoliko boca vina i male kutije s lijekovima."},
+  {"type": "item", "key": "1004", "value": "Sudoper je čist, ali u odvodu se osjeti blagi miris vina."}
+]

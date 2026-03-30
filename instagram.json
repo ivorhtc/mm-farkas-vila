@@ -1,0 +1,5 @@
+[
+  {"type": "story", "story": "instagram"},
+  {"type": "rule", "cond": "20001 AND 20000", "out": "20001", "desc": "Instagram @davoriradojkafit - Radojka se izbrisala"},
+  {"type": "item", "key": "20001", "value": "Instagram profil @davoriradojkafit. Zadnji post je star tri tjedna — fotografija para na treningu, nasmiješeni. Komentari klijenata: 'Gdje ste nestali?', 'Sve ok?'. Radojka više ne prati profil i izbrisala se s njega. Davor je zadnji put bio aktivan prije tjedan dana."}
+]

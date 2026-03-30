@@ -1,0 +1,17 @@
+[
+  {"type": "story", "story": "blagovaonica"},
+  {"type": "rule", "cond": "3000", "out": "3000", "desc": "Blagovaonica"},
+  {"type": "rule", "cond": "3001", "out": "3001", "desc": "Stol - mrlja od vina"},
+  {"type": "rule", "cond": "3002", "out": "3002", "desc": "Stolice"},
+  {"type": "rule", "cond": "3003", "out": "3003", "desc": "Vitrina - prazno mjesto"},
+  {"type": "rule", "cond": "3004", "out": "3004", "desc": "Ormar za pribor"},
+  {"type": "rule", "cond": "3005", "out": "3005", "desc": "Pod tepihom - ogrebotina kao da je nešto teško vučeno"},
+  {"type": "rule", "cond": "3006", "out": "3006", "desc": "Prozor blagovaonice"},
+  {"type": "item", "key": "3000", "value": "Velika blagovaonica s dugim drvenim stolom i vitrinom punom tanjura. Možete pretražiti: stol (3001), stolice (3002), vitrina (3003), ormar za pribor (3004), pod tepihom (3005), prozor (3006)."},
+  {"type": "item", "key": "3001", "value": "Na stolu je mrlja od vina i jedna čaša koja još miriše na alkohol."},
+  {"type": "item", "key": "3002", "value": "Stolice su uredno poredane kao nakon večere."},
+  {"type": "item", "key": "3003", "value": "Vitrina je puna tanjura i čaša, ali jedna polica ima prazno mjesto."},
+  {"type": "item", "key": "3004", "value": "U ormaru za pribor nalazi se srebrni pribor i nekoliko svijeća."},
+  {"type": "item", "key": "3005", "value": "Pod tepihom nalazi se mala ogrebotina na parketu — kao da je nešto teško povučeno prema hodniku."},
+  {"type": "item", "key": "3006", "value": "Prozor gleda na prilaz vile."}
+]

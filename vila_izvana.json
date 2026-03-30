@@ -1,0 +1,7 @@
+[
+  {"type": "story", "story": "vila_izvana"},
+  {"type": "rule", "cond": "1100 AND NOT 80021", "out": "1100", "desc": "Vila izvana - ne vide godinu"},
+  {"type": "rule", "cond": "1100 AND 80021", "out": "1101", "desc": "Vila izvana - vide godinu 2004, dobiju flag 800211"},
+  {"type": "item", "key": "1100", "value": "Moderna vila okružena je visokim borovima i skrivena iza elegantne crne metalne ograde s velikim ulaznim vratima. Kuća ima velike staklene prozore, prostranu garažu i osvijetljeni ulaz do kojeg vodi široki prilaz. Na vanjskom zidu pokraj glavnih vrata nalazi se mala metalna tabla s ugraviranom godinom izgradnje vile."},
+  {"type": "item", "key": "1101", "value": "Moderna vila okružena je visokim borovima i skrivena iza elegantne crne metalne ograde s velikim ulaznim vratima. Na vanjskom zidu pokraj glavnih vrata nalazi se mala metalna tabla s ugraviranom godinom: 2004.", "global": "800211"}
+]

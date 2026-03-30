@@ -1,0 +1,13 @@
+[
+  {"type": "story", "story": "wc"},
+  {"type": "rule", "cond": "6000", "out": "6000", "desc": "WC"},
+  {"type": "rule", "cond": "6001", "out": "6001", "desc": "Umivaonik - mokar"},
+  {"type": "rule", "cond": "6002", "out": "6002", "desc": "Ormar u WC-u - prazan prostor gdje su bile tablete"},
+  {"type": "rule", "cond": "6003", "out": "6003", "desc": "WC školjka"},
+  {"type": "rule", "cond": "6004", "out": "6004", "desc": "Ogledalo"},
+  {"type": "item", "key": "6000", "value": "Mali WC s ogledalom i umivaonikom. Možete pretražiti: umivaonik (6001), ormar/police (6002), WC školjku (6003), ogledalo (6004)."},
+  {"type": "item", "key": "6001", "value": "Umivaonik je mokar kao da ga je netko nedavno koristio."},
+  {"type": "item", "key": "6002", "value": "U ormariću su ručnici i lijekovi. Između kutija primjećujete prazan prostor — kao da je nešto nedavno izvađeno i zamijenjeno."},
+  {"type": "item", "key": "6003", "value": "WC školjka je čista."},
+  {"type": "item", "key": "6004", "value": "Ogledalo je lagano napuklo u kutu."}
+]

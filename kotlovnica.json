@@ -1,0 +1,11 @@
+[
+  {"type": "story", "story": "kotlovnica"},
+  {"type": "rule", "cond": "11000", "out": "11000", "desc": "Kotlovnica"},
+  {"type": "rule", "cond": "11001", "out": "11001", "desc": "Kotlovi"},
+  {"type": "rule", "cond": "11002", "out": "11002", "desc": "Cijevi prema vinskom podrumu"},
+  {"type": "rule", "cond": "11003", "out": "11003", "desc": "Ventili - jedan namješten drugačije, admin flag 110031"},
+  {"type": "item", "key": "11000", "value": "Kotlovnica puna cijevi i bojlera. Možete pretražiti: kotlove (11001), cijevi (11002), ventile (11003)."},
+  {"type": "item", "key": "11001", "value": "Kotlovi tiho zuje."},
+  {"type": "item", "key": "11002", "value": "Cijevi vode prema vinskom podrumu."},
+  {"type": "item", "key": "11003", "value": "Ventili izgledaju kao da ih je netko nedavno dirao — jedan je namješten drugačije od ostalih.", "global": "110031"}
+]

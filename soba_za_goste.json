@@ -1,0 +1,15 @@
+[
+  {"type": "story", "story": "soba_za_goste"},
+  {"type": "rule", "cond": "9000", "out": "9000", "desc": "Soba za goste"},
+  {"type": "rule", "cond": "9001", "out": "9001", "desc": "Krevet - zgužvan, netko je spavao"},
+  {"type": "rule", "cond": "9002", "out": "9002", "desc": "Ormar - prazan"},
+  {"type": "rule", "cond": "9003", "out": "9003", "desc": "Stol - laptop, otvara hakiranje, admin dobiva flag 90031"},
+  {"type": "rule", "cond": "9004", "out": "9004", "desc": "Pod sobe za goste"},
+  {"type": "rule", "cond": "9005", "out": "9005", "desc": "Prozor - pogled direktno na garažu"},
+  {"type": "item", "key": "9000", "value": "Soba za goste s krevetom i malim stolom. Možete pretražiti: krevet (9001), ormar (9002), stol (9003), pod (9004), prozor (9005)."},
+  {"type": "item", "key": "9001", "value": "Krevet izgleda kao da je netko nedavno ležao na njemu — jastuk je zgužvan, a deka malo povučena."},
+  {"type": "item", "key": "9002", "value": "Ormar je gotovo prazan."},
+  {"type": "item", "key": "9003", "value": "Na stolu je laptop — otvoren i uključen. Čini se da je vlasnik zaboravio isključiti ga. Na ekranu je otvorena kladionička stranica. Laptop je nezaključan. Možete hakirati mobitele svih prisutnih (8007001-8007006) i Zvonimirov mobitel (8007007).", "global": "90031"},
+  {"type": "item", "key": "9004", "value": "Pod je čist."},
+  {"type": "item", "key": "9005", "value": "Prozor gleda prema dvorištu i direktno prema garaži."}
+]
