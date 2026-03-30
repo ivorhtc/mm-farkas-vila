@@ -1,0 +1,276 @@
+<!doctype html>
+<html lang="hr">
+<head>
+    <meta charset="utf-8">
+    <title>Farkaš Vila — Tlocrt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", system-ui, sans-serif;
+            background: #1a1a1a;
+            color: #eee;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+        h1 { color: #d4b46e; margin: 0 0 16px; font-size: 20px; }
+
+        .search-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 20px;
+            background: #2a2a2a;
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 10px 16px;
+            width: 100%;
+            max-width: 660px;
+            box-sizing: border-box;
+        }
+        .search-box input {
+            background: transparent;
+            border: none;
+            outline: none;
+            color: #eee;
+            font-size: 18px;
+            flex: 1;
+            font-family: monospace;
+        }
+        .search-box input::placeholder { color: #555; }
+        .flash {
+            font-size: 16px;
+            color: #d4b46e;
+            min-width: 180px;
+            min-height: 24px;
+            transition: opacity 0.3s;
+        }
+        .flash.error { color: #c84b4b; }
+
+        svg { width: 100%; max-width: 660px; border-radius: 10px; }
+
+        .room-label { transition: opacity 0.4s; }
+        .room-rect  { transition: filter 0.3s, stroke 0.3s; }
+
+        .glow rect {
+            filter: drop-shadow(0 0 8px #d4b46e) !important;
+            stroke: #d4b46e !important;
+            stroke-width: 2.5px !important;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🏠 Farkaš vila</h1>
+
+<div class="search-box">
+    <input id="roomInput" type="text" placeholder="npr. 1000 ili 1000, 5000" autofocus>
+    <div class="flash" id="flash"></div>
+</div>
+
+<svg id="tlocrt" viewBox="0 0 680 780">
+
+    <!-- PODRUM -->
+    <text x="48" y="44" font-size="11" fill="#aaa" font-family="Segoe UI,sans-serif" font-weight="500">PODRUM</text>
+    <rect x="40" y="50" width="600" height="145" rx="8" fill="#1a2a3a" stroke="#378ADD" stroke-width="1.5"/>
+
+    <g id="r10000">
+        <rect x="56" y="64" width="170" height="117" rx="5" fill="#162030" stroke="#185FA5" stroke-width="1"/>
+        <text class="room-label" x="141" y="119" text-anchor="middle" font-size="14" font-weight="500" fill="#85B7EB" font-family="Segoe UI,sans-serif" opacity="0">🍷 Vinski podrum</text>
+        <text x="141" y="137" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">10000</text>
+    </g>
+
+    <g id="r11000">
+        <rect x="238" y="64" width="155" height="117" rx="5" fill="#1e1510" stroke="#993C1D" stroke-width="1"/>
+        <text class="room-label" x="315" y="119" text-anchor="middle" font-size="14" font-weight="500" fill="#F0997B" font-family="Segoe UI,sans-serif" opacity="0">🌡️ Kotlovnica</text>
+        <text x="315" y="137" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">11000</text>
+    </g>
+
+    <g id="r12000">
+        <rect x="405" y="64" width="140" height="117" rx="5" fill="#131a10" stroke="#3B6D11" stroke-width="1"/>
+        <text class="room-label" x="475" y="112" text-anchor="middle" font-size="14" font-weight="500" fill="#97C459" font-family="Segoe UI,sans-serif" opacity="0">👕 Vešeraj</text>
+        <text x="475" y="130" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">12000</text>
+    </g>
+
+    <rect x="556" y="64" width="72" height="117" rx="5" fill="#222" stroke="#555" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="592" y="112" text-anchor="middle" font-size="20" font-family="Segoe UI,sans-serif">🪜</text>
+    <text x="592" y="132" text-anchor="middle" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">gore</text>
+
+    <!-- PRIZEMLJE -->
+    <text x="48" y="214" font-size="11" fill="#aaa" font-family="Segoe UI,sans-serif" font-weight="500">PRIZEMLJE</text>
+    <rect x="40" y="220" width="600" height="225" rx="8" fill="#131a10" stroke="#639922" stroke-width="1.5"/>
+
+    <rect x="56" y="234" width="72" height="100" rx="5" fill="#222" stroke="#555" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="92" y="275" text-anchor="middle" font-size="20" font-family="Segoe UI,sans-serif">🪜</text>
+    <text x="92" y="292" text-anchor="middle" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">podrum</text>
+    <rect x="56" y="346" width="72" height="85" rx="5" fill="#222" stroke="#555" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="92" y="381" text-anchor="middle" font-size="20" font-family="Segoe UI,sans-serif">🪜</text>
+    <text x="92" y="398" text-anchor="middle" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">kat</text>
+
+    <g id="r1100">
+        <rect x="140" y="234" width="130" height="85" rx="5" fill="#152010" stroke="#3B6D11" stroke-width="1"/>
+        <text class="room-label" x="205" y="272" text-anchor="middle" font-size="14" font-weight="500" fill="#97C459" font-family="Segoe UI,sans-serif" opacity="0">🌿 Vrt</text>
+        <text x="205" y="290" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">1100</text>
+    </g>
+
+    <g id="r1000">
+        <rect x="282" y="234" width="130" height="85" rx="5" fill="#1e1a10" stroke="#BA7517" stroke-width="1"/>
+        <text class="room-label" x="347" y="272" text-anchor="middle" font-size="14" font-weight="500" fill="#FAC775" font-family="Segoe UI,sans-serif" opacity="0">🍳 Kuhinja</text>
+        <text x="347" y="290" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">1000</text>
+    </g>
+
+    <g id="r2000">
+        <rect x="424" y="234" width="130" height="85" rx="5" fill="#1e1015" stroke="#993556" stroke-width="1"/>
+        <text class="room-label" x="489" y="272" text-anchor="middle" font-size="14" font-weight="500" fill="#ED93B1" font-family="Segoe UI,sans-serif" opacity="0">🏋️ Teretana</text>
+        <text x="489" y="290" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">2000</text>
+    </g>
+
+    <g id="r3000">
+        <rect x="140" y="331" width="195" height="100" rx="5" fill="#13101e" stroke="#534AB7" stroke-width="1"/>
+        <text class="room-label" x="237" y="376" text-anchor="middle" font-size="14" font-weight="500" fill="#AFA9EC" font-family="Segoe UI,sans-serif" opacity="0">🪑 Blagovaonica</text>
+        <text x="237" y="394" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">3000</text>
+    </g>
+
+    <g id="r4000">
+        <rect x="347" y="331" width="207" height="100" rx="5" fill="#1a1a1a" stroke="#5F5E5A" stroke-width="1"/>
+        <text class="room-label" x="450" y="376" text-anchor="middle" font-size="14" font-weight="500" fill="#B4B2A9" font-family="Segoe UI,sans-serif" opacity="0">🚗 Garaža</text>
+        <text x="450" y="394" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">4000</text>
+    </g>
+
+    <!-- KAT -->
+    <text x="48" y="464" font-size="11" fill="#aaa" font-family="Segoe UI,sans-serif" font-weight="500">KAT</text>
+    <rect x="40" y="470" width="600" height="225" rx="8" fill="#1e1015" stroke="#D4537E" stroke-width="1.5"/>
+
+    <rect x="56" y="484" width="72" height="197" rx="5" fill="#222" stroke="#555" stroke-width="1" stroke-dasharray="4 3"/>
+    <text x="92" y="573" text-anchor="middle" font-size="20" font-family="Segoe UI,sans-serif">🪜</text>
+    <text x="92" y="591" text-anchor="middle" font-size="11" fill="#555" font-family="Segoe UI,sans-serif">prizemlje</text>
+
+    <g id="r5000">
+        <rect x="140" y="484" width="160" height="95" rx="5" fill="#1e1810" stroke="#854F0B" stroke-width="1"/>
+        <text class="room-label" x="220" y="522" text-anchor="middle" font-size="14" font-weight="500" fill="#FAC775" font-family="Segoe UI,sans-serif" opacity="0">🛌 Spavaća soba</text>
+        <text x="220" y="540" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">5000</text>
+    </g>
+
+    <g id="r6000">
+        <rect x="312" y="484" width="100" height="95" rx="5" fill="#101e18" stroke="#0F6E56" stroke-width="1"/>
+        <text class="room-label" x="362" y="522" text-anchor="middle" font-size="14" font-weight="500" fill="#5DCAA5" font-family="Segoe UI,sans-serif" opacity="0">🚽 WC</text>
+        <text x="362" y="540" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">6000</text>
+    </g>
+
+    <g id="r7000">
+        <rect x="424" y="484" width="100" height="95" rx="5" fill="#12101e" stroke="#534AB7" stroke-width="1"/>
+        <text class="room-label" x="474" y="522" text-anchor="middle" font-size="14" font-weight="500" fill="#AFA9EC" font-family="Segoe UI,sans-serif" opacity="0">🧹 Spajza</text>
+        <text x="474" y="540" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">7000</text>
+    </g>
+
+    <g id="r8000">
+        <rect x="536" y="484" width="92" height="95" rx="5" fill="#101520" stroke="#185FA5" stroke-width="1"/>
+        <text class="room-label" x="582" y="515" text-anchor="middle" font-size="13" font-weight="500" fill="#85B7EB" font-family="Segoe UI,sans-serif" opacity="0">📚 Radna</text>
+        <text class="room-label" x="582" y="533" text-anchor="middle" font-size="13" font-weight="500" fill="#85B7EB" font-family="Segoe UI,sans-serif" opacity="0">soba</text>
+        <text x="582" y="551" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">8000</text>
+    </g>
+
+    <g id="r9000">
+        <rect x="140" y="591" width="200" height="90" rx="5" fill="#1e1510" stroke="#993C1D" stroke-width="1"/>
+        <text class="room-label" x="240" y="630" text-anchor="middle" font-size="14" font-weight="500" fill="#F0997B" font-family="Segoe UI,sans-serif" opacity="0">🛌 Soba za goste</text>
+        <text x="240" y="648" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">9000</text>
+    </g>
+
+    <g id="r8100">
+        <rect x="352" y="591" width="276" height="90" rx="5" fill="#101e18" stroke="#0F6E56" stroke-width="1" stroke-dasharray="5 3"/>
+        <text class="room-label" x="490" y="630" text-anchor="middle" font-size="14" font-weight="500" fill="#5DCAA5" font-family="Segoe UI,sans-serif" opacity="0">🌙 Balkon</text>
+        <text x="490" y="648" text-anchor="middle" font-size="12" fill="#444" font-family="Segoe UI,sans-serif">8100</text>
+    </g>
+
+</svg>
+
+<script>
+    const rooms = {
+        '1000':  '🍳 Kuhinja',
+        '1100':  '🌿 Vrt',
+        '2000':  '🏋️ Teretana',
+        '3000':  '🪑 Blagovaonica',
+        '4000':  '🚗 Garaža',
+        '5000':  '🛌 Spavaća soba',
+        '6000':  '🚽 WC',
+        '7000':  '🧹 Spajza',
+        '8000':  '📚 Radna soba',
+        '8100':  '🌙 Balkon',
+        '9000':  '🛌 Soba za goste',
+        '10000': '🍷 Vinski podrum',
+        '11000': '🌡️ Kotlovnica',
+        '12000': '👕 Vešeraj',
+    };
+
+    // Sobe koje su već otkrivene (ostaju vidljive)
+    const discovered = new Set();
+    // Trenutno glowing (samo zadnji input)
+    let currentGlow = null;
+
+    function applyState(newKeys) {
+        // Dodaj nove u discovered
+        newKeys.forEach(k => { if (rooms[k]) discovered.add(k); });
+
+        // Makni glow sa svih
+        document.querySelectorAll('.glow').forEach(el => el.classList.remove('glow'));
+        currentGlow = null;
+
+        // Sve otkrivene sobe — pokaži label
+        Object.keys(rooms).forEach(k => {
+            const el = document.getElementById('r' + k);
+            if (!el) return;
+            if (discovered.has(k)) {
+                el.querySelectorAll('.room-label').forEach(t => t.setAttribute('opacity', '1'));
+            } else {
+                el.querySelectorAll('.room-label').forEach(t => t.setAttribute('opacity', '0'));
+            }
+        });
+
+        // Zadnji upisani valid — glow
+        const lastValid = [...newKeys].reverse().find(k => rooms[k]);
+        if (lastValid) {
+            const el = document.getElementById('r' + lastValid);
+            if (el) {
+                el.classList.add('glow');
+                currentGlow = lastValid;
+            }
+        }
+    }
+
+    let flashTimer = null;
+
+    document.getElementById('roomInput').addEventListener('input', function() {
+        const raw = this.value;
+        const parts = raw.split(/[,\s]+/).map(s => s.trim()).filter(Boolean);
+        const flash = document.getElementById('flash');
+
+        if (!parts.length) {
+            flash.textContent = '';
+            flash.className = 'flash';
+            applyState([]);
+            return;
+        }
+
+        const valid = parts.filter(k => rooms[k]);
+        const invalid = parts.filter(k => k.length >= 3 && !rooms[k]);
+
+        applyState(valid);
+
+        // Flash poruka
+        clearTimeout(flashTimer);
+        if (valid.length) {
+            const last = valid[valid.length - 1];
+            flash.textContent = rooms[last];
+            flash.className = 'flash';
+        } else if (invalid.length) {
+            flash.textContent = '?';
+            flash.className = 'flash error';
+        } else {
+            flash.textContent = '';
+        }
+    });
+</script>
+</body>
+</html>
