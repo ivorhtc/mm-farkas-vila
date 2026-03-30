@@ -1,0 +1,15 @@
+[
+  {"type": "story", "story": "Ovdje su neke globalne varijable"},
+
+  {"type": "rule", "cond": "6", "out": "88771", "desc": "Probor za otkrivanje otisaka."},
+
+  {
+    "type": "item",
+    "key": "88771",
+    "global": "88771",
+    "value":  "🧠 Svi s tobom u sobi vide poruku: Našli ste pribor za otiske, od sada cete nalaziti otiske gdje ima smisla.",
+    "admin": "Našli ste pribor za otiske, od sada cete nalaziti otiske gdje ima smisla. Kartica 6. Global +88771",
+    "kartica": "6"
+  }
+
+]

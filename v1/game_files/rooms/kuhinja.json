@@ -28,7 +28,7 @@
       "winner": "Između boca vina primjećuješ kutijicu tableta. Diskretno ih spremaš u džep.",
       "others": "Vidite kako ${winnerN} uzima nešto iz frižidera i sprema u džep.",
       "p7": "Daj ${winnerD} lijekove (kartica 10032). Global +10032",
-      "kartica": "💊 TABLETE — Prije nečije runde možeš mu dati tabletu u piće. Ta osoba preskače svoju rundu. Može se koristiti jednom u igri."
+      "kartica": "💊 TABLETE — Prije nečije runde možeš mu staviti tabletu u piće. Ta osoba preskače svoju rundu. Može se koristiti jednom u igri."
     }
   },
   {"type": "item", "key": "1003", "value": "Frižider je gotovo prazan osim nekoliko boca vina."},
