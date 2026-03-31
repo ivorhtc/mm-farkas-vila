@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <title>Inicijativa</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Bebas+Neue&display=swap');
+
+    :root {
+      --bg: #0e0e0e;
+      --surface: #161616;
+      --border: #2a2a2a;
+      --gold: #d4b46e;
+      --gold-dim: #8a7248;
+      --text: #e8e8e8;
+      --muted: #555;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 32px 16px;
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 48px;
+      letter-spacing: 6px;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+    }
+
+    /* LISTA */
+    #initiative-list {
+      width: 100%;
+      max-width: 560px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .player-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 10px 14px;
+      transition: transform 0.25s ease, border-color 0.2s, box-shadow 0.2s;
+      position: relative;
+    }
+
+    .player-row.has-init {
+      border-color: var(--gold-dim);
+    }
+
+    .player-row.top-init {
+      border-color: var(--gold);
+      box-shadow: 0 0 12px rgba(212,180,110,0.15);
+    }
+
+    /* Redni broj (rang) */
+    .rank {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      color: var(--muted);
+      width: 24px;
+      text-align: center;
+      flex-shrink: 0;
+      transition: color 0.2s;
+    }
+    .player-row.has-init .rank { color: var(--gold); }
+
+    /* Input inicijative */
+    .init-input {
+      width: 48px;
+      height: 36px;
+      background: #1e1e1e;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--gold);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s;
+      flex-shrink: 0;
+    }
+    .init-input:focus { border-color: var(--gold); }
+    .init-input::placeholder { color: #333; font-size: 16px; }
+
+    /* Ikona igrača */
+    .player-icon {
+      font-size: 22px;
+      width: 32px;
+      text-align: center;
+      flex-shrink: 0;
+    }
+
+    /* Ime igrača */
+    .player-name {
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 1px;
+      flex: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* Input za sobe/flagove */
+    .room-input {
+      flex: 2;
+      height: 36px;
+      background: #1a1a1a;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      padding: 0 10px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .room-input:focus { border-color: #444; }
+    .room-input::placeholder { color: #333; }
+
+    /* Hint box */
+    .hint {
+      position: absolute;
+      bottom: -1px;
+      left: 14px;
+      right: 14px;
+      transform: translateY(100%);
+      background: #1e1e1e;
+      border: 1px solid #333;
+      border-top: none;
+      border-radius: 0 0 6px 6px;
+      padding: 4px 8px;
+      font-size: 11px;
+      color: var(--gold-dim);
+      display: none;
+      z-index: 5;
+    }
+    .hint.visible { display: block; }
+
+    /* Globalni input */
+    .globals-wrap {
+      width: 100%;
+      max-width: 560px;
+      margin-top: 16px;
+    }
+    .globals-label {
+      font-size: 11px;
+      color: var(--muted);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .globals-input {
+      width: 100%;
+      height: 38px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      padding: 0 14px;
+      outline: none;
+    }
+    .globals-input:focus { border-color: #444; }
+    .globals-input::placeholder { color: #333; }
+
+    /* Eval button */
+    .eval-btn {
+      margin-top: 24px;
+      padding: 14px 48px;
+      background: var(--gold);
+      border: none;
+      border-radius: 8px;
+      color: #0e0e0e;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 4px;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+    }
+    .eval-btn:hover { opacity: 0.85; }
+    .eval-btn:active { transform: scale(0.97); }
+
+    /* Divider voditelj */
+    .divider {
+      width: 100%;
+      max-width: 560px;
+      border: none;
+      border-top: 1px solid var(--border);
+      margin: 8px 0;
+    }
+  </style>
+</head>
+<body>
+
+<h1>INICIJATIVA</h1>
+<p class="subtitle">Farkaš vila · redosljed akcija</p>
+
+<div id="initiative-list">
+  <!-- Generirano JS-om -->
+</div>
+
+<hr class="divider">
+
+<div class="globals-wrap">
+  <div class="globals-label">Globalni flagovi</div>
+  <input class="globals-input" id="p-globalNumbers" placeholder="npr. 80021, 90031, 100001">
+</div>
+
+<button class="eval-btn" id="evalBtn">⚖ RESETIRAJ</button>
+
+<script>
+  const PLAYERS = [
+    { id: 'p1', icon: '🐈‍⬛', name: 'Crni · Samir' },
+    { id: 'p2', icon: '🐥', name: 'Žuti · Igor' },
+    { id: 'p3', icon: '🐋', name: 'Plavi · Viktor' },
+    { id: 'p4', icon: '🦀', name: 'Crveni · Radomir' },
+    { id: 'p5', icon: '🐍', name: 'Zeleni · Davor' },
+    { id: 'p6', icon: '🍆', name: 'Ljubičasti · Oliver' },
+    { id: 'p7', icon: '⚠️', name: 'Voditelj' },
+  ];
+
+  const list = document.getElementById('initiative-list');
+
+  // Generiraj redove
+  PLAYERS.forEach(p => {
+    const row = document.createElement('div');
+    row.className = 'player-row';
+    row.id = 'row-' + p.id;
+    row.innerHTML = `
+      <div class="rank" id="rank-${p.id}">—</div>
+      <input class="init-input" id="init-${p.id}" placeholder="—" type="number" min="1" max="99">
+      <div class="player-icon">${p.icon}</div>
+      <div class="player-name">${p.name}</div>
+      <!--<input class="room-input" id="${p.id}" placeholder="sobe / flagovi">
+      <div class="hint" id="desc-${p.id}"></div>-->
+    `;
+    list.appendChild(row);
+    if (p.id === 'p6') {
+      const div = document.createElement('hr');
+      div.className = 'divider';
+      list.appendChild(div);
+    }
+  });
+
+  // Sortiranje po inicijativi
+  function sortRows() {
+    const rows = PLAYERS.map(p => {
+      const val = parseInt(document.getElementById('init-' + p.id).value);
+      return { id: p.id, val: isNaN(val) ? Infinity : val };
+    });
+    rows.sort((a, b) => a.val - b.val);
+
+    // Makni divider privremeno
+    const divider = list.querySelector('.divider');
+    if (divider) list.removeChild(divider);
+
+    // Sortiraj DOM
+    let rank = 1;
+    rows.forEach(r => {
+      const row = document.getElementById('row-' + r.id);
+      const rankEl = document.getElementById('rank-' + r.id);
+      list.appendChild(row);
+      if (r.val === Infinity) {
+        rankEl.textContent = '—';
+        row.classList.remove('has-init', 'top-init');
+      } else {
+        rankEl.textContent = rank++;
+        row.classList.add('has-init');
+        row.classList.remove('top-init');
+      }
+    });
+
+    // Označi prvog
+    const first = rows.find(r => r.val !== Infinity);
+    if (first) {
+      document.getElementById('row-' + first.id).classList.add('top-init');
+    }
+
+    // Vrati divider ispred voditelja
+    const vodRow = document.getElementById('row-p7');
+    if (vodRow) list.insertBefore(divider || createDivider(), vodRow);
+  }
+
+  function createDivider() {
+    const d = document.createElement('hr');
+    d.className = 'divider';
+    return d;
+  }
+
+  // Slušaj promjene inicijative
+  PLAYERS.forEach(p => {
+    let timer = null;
+    document.getElementById('init-' + p.id).addEventListener('input', () => {
+      clearTimeout(timer);
+      timer = setTimeout(() => sortRows(), 1000);
+    });
+  });
+
+  // Evaluj button - šalje signal (ovdje samo log, spoji s glavnim evaluatorom)
+  document.getElementById('evalBtn').addEventListener('click', () => {
+    // Skupi podatke
+    PLAYERS.forEach(p => {
+      document.getElementById('init-' + p.id).value = '-';
+    });
+    /*const inputs = {};
+    PLAYERS.forEach(p => {
+      inputs[p.id] = document.getElementById(p.id).value.trim();
+    });
+    inputs.globals = document.getElementById('p-globalNumbers').value.trim();
+    console.log('Evaluiraj:', inputs);
+    // TODO: spoji s index.html evaluatorom
+    alert('Evaluacija — spoji s index.html!');*/
+  });
+</script>
+</body>
+</html>

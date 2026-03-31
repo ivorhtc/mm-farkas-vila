@@ -1,17 +1,51 @@
 [
   {"type": "story", "story": "blagovaonica"},
-  {"type": "rule", "cond": "3000", "out": "3000", "desc": "Blagovaonica"},
-  {"type": "rule", "cond": "3001", "out": "3001", "desc": "Stol - mrlja od vina"},
+
+  {"type": "rule", "cond": "3000", "out": "3000", "desc": "Blagovaonica - opis"},
+  {"type": "rule", "cond": "3001", "out": "3001", "desc": "Stol - mrlja od vina, čaša"},
+  {"type": "rule", "cond": "3001 AND 88771", "out": "30011", "desc": "Stol - otisci"},
   {"type": "rule", "cond": "3002", "out": "3002", "desc": "Stolice"},
-  {"type": "rule", "cond": "3003", "out": "3003", "desc": "Vitrina - prazno mjesto"},
-  {"type": "rule", "cond": "3004", "out": "3004", "desc": "Ormar za pribor"},
-  {"type": "rule", "cond": "3005", "out": "3005", "desc": "Pod tepihom - ogrebotina kao da je nešto teško vučeno"},
-  {"type": "rule", "cond": "3006", "out": "3006", "desc": "Prozor blagovaonice"},
-  {"type": "item", "key": "3000", "value": "Velika blagovaonica s dugim drvenim stolom i vitrinom punom tanjura. Možete pretražiti: stol (3001), stolice (3002), vitrina (3003), ormar za pribor (3004), pod tepihom (3005), prozor (3006)."},
-  {"type": "item", "key": "3001", "value": "Na stolu je mrlja od vina i jedna čaša koja još miriše na alkohol."},
-  {"type": "item", "key": "3002", "value": "Stolice su uredno poredane kao nakon večere."},
-  {"type": "item", "key": "3003", "value": "Vitrina je puna tanjura i čaša, ali jedna polica ima prazno mjesto."},
-  {"type": "item", "key": "3004", "value": "U ormaru za pribor nalazi se srebrni pribor i nekoliko svijeća."},
-  {"type": "item", "key": "3005", "value": "Pod tepihom nalazi se mala ogrebotina na parketu — kao da je nešto teško povučeno prema hodniku."},
-  {"type": "item", "key": "3006", "value": "Prozor gleda na prilaz vile."}
+  {"type": "rule", "cond": "3003 AND NOT 30030", "out": "3003event", "desc": "Vitrina - Hell energetsko, tko prvi uzima"},
+  {"type": "rule", "cond": "3003 AND 30030", "out": "3003", "desc": "Vitrina - Hell već uzet"},
+  {"type": "rule", "cond": "3003 AND 88771", "out": "30031", "desc": "Vitrina - otisci"},
+  {"type": "rule", "cond": "3004 AND NOT 3040", "out": "30040", "desc": "Ormar - ključevi podruma još tu"},
+  {"type": "rule", "cond": "3004 AND 3040", "out": "3004", "desc": "Ormar - ključevi već uzeti"},
+  {"type": "rule", "cond": "3004 AND 88771", "out": "30041", "desc": "Ormar - otisci"},
+
+  {"type": "item", "key": "3000", "value": "Velika blagovaonica s dugim drvenim stolom i vitrinom punom tanjura. Možete pretražiti: stol (3001), stolice (3002), vitrina (3003), ormar za pribor (3004)."},
+  {"type": "item", "key": "3001", "value": "Na stolu je mrlja od vina i jedna čaša koja još miriše na alkohol. Na boci vina nema tragova — tko god je točio, bio je pažljiv."},
+  {"type": "item", "key": "30011", "value": "Otisci prstiju na čaši: ⚪ Zvonimir. Na boci vina nema otisaka — netko je točio s rukavicama."},
+  {"type": "item", "key": "3002", "value": "Stolice su uredno poredane kao nakon večere. Jedna je malo odmaknuta od stola — zadnja osoba koja je sjela nije je potisnula nazad."},
+
+  {"type": "event", "key": "3003event",
+    "logic": {"winnerStrategy": "priorityList", "priorityList": ["p1","p2","p3","p4","p5","p6"]},
+    "output": {
+      "winner": "Vitrina je puna tanjura i čaša, ali jedna polica ima prazno mjesto. Između čaša odskače crvena limenka Hell — potpuno out of place. Diskretno je spremaš.",
+      "others": "Vitrina je puna tanjura i čaša, ali jedna polica ima prazno mjesto. ${winnerN} uzima nešto iz vitrine.",
+      "p7": "Daj ${winnerD} Hell energetsko (kartica 30030). Global +30030",
+      "kartica": "⚡ HELL — Možeš iskoristiti jednom prije svoje runde da povećaš svoju inicijativu za +5. Kaži voditelju prije nego upišeš brojeve."
+    }
+  },
+  {"type": "item", "key": "3003", "value": "Vitrina je puna tanjura i čaša, ali jedna polica ima prazno mjesto. Između čaša ostao je prazan prostor gdje je stajala limenka."},
+  {"type": "item", "key": "30031", "value": "Otisci prstiju na čašama u vitrini: ⚪ Zvonimir."},
+
+  {"type": "event", "key": "30040",
+    "logic": {"winnerStrategy": "priorityList", "priorityList": ["p1","p2","p3","p4","p5","p6"]},
+    "output": {
+      "winner": "Na ormaru za pribor visi mali ključ s karticom 'Podrum'. Diskretno ga spremaš.",
+      "others": "Na ormaru za pribor visio je mali ključ — ${winnerN} ga uzima.",
+      "p7": "Daj ${winnerD} ključ podruma (kartica 3041). Global +3040 +3041",
+      "kartica": "🗝️ KLJUČ PODRUMA — Možeš otvoriti vrata prema podrumu. Global +100004"
+    }
+  },
+  {"type": "item", "key": "3004", "value": "U ormaru za pribor nalazi se srebrni pribor i nekoliko svijeća. Na kuki gdje je visio ključ podruma ostao je samo prazan lanac."},
+  {"type": "item", "key": "30041", "value": "Otisci prstiju na ormaru: 🔴 Crveni, ⚪ Zvonimir, ⚫ Crni, 🟢 Zeleni."},
+
+  {"type": "story", "value": "Stube dolje su u ovom file-u jer se kljuc ovjde nalazi."},
+  {"type": "rule", "cond": "100", "desc": "Stube dolje"},
+  {"type": "rule", "cond": "100 AND NOT 3041", "out": "100locked", "desc": "Stube dolje - zaključano"},
+  {"type": "rule", "cond": "100 AND 3041", "out": "100open", "desc": "Stube dolje - otključano s ključem"},
+
+  {"type": "item", "key": "100locked", "value": "Vrata prema podrumu su zaključana."},
+  {"type": "item", "key": "100open", "value": "Otključavate vrata i silazite niz stube. U donjem hodniku pred vama su tri vrata: vinski podrum (10000), kotlovnica (11000) i vešeraj (12000)."}
 ]
