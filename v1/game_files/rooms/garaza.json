@@ -1,7 +1,9 @@
 [
   {"type": "story", "story": "garaza"},
   {"type": "rule", "cond": "4000", "out": "4000", "desc": "Garaža - opis"},
-  {"type": "item", "key": "4000", "value": "Dvostruka garaža s policama za alat i parkiranim vozilima. Uz zid desno stoje police s alatom. Parkirana su dva vozila — osobni auto i bijeli kombi s logom firme za čišćenje. Na podu se vide tragovi blata koji vode prema kombiju. Možete pretražiti: alat na polici (4001), police (4002), pod (4003), kombi (4004), garažna vrata (4005)."},
+  {"type": "item", "key": "4000", "value": "Dvostruka garaža s policama za alat i parkiranim vozilima. Uz zid desno stoje police s alatom. Parkirana su dva vozila — osobni auto i bijeli kombi s logom firme za čišćenje. Na podu se vide tragovi blata koji vode prema kombiju. Možete pretražiti: alat na polici (4001), police (4002), pod (4003), kombi (4004), garažna vrata (4005).",
+    "p7": "Daj svim igračima karticu garaže (kartica 4000).", "kartica": "🚗 GARAŽA — Možete pretražiti: alat na polici (4001), police (4002), pod (4003), kombi (4004), garažna vrata (4005)."
+  },
 
   {"type": "story", "story": "alat"},
   {"type": "rule", "cond": "4001 AND NOT 40010", "out": "4001event", "desc": "Alat - taser još tu"},
@@ -44,6 +46,8 @@
     "value": "Otključavate kombi ključevima. Prednja sjedala su nagnuta unazad — netko je tu spavao. Na stražnjim sjedalima nalazite: nekoliko torbi punih novca, tri zlatne poluge i jednu četvrtu polugu koja ima tragove krvi na vrhu. Na podu kombija leži osobna iskaznica.",
     "p1": "🧠 Uzimаš osobnu iskaznicu s poda — na njoj je tvoja slika, tvoje ime i prezime. To je TVOJA iskaznica. Kako je završila ovdje?",
     "p2": "🧠 Sve su našli. Moraš smisliti objašnjenje — i brzo.",
+    "p7": "Daj igracu s najvecom incijativom iskaznicu vozača (kartica 40046). Global +40041",
+    "kartica": "🪪 ISKAZNICA VOZAČA — Identifikacijska kartica s fotografijom, imenom i prezimenom vozača kombija firme za čišćenje. Crni se zove Samir ",
     "global": "40041"},
 
   {"type": "rule", "cond": "4004 AND 40040 AND NOT 40045 AND NOT 40041", "out": "40041pajser", "desc": "Kombi otvoren pajserom"},
@@ -51,6 +55,8 @@
     "value": "Pajserom uspijevate otvoriti kombi. Prednja sjedala su nagnuta unazad — netko je tu spavao. Na stražnjim sjedalima nalazite: nekoliko torbi punih novca, tri zlatne poluge i jednu četvrtu polugu koja ima tragove krvi na vrhu. Na podu kombija leži osobna iskaznica.",
     "p1": "🧠 Uzimаš osobnu iskaznicu s poda — na njoj je tvoja slika, tvoje ime i prezime. To je TVOJA iskaznica. Kako je završila ovdje?",
     "p2": "🧠 Gotovo je. Sve su našli. Moraš smisliti objašnjenje — i brzo.",
+    "p7": "Daj igracu s najvecom incijativom iskaznicu vozača (kartica 40046). Global +40041",
+    "kartica": "🪪 ISKAZNICA VOZAČA — Identifikacijska kartica s fotografijom, imenom i prezimenom vozača kombija firme za čišćenje. Crni se zove Samir ",
     "global": "40041"},
 
   {"type": "rule", "cond": "4004 AND 40041", "out": "40041keys", "desc": "Kombi već otvoren - isti prikaz"},
