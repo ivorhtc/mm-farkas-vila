@@ -1,0 +1,244 @@
+<!doctype html>
+<html lang="hr">
+<head>
+    <meta charset="utf-8">
+    <title>Kartice — Farkaš Vila</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #0e0e0e;
+            color: #e8e8e8;
+            font-family: "Segoe UI", system-ui, sans-serif;
+            padding: 24px 16px;
+        }
+        h1 {
+            font-size: 28px;
+            color: #d4b46e;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .subtitle { font-size: 12px; color: #555; letter-spacing: 2px; margin-bottom: 24px; }
+
+        .section { margin-bottom: 32px; }
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #888;
+            border-bottom: 1px solid #2a2a2a;
+            padding-bottom: 8px;
+            margin-bottom: 12px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+        }
+        th {
+            text-align: left;
+            padding: 8px 12px;
+            background: #1a1a1a;
+            color: #888;
+            font-weight: 500;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+        td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #1e1e1e;
+            vertical-align: top;
+        }
+        tr:hover td { background: #141414; }
+
+        .tag {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .tag-settings { background: #1a2a1a; color: #97C459; }
+        .tag-room    { background: #1a1a2a; color: #85B7EB; }
+        .tag-player  { background: #2a1a1a; color: #F0997B; }
+
+        .card-text {
+            color: #ccc;
+            line-height: 1.5;
+        }
+        .flag {
+            font-family: monospace;
+            font-size: 11px;
+            color: #d4b46e;
+            background: #1e1a10;
+            padding: 1px 6px;
+            border-radius: 3px;
+        }
+        .file-name {
+            font-family: monospace;
+            font-size: 11px;
+            color: #555;
+        }
+
+        #status {
+            color: #555;
+            font-size: 12px;
+            margin-bottom: 16px;
+        }
+        #error {
+            color: #c84b4b;
+            font-size: 13px;
+            padding: 12px;
+            background: #1e1010;
+            border-radius: 6px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+<h1>🃏 Kartice</h1>
+<p class="subtitle">Farkaš vila · inventar svih kartica</p>
+<div id="status">Učitavanje...</div>
+<div id="error"></div>
+<div id="output"></div>
+
+<script>
+    const ROOM_FILES = [
+        'vila_izvana','radna_soba','kuhinja','teretana','blagovaonica',
+        'garaza','spavaca_soba','wc','spajza','balkon','soba_za_goste',
+        'vinski_podrum','kotlovnica','vesheraj','instagram','hakiranje','razgovori'
+    ];
+
+    const PLAYER_NAMES = {
+        p1: '⚫ Crni (Samir)',
+        p2: '🟡 Žuti (Igor)',
+        p3: '🔵 Plavi (Viktor)',
+        p4: '🔴 Crveni (Radomir)',
+        p5: '🟢 Zeleni (Davor)',
+        p6: '🟣 Ljubičasti (Oliver)',
+        p7: '⚠️ Voditelj',
+    };
+
+    // Izvuci global flag iz teksta
+    function extractFlag(text) {
+        const m = text.match(/Global\s*\+([0-9, +]+)/i);
+        return m ? m[1].replace(/\s/g,'').split('+').filter(Boolean).join(', ') : null;
+    }
+
+    function makeRow(source, location, player, cardText, flag, fileName) {
+        const flagHtml = flag ? `<span class="flag">+${flag}</span>` : '<span style="color:#333">—</span>';
+        const tagHtml = source === 'settings'
+            ? `<span class="tag tag-settings">settings</span>`
+            : `<span class="tag tag-room">soba</span>`;
+        const playerHtml = player
+            ? `<span class="tag tag-player">${player}</span>`
+            : '<span style="color:#333">—</span>';
+
+        return `<tr>
+    <td>${tagHtml}</td>
+    <td class="file-name">${fileName}</td>
+    <td>${location}</td>
+    <td>${playerHtml}</td>
+    <td class="card-text">${cardText}</td>
+    <td>${flagHtml}</td>
+  </tr>`;
+    }
+
+    async function load() {
+        const rows = [];
+
+        // --- SETTINGS ---
+        try {
+            const settings = await fetch('game_files/settings.json').then(r => r.json());
+            settings.forEach(obj => {
+                if (!obj.cards || !obj.cards.length) return;
+                // Pronađi koji igrač
+                const pKey = Object.keys(obj).find(k => k.match(/^p\d+$/) && k !== 'p7');
+                const playerName = pKey ? PLAYER_NAMES[pKey] : '?';
+                const location = pKey ? `Početna kartica — ${playerName}` : 'Nepoznato';
+
+                obj.cards.forEach(card => {
+                    const flag = extractFlag(card);
+                    rows.push(makeRow('settings', location, playerName, card, flag, 'settings.json'));
+                });
+            });
+        } catch(e) {
+            console.error('settings error', e);
+        }
+
+        // --- ROOM FILES ---
+        for (const roomName of ROOM_FILES) {
+            try {
+                const data = await fetch(`game_files/rooms/${roomName}.json`).then(r => r.json());
+                const fileName = `rooms/${roomName}.json`;
+
+                data.forEach(obj => {
+                    // Event s karticom
+                    if (obj.type === 'event' && obj.output && obj.output.kartica) {
+                        const card = obj.output.kartica;
+                        const flag = extractFlag(card) || extractFlag(obj.output.p7 || '');
+                        const location = `Soba: ${roomName} · event key: ${obj.key}`;
+                        rows.push(makeRow('room', location, null, card, flag, fileName));
+                    }
+
+                    // Obični item s karticom u p7
+                    if ((obj.type === 'item') && obj.p7 && obj.p7.includes('kartica')) {
+                        const flag = extractFlag(obj.p7);
+                        const location = `Soba: ${roomName} · item key: ${obj.key}`;
+                        rows.push(makeRow('room', location, null, obj.p7, flag, fileName));
+                    }
+                });
+            } catch(e) {
+                console.warn(`Greška pri učitavanju ${roomName}:`, e);
+            }
+        }
+
+        // --- RENDER ---
+        const status = document.getElementById('status');
+        status.textContent = `Pronađeno ${rows.length} kartica.`;
+
+        const settingsRows = rows.filter(r => r.includes('tag-settings'));
+        const roomRows = rows.filter(r => r.includes('tag-room'));
+
+        const tableHtml = (rowsArr) => `
+    <table>
+      <thead>
+        <tr>
+          <th>Izvor</th>
+          <th>File</th>
+          <th>Lokacija</th>
+          <th>Igrač</th>
+          <th>Tekst kartice</th>
+          <th>Global flag</th>
+        </tr>
+      </thead>
+      <tbody>${rowsArr.join('')}</tbody>
+    </table>`;
+
+        document.getElementById('output').innerHTML = `
+    <div class="section">
+      <div class="section-title">📦 Početne kartice (settings.json) — ${settingsRows.length}</div>
+      ${settingsRows.length ? tableHtml(settingsRows) : '<p style="color:#555;font-size:13px">Nema kartica.</p>'}
+    </div>
+    <div class="section">
+      <div class="section-title">🗺️ Kartice u sobama — ${roomRows.length}</div>
+      ${roomRows.length ? tableHtml(roomRows) : '<p style="color:#555;font-size:13px">Nema kartica.</p>'}
+    </div>
+  `;
+    }
+
+    load().catch(e => {
+        document.getElementById('status').textContent = 'Greška!';
+        const err = document.getElementById('error');
+        err.style.display = 'block';
+        err.textContent = e.toString();
+    });
+</script>
+</body>
+</html>
