@@ -48,6 +48,7 @@
     "p2": "🧠 Sve su našli. Moraš smisliti objašnjenje — i brzo.",
     "p7": "Daj igracu s najvecom incijativom iskaznicu vozača (kartica 40046). Global +40041",
     "kartica": "🪪 ISKAZNICA VOZAČA — Identifikacijska kartica s fotografijom, imenom i prezimenom vozača kombija firme za čišćenje. Crni se zove Samir ",
+    "kartica_2": "📋 INTERNA BILJEŠKA — Farmakološka interakcija Cardiovex + Dormex. Ručne bilješke u plavom: \"topi se u vodi, bez boje i mirisa\" i \"stariji pacijenti s kroničnom srčanom terapijom — povećan rizik ×3\". Dokument nije potpisan.",
     "global": "40041"},
 
   {"type": "rule", "cond": "4004 AND 40040 AND NOT 40045 AND NOT 40041", "out": "40041pajser", "desc": "Kombi otvoren pajserom"},
@@ -57,6 +58,7 @@
     "p2": "🧠 Gotovo je. Sve su našli. Moraš smisliti objašnjenje — i brzo.",
     "p7": "Daj igracu s najvecom incijativom iskaznicu vozača (kartica 40046). Global +40041",
     "kartica": "🪪 ISKAZNICA VOZAČA — Identifikacijska kartica s fotografijom, imenom i prezimenom vozača kombija firme za čišćenje. Crni se zove Samir ",
+    "kartica_2": "📋 INTERNA BILJEŠKA — Farmakološka interakcija Cardiovex + Dormex. Ručne bilješke u plavom: \"topi se u vodi, bez boje i mirisa\" i \"stariji pacijenti s kroničnom srčanom terapijom — povećan rizik ×3\". Dokument nije potpisan.",
     "global": "40041"},
 
   {"type": "rule", "cond": "4004 AND 40041", "out": "40041keys", "desc": "Kombi već otvoren - isti prikaz"},
