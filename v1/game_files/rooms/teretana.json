@@ -1,26 +1,34 @@
 [
-  {"type": "story", "story": "teretana"},
+  {"type": "story", "story": "teretana - posjetnica Davor i Radojka Fit, otisci na spravama i bucicama"},
 
   {"type": "rule", "cond": "2000", "out": "2000", "desc": "Teretana - opis"},
-  {"type": "rule", "cond": "2001", "out": "2001", "desc": "Bučice"},
-  {"type": "rule", "cond": "2001 AND 88771", "out": "20011", "desc": "Bučice - otisci"},
-  {"type": "rule", "cond": "2002", "out": "2002", "desc": "Sprave"},
-  {"type": "rule", "cond": "2002 AND 88771", "out": "20021", "desc": "Sprave - otisci"},
-  {"type": "rule", "cond": "2003", "out": "2003", "desc": "Prostirke"},
-  {"type": "rule", "cond": "2003 AND 88771", "out": "20031", "desc": "Prostirke - otisci"},
-  {"type": "rule", "cond": "2004 AND NOT 20000", "out": "2004event", "desc": "Police - nalaze vizitku, admin daje karticu"},
-  {"type": "rule", "cond": "2004 AND 20000", "out": "2004", "desc": "Police - vizitka već nađena"},
-  {"type": "rule", "cond": "2004 AND 88771", "out": "20041", "desc": "Police - otisci"},
-  {"type": "rule", "cond": "20001 AND 20000", "out": "20001", "desc": "Instagram - dostupno uz vizitku"},
+  {"type": "item", "key": "2000", "value": "Moderna soba za vježbanje s bučicama, spravama i velikim prozorom. Možete pretražiti: bučice (2001), sprave (2002), prostirke (2003), police s opremom (2004).",
+    "p7": "Daj svim igračima karticu teretane (kartica 2000).",
+    "kartica": "🏋️ TERETANA — Možete pretražiti: bučice (2001), sprave (2002), prostirke (2003), police s opremom (2004)."},
 
-  {"type": "item", "key": "2000", "value": "Moderna soba za vježbanje s bučicama, spravama i velikim prozorom. Možete pretražiti: bučice (2001), sprave (2002), prostirke (2003), police s opremom (2004)."},
+  {"type": "story", "story": "bucice"},
+  {"type": "rule", "cond": "2001", "out": "2001", "desc": "Bučice"},
   {"type": "item", "key": "2001", "value": "Bučice su uredno posložene po težini."},
+
+  {"type": "rule", "cond": "2001 AND 88771", "out": "20011", "desc": "Bučice - otisci"},
   {"type": "item", "key": "20011", "value": "Otisci prstiju na bučicama: 🟢 Zeleni, ⚪ Zvonimir."},
+
+  {"type": "story", "story": "sprave"},
+  {"type": "rule", "cond": "2002", "out": "2002", "desc": "Sprave"},
   {"type": "item", "key": "2002", "value": "Sprave za vježbanje izgledaju rijetko korištene."},
+
+  {"type": "rule", "cond": "2002 AND 88771", "out": "20021", "desc": "Sprave - otisci"},
   {"type": "item", "key": "20021", "value": "Otisci prstiju na spravama: 🟢 Zeleni, ⚪ Zvonimir."},
+
+  {"type": "story", "story": "prostirke"},
+  {"type": "rule", "cond": "2003", "out": "2003", "desc": "Prostirke"},
   {"type": "item", "key": "2003", "value": "Prostirke za vježbanje smotane su u kutu."},
+
+  {"type": "rule", "cond": "2003 AND 88771", "out": "20031", "desc": "Prostirke - otisci"},
   {"type": "item", "key": "20031", "value": "Otisci prstiju na prostirkama: 🟢 Zeleni, ⚪ Zvonimir."},
-  {"type": "item", "key": "2004", "value": "Na policama su ručnici i sportske boce."},
+
+  {"type": "story", "story": "police - vizitka Davor i Radojka Fit, otisci Zvonimira"},
+  {"type": "rule", "cond": "2004 AND NOT 20000", "out": "2004event", "desc": "Police - nalaze vizitku, admin daje karticu"},
   {"type": "event", "key": "2004event",
     "logic": {"winnerStrategy": "priorityList", "priorityList": ["p1","p2","p3","p4","p5","p6"]},
     "output": {
@@ -28,8 +36,15 @@
       "others": "Na policama su ručnici i sportske boce. ${winnerN} uzima vizitku s police.",
       "p7": "${winnerD} je nasao vizitku, daj karticu svima (kartica 20000). Global +20000",
       "kartica": "📇 VIZITKA — Davor i Radojka Fit, personalni treninzi. Instagram: @davoriradojkafit. Možete posjetiti profil (20001)."
-    }
-  },
+    }},
+
+  {"type": "rule", "cond": "2004 AND 20000", "out": "2004", "desc": "Police - vizitka već nađena"},
+  {"type": "item", "key": "2004", "value": "Na policama su ručnici i sportske boce."},
+
+  {"type": "rule", "cond": "2004 AND 88771", "out": "20041", "desc": "Police - otisci"},
   {"type": "item", "key": "20041", "value": "Otisci prstiju na policama: ⚪ Zvonimir."},
+
+  {"type": "story", "story": "instagram - dostupno uz vizitku (20000)"},
+  {"type": "rule", "cond": "20001 AND 20000", "out": "20001", "desc": "Instagram - dostupno uz vizitku"},
   {"type": "item", "key": "20001", "value": "Instagram profil @davoriradojkafit. link: https://ivorhtc.github.io/mm-farkas-vila/v1/assets/dr_fit/dr_fit.html"}
 ]
