@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <title>🔫 Pištolj</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px 16px;
+    }
+
+    .card {
+      background: #111;
+      border: 1px solid #2a2a2a;
+      border-radius: 16px;
+      max-width: 480px;
+      width: 100%;
+      overflow: hidden;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.8);
+    }
+
+    /* Slika */
+    .image-wrap {
+      width: 100%;
+      height: 240px;
+      background: #0d0d0d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-bottom: 1px solid #1e1e1e;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Naslov */
+    .title-bar {
+      padding: 20px 24px 0;
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+    .title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 42px;
+      color: #c84b4b;
+      letter-spacing: 4px;
+      line-height: 1;
+    }
+    .badge {
+      font-family: 'Crimson Text', serif;
+      font-size: 13px;
+      color: #555;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+
+    /* Divider */
+    .divider {
+      margin: 16px 24px;
+      border: none;
+      border-top: 1px solid #1e1e1e;
+    }
+
+    /* Tekst */
+    .body {
+      padding: 0 24px 28px;
+      font-family: 'Crimson Text', serif;
+      color: #c8c4bc;
+      font-size: 19px;
+      line-height: 1.7;
+    }
+
+    .body p { margin-bottom: 14px; }
+    .body p:last-child { margin-bottom: 0; }
+
+    .highlight {
+      color: #e8e4dc;
+      font-weight: 600;
+    }
+
+    .warning {
+      margin-top: 20px;
+      padding: 14px 16px;
+      background: #1a0d0d;
+      border-left: 3px solid #c84b4b;
+      border-radius: 0 8px 8px 0;
+      font-style: italic;
+      color: #c84b4b;
+      font-size: 17px;
+      line-height: 1.6;
+    }
+
+    /* Metak indikator */
+    .bullets {
+      display: flex;
+      gap: 8px;
+      margin: 16px 24px;
+      align-items: center;
+    }
+    .bullet {
+      width: 10px;
+      height: 24px;
+      border-radius: 2px 2px 0 0;
+      background: #c84b4b;
+      box-shadow: 0 0 8px rgba(200,75,75,0.4);
+    }
+    .bullet-label {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 13px;
+      color: #555;
+      letter-spacing: 2px;
+      margin-left: 4px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="card">
+
+  <!-- Slika pištolja (SVG) -->
+  <div class="image-wrap">
+    <img height="120px" src="pistolj.png" alt="gun">
+  </div>
+
+  <!-- Metak indikator -->
+  <div class="bullets">
+    <div class="bullet"></div>
+    <span class="bullet-label">1 METAK</span>
+  </div>
+
+  <!-- Naslov -->
+  <div class="title-bar">
+    <div class="title">PIŠTOLJ</div>
+    <div class="badge">kartica 80022</div>
+  </div>
+
+  <hr class="divider">
+
+  <!-- Tekst -->
+  <div class="body">
+    <p>
+      Bravo, našao si pištolj. Imaš <span class="highlight">jedan metak</span> — iskoristi ga pametno.
+    </p>
+    <p>
+      Kad ga želiš koristiti, <span class="highlight">javi voditelju ako ga zelis odigrati tajno dok pretrazujete u nekoj rundi</span> (vide samo oni u sobi s tobom sto se dogodilo, ali moras biti u istoj sobi kao osoba u koju pucas) ili ga odigraj <span class="highlight">pred svima</span> imeđu 2 pretraživanja.
+    </p>
+    <p>
+      👻 Upucani igrač ispada iz igre ali može pratiti i glasati na kraju.
+    </p>
+    <p>
+      Zašto bi pucao? Ako si ubojica — <span class="highlight">znaš koga trebaš eliminirati</span>. Ako nisi — možeš biti heroj, spriječiti ubojicu da manipulira drugima ili nekoga ubije.
+    </p>
+    <div class="warning">
+      Nemoj pucati u ljude ako nisi siguran u sebe. Imaš samo jedan metak. 🎯
+    </div>
+  </div>
+
+</div>
+
+</body>
+</html>
