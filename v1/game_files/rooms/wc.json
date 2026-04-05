@@ -1,13 +1,53 @@
 [
-  {"type": "story", "story": "wc"},
-  {"type": "rule", "cond": "6000", "out": "6000", "desc": "WC"},
-  {"type": "rule", "cond": "6001", "out": "6001", "desc": "Umivaonik - mokar"},
-  {"type": "rule", "cond": "6002", "out": "6002", "desc": "Ormar u WC-u - prazan prostor gdje su bile tablete"},
+  {"type": "story", "story": "wc - Viktor zamijenio tablete ovdje. Cardiovex kutija s vitaminima, aspirin, britvica R.S. na umivaonik, otisci Crnog svugdje."},
+
+  {"type": "rule", "cond": "6000", "out": "6000", "desc": "WC - opis"},
+  {"type": "item", "key": "6000", "value": "Mali WC s ogledalom i umivaonikom. Možete pretražiti: umivaonik (6001), ormar/police (6002), WC školjku (6003), ogledalo (6004).",
+    "p7": "Daj svim igračima karticu WC-a (kartica 6000).",
+    "kartica": "🚽 WC — Možete pretražiti: umivaonik (6001), ormar/police (6002), WC školjku (6003), ogledalo (6004)."},
+
+  {"type": "story", "story": "hladna voda - solo kartica (+3 inicijativa)"},
+  {"type": "rule", "cond": "(6000 OR 6001 OR 6002 OR 6003 OR 6004) AND max1p", "out": "6001solo", "desc": "WC - sam, dobiva karticu hladne vode"},
+  {"type": "item", "key": "6001solo", "value": "Sam si — prskаš hladnu vodu u lice na umivaoniku. Odmah si bistriji.",
+    "p7": "Daj igracu karticu hladne vode (kartica 60010). Iduci red ima +3 na inicijativu.",
+    "kartica": "💧 HLADNA VODA — Iducu rundu imaš +3 na inicijativu."},
+
+  {"type": "story", "story": "umivaonik - mokar, britvica R.S., otisci Crnog"},
+  {"type": "rule", "cond": "6001", "out": "6001", "desc": "Umivaonik - mokar, britvica R.S."},
+  {"type": "item", "key": "6001", "value": "Umivaonik je mokar kao da ga je netko nedavno koristio. Na rubu umivaonika leži mala srebrna britvica s ugraviranim inicijalima 'R.Š.'"},
+
+  {"type": "rule", "cond": "6001 AND 88771", "out": "60011", "desc": "Umivaonik - otisci"},
+  {"type": "item", "key": "60011", "value": "Otisci prstiju na umivaonik: ⚫ Crni, ⚪ Zvonimir."},
+
+  {"type": "story", "story": "ormar - Cardiovex kutija s vitaminima (Viktorov trag), aspirin"},
+  {"type": "rule", "cond": "6002 AND NOT 60020", "out": "6002event", "desc": "Ormar - vitamini i aspirin još tu"},
+  {"type": "event", "key": "6002event",
+    "logic": {"winnerStrategy": "priorityList", "priorityList": ["p6","p3","p1","p4","p5","p2"]},
+    "output": {
+      "winner": "U ormariću su ručnici i lijekovi. Primjećujete prazan prostor gdje je nešto nedavno izvađeno i zamijenjeno. Tu je kutija s natpisom 'Cardiovex' — ali kad je otvorite, unutra su vitamini. Pored kutije stoji aspirin.",
+      "others": "U ormariću su ručnici i lijekovi. Primjećujete prazan prostor gdje je nešto nedavno izvađeno i zamijenjeno. ${winnerN} uzima nešto iz ormara.",
+      "p6": "🧠 Vitamini u kutiji od Cardiovexa — netko je zamijenio tablete. Otisci na kutiji mogli bi reći tko.",
+      "p7": "Daj ${winnerD} aspirin (kartica 60021). Global +60020",
+      "kartica": "💊 ASPIRIN — Iskoristi jednom prije svoje runde za +3 na inicijativu. Kaži voditelju prije nego upišeš brojeve."
+    }},
+
+  {"type": "rule", "cond": "6002 AND 60020", "out": "6002", "desc": "Ormar - aspirin već uzet"},
+  {"type": "item", "key": "6002", "value": "U ormariću su ručnici i lijekovi. Tu je kutija s natpisom 'Cardiovex' — ali kad je otvorite, unutra su vitamini."},
+
+  {"type": "rule", "cond": "6002 AND 88771", "out": "60021otisci", "desc": "Ormar - otisci na Cardiovex kutiji"},
+  {"type": "item", "key": "60021otisci", "value": "Otisci prstiju na kutiji Cardiovex: 🔵 Plavi, ⚪ Zvonimir."},
+
+  {"type": "story", "story": "wc skoljka - otisci Crnog"},
   {"type": "rule", "cond": "6003", "out": "6003", "desc": "WC školjka"},
-  {"type": "rule", "cond": "6004", "out": "6004", "desc": "Ogledalo"},
-  {"type": "item", "key": "6000", "value": "Mali WC s ogledalom i umivaonikom. Možete pretražiti: umivaonik (6001), ormar/police (6002), WC školjku (6003), ogledalo (6004)."},
-  {"type": "item", "key": "6001", "value": "Umivaonik je mokar kao da ga je netko nedavno koristio."},
-  {"type": "item", "key": "6002", "value": "U ormariću su ručnici i lijekovi. Između kutija primjećujete prazan prostor — kao da je nešto nedavno izvađeno i zamijenjeno."},
   {"type": "item", "key": "6003", "value": "WC školjka je čista."},
-  {"type": "item", "key": "6004", "value": "Ogledalo je lagano napuklo u kutu."}
+
+  {"type": "rule", "cond": "6003 AND 88771", "out": "60031", "desc": "WC školjka - otisci"},
+  {"type": "item", "key": "60031", "value": "Otisci prstiju na WC školjci: ⚫ Crni, ⚪ Zvonimir."},
+
+  {"type": "story", "story": "ogledalo - napuklo, otisci Crnog"},
+  {"type": "rule", "cond": "6004", "out": "6004", "desc": "Ogledalo"},
+  {"type": "item", "key": "6004", "value": "Ogledalo je lagano napuklo u kutu. U odrazu vidite cijelu prostoriju."},
+
+  {"type": "rule", "cond": "6004 AND 88771", "out": "60041", "desc": "Ogledalo - otisci"},
+  {"type": "item", "key": "60041", "value": "Otisci prstiju na ogledalu: ⚫ Crni."}
 ]
