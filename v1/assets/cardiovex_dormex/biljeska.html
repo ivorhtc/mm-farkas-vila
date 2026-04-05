@@ -1,0 +1,286 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <title>Interna bilješka — Farmakološka interakcija</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #2c2416;
+      min-height: 100vh;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 40px 16px;
+    }
+
+    .paper {
+      background: #f5f0e4;
+      max-width: 680px;
+      width: 100%;
+      padding: 52px 56px;
+      border-radius: 2px;
+      box-shadow:
+              0 2px 4px rgba(0,0,0,0.3),
+              0 8px 24px rgba(0,0,0,0.4),
+              inset 0 0 80px rgba(180,150,80,0.08);
+      position: relative;
+      font-family: 'Courier Prime', monospace;
+      color: #1a1614;
+      line-height: 1.7;
+
+      /* Tekstura papira */
+      background-image:
+              repeating-linear-gradient(
+                      0deg,
+                      transparent,
+                      transparent 27px,
+                      rgba(180,160,100,0.12) 27px,
+                      rgba(180,160,100,0.12) 28px
+              );
+    }
+
+    /* Rupe za fascikl */
+    .hole {
+      position: absolute;
+      left: 22px;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #2c2416;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+    }
+    .hole-1 { top: 80px; }
+    .hole-2 { top: 50%; transform: translateY(-50%); }
+    .hole-3 { bottom: 80px; }
+
+    /* Rubna linija fascikla */
+    .margin-line {
+      position: absolute;
+      left: 46px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: rgba(200,100,100,0.25);
+    }
+
+    /* Žig POVJERLJIVO */
+    .stamp {
+      position: absolute;
+      top: 36px;
+      right: 44px;
+      border: 3px solid rgba(180,40,40,0.5);
+      color: rgba(180,40,40,0.5);
+      font-family: 'Special Elite', cursive;
+      font-size: 13px;
+      letter-spacing: 4px;
+      padding: 4px 10px;
+      transform: rotate(8deg);
+      text-transform: uppercase;
+      border-radius: 2px;
+    }
+
+    /* Zaglavlje */
+    .header {
+      margin-bottom: 28px;
+      padding-bottom: 16px;
+      border-bottom: 2px solid #1a1614;
+    }
+
+    .doc-title {
+      font-family: 'Special Elite', cursive;
+      font-size: 15px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .meta {
+      font-size: 12px;
+      color: #5a4e3a;
+      line-height: 1.8;
+    }
+    .meta strong { color: #1a1614; }
+
+    /* Sekcije */
+    .section {
+      margin-bottom: 22px;
+    }
+
+    .section-title {
+      font-family: 'Special Elite', cursive;
+      font-size: 13px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      color: #2a1e10;
+    }
+
+    p {
+      font-size: 13.5px;
+      margin-bottom: 8px;
+    }
+
+    ul {
+      margin: 8px 0 8px 20px;
+    }
+    li {
+      font-size: 13.5px;
+      margin-bottom: 4px;
+    }
+
+    /* Podvučeni dijelovi */
+    .underline {
+      text-decoration: underline;
+      text-decoration-style: solid;
+      text-decoration-thickness: 1px;
+    }
+
+    /* Zaokružene riječi */
+    .circled {
+      border: 1.5px solid #1a1614;
+      border-radius: 50%;
+      padding: 0 4px;
+      display: inline-block;
+    }
+
+    /* Žuta oznaka (highlighter) */
+    .highlight {
+      background: rgba(255,220,50,0.45);
+      padding: 0 2px;
+    }
+
+    /* Ručna bilješka */
+    .handnote {
+      font-family: 'Special Elite', cursive;
+      font-size: 12px;
+      color: #1a3a6a;
+      margin-top: 6px;
+      margin-left: 12px;
+      font-style: italic;
+    }
+    .handnote::before { content: "→ "; }
+
+    /* Rukom podcrtano (crvenom) */
+    .red-underline {
+      text-decoration: underline;
+      text-decoration-color: rgba(180,40,40,0.7);
+      text-decoration-thickness: 2px;
+      text-decoration-style: wavy;
+    }
+
+    /* Zaključak box */
+    .conclusion {
+      border: 1.5px solid #1a1614;
+      padding: 14px 16px;
+      margin-top: 8px;
+      background: rgba(180,150,80,0.06);
+    }
+
+    /* Footer */
+    .footer {
+      margin-top: 32px;
+      padding-top: 16px;
+      border-top: 1px solid #8a7a5a;
+      font-size: 11px;
+      color: #8a7a5a;
+      text-align: center;
+      letter-spacing: 1px;
+    }
+
+    /* Fascikl marker lijevo */
+    .folder-left {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 46px;
+      background: rgba(180,150,80,0.06);
+      border-right: 1px solid rgba(180,150,80,0.2);
+    }
+  </style>
+</head>
+<body>
+
+<div class="paper">
+  <div class="folder-left"></div>
+  <div class="margin-line"></div>
+  <div class="hole hole-1"></div>
+  <div class="hole hole-2"></div>
+  <div class="hole hole-3"></div>
+  <div class="stamp">Radna verzija</div>
+
+  <!-- Zaglavlje -->
+  <div class="header">
+    <div class="doc-title">Interna bilješka — Farmakološka interakcija</div>
+    <div class="meta">
+      <strong>Predmet:</strong> Učinci kombinacije preparata <span class="circled">Cardiovex</span> i <span class="circled">Dormex</span><br>
+      <strong>Status:</strong> Neformalno istraživanje (radna verzija)<br>
+      <strong>Autor:</strong> [nepoznato]
+    </div>
+  </div>
+
+  <!-- Sažetak -->
+  <div class="section">
+    <div class="section-title">Sažetak</div>
+    <p>Ova bilješka analizira potencijalnu <span class="underline">interakciju između lijeka za regulaciju srčanog ritma</span> (<strong>Cardiovex</strong>) i sedativa (<strong>Dormex</strong>). Poseban naglasak stavljen je na njihove <span class="highlight">kumulativne učinke na kardiovaskularni i respiratorni sustav</span>.</p>
+  </div>
+
+  <!-- Opis supstanci -->
+  <div class="section">
+    <div class="section-title">Opis supstanci</div>
+    <ul>
+      <li><strong>Cardiovex</strong> — koristi se za stabilizaciju srčanog ritma i <span class="underline">smanjenje frekvencije otkucaja</span>. Djeluje na električnu aktivnost srca i može uzrokovati <span class="circled">usporavanje pulsa</span>.</li>
+      <li style="margin-top:8px"><strong>Dormex</strong> — sedativ s izraženim umirujućim učinkom; <span class="underline">usporava rad središnjeg živčanog sustava</span> te posljedično i disanje.
+        <div class="handnote">topi se u vodi, bez boje i mirisa — nedetektabilno</div>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Zabilježena interakcija -->
+  <div class="section">
+    <div class="section-title">Zabilježena interakcija</div>
+    <p>Kod istodobne primjene, uočava se <span class="highlight">pojačan depresivni učinak na srčanu funkciju i disanje</span>. Kombinacija može dovesti do:</p>
+    <ul>
+      <li>značajnog <span class="red-underline">pada srčane frekvencije</span></li>
+      <li>smanjenja krvnog tlaka</li>
+      <li>usporavanja respiracije</li>
+      <li><span class="circled">gubitka svijesti</span></li>
+    </ul>
+    <p style="margin-top:10px">U određenim okolnostima, ovi učinci mogu eskalirati u <span class="underline red-underline">potpuni zastoj srčane aktivnosti</span>.</p>
+  </div>
+
+  <!-- Napomena -->
+  <div class="section">
+    <div class="section-title">Napomena</div>
+    <p>Interakcija nije uobičajena u standardnoj terapiji i preporučuje se izbjegavanje kombiniranja bez medicinskog nadzora. <span class="highlight">Posebno je rizično kod osoba koje već koriste Cardiovex kao redovitu terapiju.</span></p>
+    <div class="handnote">stariji pacijenti s kroničnom srčanom terapijom — povećan rizik ×3</div>
+  </div>
+
+  <!-- Dodatna opažanja -->
+  <div class="section">
+    <div class="section-title">Dodatna opažanja</div>
+    <p>S obzirom na relativno <span class="circled">"tihe" simptome</span> (postupni gubitak svijesti bez naglih vanjskih znakova), <span class="highlight">ovakva kombinacija može biti teško prepoznatljiva bez detaljne toksikološke analize</span>.</p>
+    <div class="handnote">standardna obdukcija ne otkriva — potrebna posebna analiza krvi</div>
+  </div>
+
+  <!-- Zaključak -->
+  <div class="section">
+    <div class="section-title">Zaključak</div>
+    <div class="conclusion">
+      <p>Sinergijski učinak <strong>Cardiovexa</strong> i <strong>Dormexa</strong> predstavlja <span class="red-underline">potencijalno opasnu kombinaciju</span> koja, u specifičnim uvjetima, može rezultirati <span class="underline">fatalnim ishodom</span>. Daljnje istraživanje preporučuje se u kontroliranim uvjetima.</p>
+    </div>
+  </div>
+
+  <div class="footer">
+    (kraj bilješke) &nbsp;·&nbsp; klasifikacija: interno &nbsp;·&nbsp; nije za distribuciju
+  </div>
+
+</div>
+
+</body>
+</html>
