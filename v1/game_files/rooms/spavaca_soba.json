@@ -1,15 +1,51 @@
 [
-  {"type": "story", "story": "spavaca_soba"},
-  {"type": "rule", "cond": "5000", "out": "5000", "desc": "Spavaća soba"},
-  {"type": "rule", "cond": "5001", "out": "5001", "desc": "Krevet"},
-  {"type": "rule", "cond": "5002", "out": "5002", "desc": "Ormar"},
-  {"type": "rule", "cond": "5003", "out": "5003", "desc": "Noćni ormarić - kutija tableta, ali su vitamini"},
-  {"type": "rule", "cond": "5004", "out": "5004", "desc": "Prozor spavaće"},
-  {"type": "rule", "cond": "5005", "out": "5005", "desc": "Pod spavaće"},
-  {"type": "item", "key": "5000", "value": "Velika spavaća soba s krevetom i noćnim ormarićima. Možete pretražiti: krevet (5001), ormar (5002), noćni ormarić (5003), prozor (5004), pod (5005)."},
-  {"type": "item", "key": "5001", "value": "Krevet je uredno pospremljen."},
-  {"type": "item", "key": "5002", "value": "Ormar je pun skupih odijela."},
-  {"type": "item", "key": "5003", "value": "U noćnom ormariću nalazi se kutija tableta za srce — ali kad je otvorite, unutra su samo vitamini. Netko je zamijenio tablete."},
-  {"type": "item", "key": "5004", "value": "Prozor gleda prema vrtu."},
-  {"type": "item", "key": "5005", "value": "Pod je čist, ali se vidi mali trag kapljice vina."}
+  {"type": "story", "story": "spavaca_soba - krevet uredan, Zvonimir nije spavao tu. Ormar s mobitelem, nocni ormaric s okvirom, prozor sa sifrom sefa."},
+
+  {"type": "rule", "cond": "5000", "out": "5000", "desc": "Spavaća soba - opis"},
+  {"type": "item", "key": "5000", "value": "Velika spavaća soba s krevetom, ormarom i noćnim ormarićem. Sve je uredno i pospremljeno. Možete pretražiti: krevet (5001), ormar (5002), noćni ormarić (5003), prozor (5004)."},
+
+  {"type": "story", "story": "krevet"},
+  {"type": "rule", "cond": "5001", "out": "5001", "desc": "Krevet - uredan, Zvonimir nije spavao tu"},
+  {"type": "item", "key": "5001", "value": "Krevet je uredno pospremljen — jastuk ravan, deka zategnuta. Izgleda kao da nije nitko spavao tu sinoć."},
+
+  {"type": "story", "story": "ormar - Zvonimirov mobitel u dzepu hlaca. Flag 50020 otkljucava hakiranje 8007007"},
+  {"type": "rule", "cond": "5002 AND NOT 50020", "out": "5002event", "desc": "Ormar - mobitel još tu"},
+  {"type": "event", "key": "5002event",
+    "logic": {"winnerStrategy": "priorityList", "priorityList": ["p6","p3","p1","p4","p5","p2"]},
+    "output": {
+      "winner": "Ormar je pun skupih odijela i odijela. Pretražujete džepove — u unutarnjem džepu jednih tamnih hlača nalazite mobitel. Ekran je ugašen ali baterija je još tu.",
+      "others": "Ormar je pun skupih odijela. ${winnerN} pretražuje džepove i uzima nešto.",
+      "p7": "Daj ${winnerD} Zvonimirov mobitel (kartica 50020). Global +50020",
+      "kartica": "📱 ZVONIMIROV MOBITEL — Možeš ga haknuti ako nađeš laptop (8007007). Global +50020"
+    }},
+  {"type": "rule", "cond": "5002 AND 50020", "out": "5002", "desc": "Ormar - mobitel već uzet"},
+  {"type": "item", "key": "5002", "value": "Ormar je pun skupih odijela. Džepovi su prazni — netko je već pretražio."},
+  {"type": "rule", "cond": "5002 AND 88771", "out": "50021", "desc": "Ormar - otisci"},
+  {"type": "item", "key": "50021", "value": "Otisci prstiju na ormaru: ⚪ Zvonimir."},
+
+  {"type": "story", "story": "nocni ormaric - ladica s poklopljenim okvirom (kartica). Otisci Plavog i Zvonimira."},
+  {"type": "rule", "cond": "5003 AND NOT 50030", "out": "5003event", "desc": "Noćni ormarić - okvir sa slikom još tu"},
+  {"type": "event", "key": "5003event",
+    "logic": {"winnerStrategy": "priorityList", "priorityList": ["p3","p6","p1","p4","p5","p2"]},
+    "output": {
+      "winner": "U ladici nalazite okvir za sliku okrenut licem prema dolje. Na slici su trojica: stariji muškarac i dvoje mlađih. Na slici piše: 'Zvonimir, Viktor i Viktorija — Minhen 2023.' Diskretno spremaš okvir.",
+      "others": "${winnerN} uzima nešto iz ladice.",
+      "p7": "Daj ${winnerD} okvir sa slikom (kartica 50030). Global +50030",
+      "kartica": "🖼️ OBITELJSKA FOTOGRAFIJA — Na poleđini piše: Zvonimir, Viktor i Viktorija. Na slici piše Minhen 2023."
+    }},
+  {"type": "rule", "cond": "5003 AND 50030", "out": "5003", "desc": "Noćni ormarić - okvir već uzet"},
+  {"type": "item", "key": "5003", "value": "U noćnom ormariću je prazno — kutija tableta za srce nedostaje. Ladica je prazna."},
+  {"type": "rule", "cond": "5003 AND 88771", "out": "50031", "desc": "Noćni ormarić - otisci"},
+  {"type": "item", "key": "50031", "value": "Otisci prstiju na noćnom ormariću: 🔵 Plavi, ⚪ Zvonimir."},
+
+  {"type": "story", "story": "prozor - ispod tegle papiric sa sifrom sefa (global 80021)"},
+  {"type": "rule", "cond": "5004 AND NOT 80021", "out": "5004", "desc": "Prozor - papirić sa šifrom još tu"},
+  {"type": "item", "key": "5004",
+    "value": "Prozor gleda prema vrtu. Na prozorskoj dasci stoji tegla s cvijećem. Ispod tegle nalazite presavijen papirić na kojem rukom piše: 'Šifra sefa = godina izgradnje vile.'",
+    "p7": "Daj najbržem papiric (kartica 80021). Global +80021.",
+    "global": "80021",
+    "kartica": "\uD83D\uDCDD PAPIRIC na kojem rukom piše: 'Šifra sefa = godina izgradnje vile.'. Global +20021."
+  },
+  {"type": "rule", "cond": "5004 AND 80021", "out": "50040", "desc": "Prozor - papirić već nađen"},
+  {"type": "item", "key": "50040", "value": "Prozor gleda prema vrtu. Na prozorskoj dasci stoji tegla s cvijećem."}
 ]

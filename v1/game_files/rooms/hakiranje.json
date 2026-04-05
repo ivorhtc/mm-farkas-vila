@@ -1,17 +1,24 @@
 [
-  {"type": "story", "story": "hakiranje"},
+  {"type": "story", "story": "hakiranje - dostupno uz laptop (90031). Zvonimirov mobitel trazi i flag 50020 (mobitel naden u spavacoj sobi)."},
+
   {"type": "rule", "cond": "8007001 AND 90031", "out": "8007001", "desc": "Samirov mobitel"},
+  {"type": "item", "key": "8007001", "value": "📱 Samirov mobitel:\n• SMS prijatelju: 'Brate, ne mogu doma, kamatari su mi razbili stan'\n• Kladionička app — trenutni minus: 4.200€\n• Lokacija u petak: firma za čišćenje → Farkaš vila"},
+
   {"type": "rule", "cond": "8007002 AND 90031", "out": "8007002", "desc": "Igorov mobitel"},
-  {"type": "rule", "cond": "8007003 AND 90031", "out": "8007003", "desc": "Viktorov mobitel"},
-  {"type": "rule", "cond": "8007004 AND 90031", "out": "8007004", "desc": "Radomirov mobitel"},
-  {"type": "rule", "cond": "8007005 AND 90031", "out": "8007005", "desc": "Davorov mobitel"},
-  {"type": "rule", "cond": "8007006 AND 90031", "out": "8007006", "desc": "Oliverov mobitel"},
-  {"type": "rule", "cond": "8007007 AND 90031", "out": "8007007", "desc": "Zvonimirov mobitel"},
-  {"type": "item", "key": "8007001", "value": "📱 Samirov mobitel:\n• SMS prijatelju: 'Brat, ne mogu doma, kamataši su mi razbili stan'\n• Kladionička app — trenutni minus: 4.200€\n• Lokacija u petak: firma za čišćenje → Farkaš vila"},
   {"type": "item", "key": "8007002", "value": "📱 Igorov mobitel:\n• Redovne uplate od: Viktorija Farkaš\n• Poziv s Viktorijom Farkaš u utorak, 12 minuta\n• Lokacija: isključena"},
+
+  {"type": "rule", "cond": "8007003 AND 90031", "out": "8007003", "desc": "Viktorov mobitel"},
   {"type": "item", "key": "8007003", "value": "📱 Viktorov mobitel:\n• Poziv sestri Viktoriji u Australiju u ponedjeljak, 47 minuta\n• SMS Viktoriji: 'Mora biti gotovo prije idućeg tjedna'\n• Lokacija: Farkaš vila u petak na ručku"},
+
+  {"type": "rule", "cond": "8007004 AND 90031", "out": "8007004", "desc": "Radomirov mobitel"},
   {"type": "item", "key": "8007004", "value": "📱 Radomirov mobitel:\n• Fotografije s curom — romantične, hotel, plaža\n• SMS od cure: 'Maldivi su rezervirani, samo završi to'\n• Pozivi Zvonimiru u petak ujutro"},
+
+  {"type": "rule", "cond": "8007005 AND 90031", "out": "8007005", "desc": "Davorov mobitel"},
   {"type": "item", "key": "8007005", "value": "📱 Davorov mobitel:\n• Redovne uplate od: Zvonimir Farkaš (treninzi)\n• Zadnja uplata: 3 tjedna prije\n• Instagram: @davoriradojkafit — Davor je admin profila (20001)"},
+
+  {"type": "rule", "cond": "8007006 AND 90031", "out": "8007006", "desc": "Oliverov mobitel"},
   {"type": "item", "key": "8007006", "value": "📱 Oliverov mobitel:\n• Poruka automatskog sustava: popis tablica automobila koja su bila u Farkaš vili u petak\n• Interna baza — pretrage na sve prisutne osobe\n• Lokacija: dolazi iz smjera policijske postaje"},
+
+  {"type": "rule", "cond": "8007007 AND 90031 AND 50020", "out": "8007007", "desc": "Zvonimirov mobitel - treba laptop I fizički mobitel nađen u spavaćoj"},
   {"type": "item", "key": "8007007", "value": "📱 Zvonimirov mobitel:\n• Intimne fotografije s Radojkom Špek\n• Obiteljske fotografije s Viktorom i Viktorijom Farkaš — stare nekoliko godina\n• SMS odvjetniku u srijedu: 'Dođi u petak, mijenjamo oporuku'"}
 ]
