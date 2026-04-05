@@ -1,0 +1,444 @@
+<!doctype html>
+<html lang="hr">
+<head>
+    <meta charset="utf-8">
+    <title>Farkaš Vila — Što se zapravo dogodilo</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #1a1410;
+            min-height: 100vh;
+            padding: 48px 16px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .document {
+            max-width: 720px;
+            width: 100%;
+            background: #f7f2e6;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4), 0 16px 48px rgba(0,0,0,0.5);
+            border-radius: 2px;
+            overflow: hidden;
+            background-image:
+                    repeating-linear-gradient(
+                            0deg,
+                            transparent,
+                            transparent 31px,
+                            rgba(180,160,100,0.1) 31px,
+                            rgba(180,160,100,0.1) 32px
+                    );
+        }
+
+        /* Zaglavlje */
+        .header {
+            background: #1a1410;
+            padding: 40px 56px 32px;
+            text-align: center;
+            border-bottom: 4px solid #8a6a2a;
+        }
+
+        .header-label {
+            font-family: 'Crimson Text', serif;
+            font-size: 11px;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #8a6a2a;
+            margin-bottom: 12px;
+        }
+
+        .header-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            color: #f7f2e6;
+            line-height: 1.2;
+            margin-bottom: 8px;
+        }
+
+        .header-subtitle {
+            font-family: 'Crimson Text', serif;
+            font-style: italic;
+            font-size: 18px;
+            color: #8a7a5a;
+        }
+
+        /* Sadržaj */
+        .content {
+            padding: 48px 56px;
+        }
+
+        /* Dan sekcija */
+        .day-section {
+            margin-bottom: 40px;
+        }
+
+        .day-label {
+            font-family: 'Playfair Display', serif;
+            font-size: 13px;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #8a6a2a;
+            margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .day-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: rgba(138,106,42,0.3);
+        }
+
+        .day-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 26px;
+            color: #1a1410;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1a1410;
+        }
+
+        /* Paragraf */
+        p {
+            font-family: 'Crimson Text', serif;
+            font-size: 17px;
+            line-height: 1.85;
+            color: #2a2018;
+            margin-bottom: 16px;
+        }
+
+        /* Igrači */
+        .p1 { color: #1a1a1a; font-weight: 600; }
+        .p2 { color: #8a6a00; font-weight: 600; }
+        .p3 { color: #1a3a6a; font-weight: 600; }
+        .p4 { color: #8a1a1a; font-weight: 600; }
+        .p5 { color: #1a5a1a; font-weight: 600; }
+        .p6 { color: #4a1a6a; font-weight: 600; }
+
+        /* Podvlake */
+        .underline {
+            text-decoration: underline;
+            text-decoration-thickness: 1px;
+        }
+
+        .red-wave {
+            text-decoration: underline wavy;
+            text-decoration-color: rgba(160,40,40,0.6);
+            text-decoration-thickness: 2px;
+        }
+
+        /* Zaokruženo */
+        .circled {
+            border: 1.5px solid #1a1410;
+            border-radius: 50%;
+            padding: 1px 5px;
+            display: inline-block;
+            line-height: 1.3;
+        }
+
+        .circled-red {
+            border: 1.5px solid rgba(160,40,40,0.7);
+            border-radius: 50%;
+            padding: 1px 5px;
+            display: inline-block;
+            color: rgba(160,40,40,0.9);
+            line-height: 1.3;
+        }
+
+        /* Highlight */
+        .hl {
+            background: rgba(255,210,40,0.4);
+            padding: 0 2px;
+        }
+
+        .hl-red {
+            background: rgba(200,60,60,0.15);
+            padding: 0 2px;
+        }
+
+        /* Ručna bilješka */
+        .margin-note {
+            font-family: 'Crimson Text', serif;
+            font-style: italic;
+            font-size: 13px;
+            color: #1a3a6a;
+            margin: -8px 0 16px 24px;
+            padding-left: 12px;
+            border-left: 2px solid rgba(26,58,106,0.4);
+        }
+
+        /* Divider */
+        .divider {
+            border: none;
+            border-top: 1px solid rgba(138,106,42,0.3);
+            margin: 32px 0;
+        }
+
+        /* Finale box */
+        .finale {
+            margin-top: 8px;
+            border: 2px solid #1a1410;
+            padding: 24px 28px;
+            background: rgba(26,20,16,0.04);
+        }
+
+        .finale-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 20px;
+            color: #1a1410;
+            margin-bottom: 14px;
+            font-style: italic;
+        }
+
+        /* Footer */
+        .footer {
+            background: #1a1410;
+            padding: 20px 56px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .footer-text {
+            font-family: 'Crimson Text', serif;
+            font-size: 12px;
+            color: #5a4a2a;
+            letter-spacing: 2px;
+        }
+
+        .footer-icon {
+            font-size: 20px;
+            opacity: 0.5;
+        }
+    </style>
+</head>
+<body>
+
+<div class="document">
+
+    <!-- Zaglavlje -->
+    <div class="header">
+        <div class="header-label">Službeni izvještaj · Slučaj 2024-FM</div>
+        <div class="header-title">Farkaš Vila</div>
+        <div class="header-subtitle">Što se zapravo dogodilo</div>
+    </div>
+
+    <div class="content">
+
+        <!-- PONEDJELJAK -->
+        <div class="day-section">
+            <div class="day-label">Dan prvi</div>
+            <div class="day-title">Ponedjeljak</div>
+
+            <p>
+                <span class="p3">🔵 Sin Viktor</span> dolazi na ručak kod oca
+                <span class="underline">Zvonimira Farkaša</span> i saznaje šokantnu vijest —
+                otac ga namjerava <span class="hl-red">izbaciti iz oporuke zajedno sa sestrom Viktorijom</span>.
+                Sve će ostaviti ljubavnici. Viktor ljutito odlazi kući i odmah zove
+                sestru u Australiju da joj prenese vijest.
+                <span class="circled">Odvjetnik dolazi idući tjedan</span> — vremena je malo.
+            </p>
+
+            <p>
+                Ono što Viktor ne zna: <span class="p6">🟣 Viktorija</span> je
+                <span class="hl">već prije mjesec dana zaposlila plaćenog ubojicu</span> —
+                <span class="p2">🟡 Igora</span>.
+            </p>
+        </div>
+
+        <hr class="divider">
+
+        <!-- UTORAK -->
+        <div class="day-section">
+            <div class="day-label">Dan drugi</div>
+            <div class="day-title">Utorak</div>
+
+            <p>
+                Viktorija javlja <span class="p2">🟡 Igoru</span> da mora
+                <span class="red-wave">ubrzati plan</span> — ubojstvo se mora dogoditi
+                <span class="underline">prije idućeg tjedna</span>, dok Zvonimir još nije
+                službeno promijenio oporuku.
+            </p>
+
+            <p>
+                <span class="p2">🟡 Igor</span> već tjednima radi u firmi za čišćenje vile —
+                uči raspored kuće, Zvonimirove navike, rutinu.
+                Plan je jednostavan: <span class="hl">u petak navečer uzet će
+        <span class="p1">⚫ Samirov</span> službeni kombi</span> iz firme,
+                otrovati Zvonimira sedativom koji u kombinaciji s njegovim tabletama za srce
+                postaje <span class="circled-red">smrtonosan</span>,
+                otvoriti sef (šifra: godina izgradnje vile — <strong>2004</strong>),
+                uzeti novac i zlato i nestati.
+            </p>
+
+            <div class="margin-note">Igor već tjednima ima pristup vili. Nitko ne primjećuje čistača.</div>
+        </div>
+
+        <hr class="divider">
+
+        <!-- SRIJEDA -->
+        <div class="day-section">
+            <div class="day-label">Dan treći</div>
+            <div class="day-title">Srijeda</div>
+
+            <p>
+                <span class="p5">🟢 Trener Davor</span> saznaje razornu vijest —
+                njegov klijent <span class="underline">Zvonimir Farkaš</span> dugo spava
+                s njegovom ženom, osobnom trenericom <span class="circled">Radojkom Špek</span>.
+                Radojka ga je taj dan ostavila i priznala aferu.
+                Davorov plan: <span class="hl-red">u petak, nakon jutarnjeg treninga,
+        postavit će zamku koja će ubiti Zvonimira.</span>
+            </p>
+
+            <p>
+                <span class="p3">🔵 Viktor</span> donosi odluku — u petak će opet doći na ručak,
+                još jednom moliti oca da se predomisli, i ako ne uspije —
+                <span class="underline">zamijeniti njegove tablete za srce vitaminima</span>.
+            </p>
+        </div>
+
+        <hr class="divider">
+
+        <!-- ČETVRTAK -->
+        <div class="day-section">
+            <div class="day-label">Dan četvrti</div>
+            <div class="day-title">Četvrtak</div>
+
+            <p>
+                <span class="circled">Radojka Špek</span> nije otišla Zvonimiru —
+                otišla je drugom ljubavniku,
+                <span class="p4">🔴 Odvjetniku Radomiru</span>.
+                Nagovara ga da odu na <span class="hl">Maldive idući tjedan</span>.
+                Plan: Radomir ide u petak k Zvonimiru promijeniti oporuku i
+                <span class="red-wave">postaviti zamku u vinskom podrumu</span>.
+            </p>
+        </div>
+
+        <hr class="divider">
+
+        <!-- PETAK -->
+        <div class="day-section">
+            <div class="day-label">Dan peti — ključni dan</div>
+            <div class="day-title">Petak</div>
+
+            <p>
+                <span class="p5">🟢 Trener Davor</span> dolazi na jutarnji trening.
+                Dok se Zvonimir tušira, Davor silazi u podrum, uzima alat i
+                <span class="hl-red">odšarafljuje ogradu balkona na katu</span>.
+                Zvonimir svake večeri popije barem dvije boce vina i oslonjen na ogradu
+                gleda imanje. <span class="circled">Davor odlazi.</span>
+            </p>
+
+            <p>
+                <span class="p1">⚫ Samir</span> dolazi i zamoli Zvonimira može li
+                noćas ostati u sobi za goste — <span class="underline">navodno ima radove u stanu</span>,
+                a zapravo mu je stan razbijen zbog dugova iz kladionice.
+                Zvonimir kaže: <em>"Ma naravno."</em>
+            </p>
+
+            <p>
+                <span class="p4">🔴 Odvjetnik Radomir</span> dolazi promijeniti oporuku.
+                <span class="hl">Iz oporuke se miču Viktor i Viktorija —
+        sve nasljeđuje Radojka Špek.</span>
+                Prije odlaska, Radomir ide u podrum,
+                <span class="red-wave">pokreće peć u kotlovnici i puni vinski podrum
+        ugljičnim monoksidom</span>. Podešava vrata vinskog podruma da se
+                mogu otvoriti samo izvana. <span class="circled">Radomir odlazi.</span>
+            </p>
+
+            <div class="margin-note">Tri zamke postavljene. Nitko od trojice ne zna za ostale.</div>
+
+            <p>
+                <span class="p3">🔵 Viktor</span> dolazi na ručak, posljednji put moli
+                oca da mu barem kuću ostavi. Zvonimir odbija —
+                <em>"Radojka želi sve, a ja želim Radojku."</em>
+                Viktor odlazi u WC i <span class="hl-red">zamjenjuje Zvonimirove tablete
+        za srce vitaminima</span>. Vraća se za stol. Ručak završava.
+                <span class="p3">🔵 Viktor</span> odlazi.
+            </p>
+
+            <p>
+                Navečer dolazi <span class="p2">🟡 Igor</span>. Parkira kombi u garažu.
+                <span class="underline">Toči Zvonimiru pripremljeno otrovano vino.</span>
+                Čuje da netko ulazi u kuću — to je <span class="p1">⚫ Samir</span>
+                koji večer provodi u sobi za goste na video-callu i online kladionici.
+                <span class="p2">🟡 Igor</span> nastavlja. Zvonimir se povlači u radnu sobu.
+            </p>
+
+            <p>
+                <span class="p2">🟡 Igor</span> čeka da otrov počne djelovati.
+                Zvonimir zaspi na kauču. <span class="hl">Igor otvara sef i nosi
+        novac i zlato u kombi.</span> Zlato je teško — više puta gore-dolje.
+                Trećim ulaskom u radnu sobu — <span class="circled-red">Zvonimir stoji</span>.
+                Ošamućen, ali živ. <span class="p2">🟡 Igor</span>
+                <span class="red-wave">udara ga zlatnom polugom</span>.
+                Zvonimir pada. Ovaj put zauvijek.
+            </p>
+
+            <p>
+                <span class="p2">🟡 Igor</span> juri prema kombiju —
+                ali ispred garaže je <span class="circled"><span class="p1">Samirov</span> auto</span>.
+                Ne može pobjeći a da ne bude viđen. Čeka u kombiju.
+                Nakon nekoliko sati, iscrpljen, <span class="underline">zaspi s novcem i
+        zlatom uz sebe</span>.
+            </p>
+        </div>
+
+        <hr class="divider">
+
+        <!-- SUBOTA -->
+        <div class="day-section">
+            <div class="day-label">Dan šesti — jutro</div>
+            <div class="day-title">Subota</div>
+
+            <p>
+                Zvonimir je bio paranoičan. Čim mu je srce stalo,
+                <span class="p6">🟣 Inspektor Oliver</span> automatski dobiva
+                popis svih osoba koje su taj dan bile u vili.
+                Šalje poruku svima: <em>"Hitno dođite u Farkaš vilu."</em>
+            </p>
+
+            <p>
+        <span class="hl">Zamislite Oliverovo iznenađenje kada ga u hodniku
+        vile ujutro dočeka svih pet potencijalnih ubojica.</span>
+                Oliver zaključuje — ubojica je ostao jer je bio zarobljen.
+                Glumi da je i on dobio istu poruku i ne zna o čemu se radi.
+            </p>
+        </div>
+
+        <hr class="divider">
+
+        <!-- FINALE -->
+        <div class="finale">
+            <div class="finale-title">Istina</div>
+            <p>
+                Zvonimira Farkaša ubio je <span class="p2 underline">🟡 Igor</span> —
+                <span class="hl-red">plaćeni ubojica angažiran od strane Viktorije Farkaš</span>,
+                zlatnom polugom, u radnoj sobi, u petak navečer.
+            </p>
+            <p>
+                Četiri osobe su te noći imale razlog i plan za ubojstvo.
+                <span class="circled">Samo jedan je uspio.</span>
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="footer">
+        <span class="footer-text">Farkaš Vila · Slučaj 2024-FM · Povjerljivo</span>
+        <span class="footer-icon">⚖️</span>
+        <span class="footer-text">kraj</span>
+    </div>
+
+</div>
+
+</body>
+</html>
