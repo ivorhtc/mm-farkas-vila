@@ -1,11 +1,20 @@
 [
-  {"type": "story", "story": "spavaca_soba - krevet uredan, Zvonimir nije spavao tu. Ormar s mobitelem, nocni ormaric s okvirom, prozor sa sifrom sefa."},
+  {"type": "story", "story": "spavaca_soba - krevet uredan, Zvonimir nije spavao tu. Krevet ima kljuc ladice. Ormar s mobitelem, nocni ormaric s okvirom, prozor sa sifrom sefa."},
 
   {"type": "rule", "cond": "5000", "out": "5000", "desc": "Spavaća soba - opis"},
   {"type": "item", "key": "5000", "value": "Velika spavaća soba s krevetom, ormarom i noćnim ormarićem. Sve je uredno i pospremljeno. Možete pretražiti: krevet (5001), ormar (5002), noćni ormarić (5003), prozor (5004)."},
 
-  {"type": "story", "story": "krevet"},
-  {"type": "rule", "cond": "5001", "out": "5001", "desc": "Krevet - uredan, Zvonimir nije spavao tu"},
+  {"type": "story", "story": "krevet - ispod jastuka kljuc od zakljucane ladice u radnoj sobi (50032)"},
+  {"type": "rule", "cond": "5001 AND NOT 50032", "out": "5001event", "desc": "Krevet - ključ još tu"},
+  {"type": "event", "key": "5001event",
+    "logic": {"winnerStrategy": "priorityList", "priorityList": ["p6","p3","p1","p4","p5","p2"]},
+    "output": {
+      "winner": "Krevet je uredno pospremljen — jastuk ravan, deka zategnuta. Podižete jastuk i nalazite mali ključ s plavom etiketom na kojoj piše 'L2'.",
+      "others": "Krevet je uredno pospremljen. ${winnerN} podiže jastuk i uzima nešto.",
+      "p7": "Daj ${winnerD} ključ ladice (kartica 50032). Global +50032",
+      "kartica": "🗝️ KLJUČ L2 — Ključ od zaključane ladice u radnoj sobi. Global +50032"
+    }},
+  {"type": "rule", "cond": "5001 AND 50032", "out": "5001", "desc": "Krevet - ključ već uzet"},
   {"type": "item", "key": "5001", "value": "Krevet je uredno pospremljen — jastuk ravan, deka zategnuta. Izgleda kao da nije nitko spavao tu sinoć."},
 
   {"type": "story", "story": "ormar - Zvonimirov mobitel u dzepu hlaca. Flag 50020 otkljucava hakiranje 8007007"},
@@ -13,7 +22,7 @@
   {"type": "event", "key": "5002event",
     "logic": {"winnerStrategy": "priorityList", "priorityList": ["p6","p3","p1","p4","p5","p2"]},
     "output": {
-      "winner": "Ormar je pun skupih odijela i odijela. Pretražujete džepove — u unutarnjem džepu jednih tamnih hlača nalazite mobitel. Ekran je ugašen ali baterija je još tu.",
+      "winner": "Ormar je pun skupih odijela. Pretražujete džepove — u unutarnjem džepu jednih tamnih hlača nalazite mobitel. Ekran je ugašen ali baterija je još tu.",
       "others": "Ormar je pun skupih odijela. ${winnerN} pretražuje džepove i uzima nešto.",
       "p7": "Daj ${winnerD} Zvonimirov mobitel (kartica 50020). Global +50020",
       "kartica": "📱 ZVONIMIROV MOBITEL — Možeš ga haknuti ako nađeš laptop (8007007). Global +50020"
@@ -34,7 +43,7 @@
       "kartica": "🖼️ OBITELJSKA FOTOGRAFIJA — Na poleđini piše: Zvonimir, Viktor i Viktorija. Na slici piše Minhen 2023."
     }},
   {"type": "rule", "cond": "5003 AND 50030", "out": "5003", "desc": "Noćni ormarić - okvir već uzet"},
-  {"type": "item", "key": "5003", "value": "U noćnom ormariću je prazno — kutija tableta za srce nedostaje. Ladica je prazna."},
+  {"type": "item", "key": "5003", "value": "U noćnom ormariću je prazno. Ladica je prazna."},
   {"type": "rule", "cond": "5003 AND 88771", "out": "50031", "desc": "Noćni ormarić - otisci"},
   {"type": "item", "key": "50031", "value": "Otisci prstiju na noćnom ormariću: 🔵 Plavi, ⚪ Zvonimir."},
 
@@ -44,7 +53,7 @@
     "value": "Prozor gleda prema vrtu. Na prozorskoj dasci stoji tegla s cvijećem. Ispod tegle nalazite presavijen papirić na kojem rukom piše: 'Šifra sefa = godina izgradnje vile.'",
     "p7": "Daj najbržem papiric (kartica 80021). Global +80021.",
     "global": "80021",
-    "kartica": "\uD83D\uDCDD PAPIRIC na kojem rukom piše: 'Šifra sefa = godina izgradnje vile.'. Global +20021."
+    "kartica": "📝 PAPIRIĆ — Rukom pisano: 'Šifra sefa = godina izgradnje vile.' Global +20021"
   },
   {"type": "rule", "cond": "5004 AND 80021", "out": "50040", "desc": "Prozor - papirić već nađen"},
   {"type": "item", "key": "50040", "value": "Prozor gleda prema vrtu. Na prozorskoj dasci stoji tegla s cvijećem."}
