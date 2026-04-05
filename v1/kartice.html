@@ -193,6 +193,31 @@
                         const location = `Soba: ${roomName} · item key: ${obj.key}`;
                         rows.push(makeRow('room', location, null, obj.p7, flag, fileName));
                     }
+
+                    // Obični item s karticom
+                    if (obj.type === 'item') {
+                        if (obj.kartica) {
+                            const flag = extractFlag(obj.kartica);
+                            const location = `Soba: ${roomName} · item key: ${obj.key}`;
+                            rows.push(makeRow('room', location, null, obj.kartica, flag, fileName));
+                        }
+                        if (obj.kartica_1) {
+                            const flag = extractFlag(obj.kartica_1);
+                            const location = `Soba: ${roomName} · item key: ${obj.key}`;
+                            rows.push(makeRow('room', location, null, obj.kartica_1, flag, fileName));
+                        }
+                        if (obj.kartica_2) {
+                            const flag = extractFlag(obj.kartica_2);
+                            const location = `Soba: ${roomName} · item key: ${obj.key}`;
+                            rows.push(makeRow('room', location, null, obj.kartica_2, flag, fileName));
+                        }
+                        if (obj.kartica_3) {
+                            const flag = extractFlag(obj.kartica_3);
+                            const location = `Soba: ${roomName} · item key: ${obj.key}`;
+                            rows.push(makeRow('room', location, null, obj.kartica_3, flag, fileName));
+                        }
+                    }
+
                 });
             } catch(e) {
                 console.warn(`Greška pri učitavanju ${roomName}:`, e);
