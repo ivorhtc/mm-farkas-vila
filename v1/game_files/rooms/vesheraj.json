@@ -1,19 +1,56 @@
 [
-  {"type": "story", "story": "vesheraj"},
-  {"type": "rule", "cond": "12000", "out": "12000", "desc": "Vešeraj"},
+  {"type": "story", "story": "vesheraj - odvijac Zelenog, kloroform na policama, otisci Zelenog i Crnog"},
+
+  {"type": "rule", "cond": "12000", "out": "12000", "desc": "Vešeraj - opis"},
+  {"type": "item", "key": "12000", "value": "Vešeraj s perilicom i sušilicom. Možete pretražiti: perilicu (12001), sušilicu (12002), police (12003), pod (12004), peglu i dasku (12005), alat (12006).",
+    "p7": "Daj svim igračima karticu vešeraja (kartica 12000).",
+    "kartica": "👕 VEŠERAJ — Možete pretražiti: perilicu (12001), sušilicu (12002), police (12003), pod (12004), peglu i dasku (12005), alat (12006)."},
+
+  {"type": "story", "story": "perilica"},
   {"type": "rule", "cond": "12001", "out": "12001", "desc": "Perilica"},
-  {"type": "rule", "cond": "12002", "out": "12002", "desc": "Sušilica"},
-  {"type": "rule", "cond": "12003", "out": "12003", "desc": "Police vešeraja"},
-  {"type": "rule", "cond": "12004", "out": "12004", "desc": "Pod vešeraja"},
-  {"type": "rule", "cond": "12005", "out": "12005", "desc": "Pegla i daska"},
-  {"type": "rule", "cond": "12006 AND NOT 88771", "out": "12006", "desc": "Odvijač - nedavno korišten, bez otisaka"},
-  {"type": "rule", "cond": "12006 AND 88771", "out": "120061", "desc": "Odvijač - otisci prstiju, admin kaže da su Zeleni"},
-  {"type": "item", "key": "12000", "value": "Vešeraj s perilicom i sušilicom. Možete pretražiti: perilicu (12001), sušilicu (12002), police (12003), pod (12004), peglu i dasku (12005), alat (12006)."},
   {"type": "item", "key": "12001", "value": "Perilica je puna ručnika."},
+
+  {"type": "rule", "cond": "12001 AND 88771", "out": "120011", "desc": "Perilica - otisci"},
+  {"type": "item", "key": "120011", "value": "Otisci prstiju na perilici: ⚫ Crni."},
+
+  {"type": "story", "story": "sušilica"},
+  {"type": "rule", "cond": "12002", "out": "12002", "desc": "Sušilica"},
   {"type": "item", "key": "12002", "value": "Sušilica je još topla."},
-  {"type": "item", "key": "12003", "value": "Na policama su deterdženti."},
+
+  {"type": "rule", "cond": "12002 AND 88771", "out": "120021", "desc": "Sušilica - otisci"},
+  {"type": "item", "key": "120021", "value": "Otisci prstiju na sušilici: ⚫ Crni."},
+
+  {"type": "story", "story": "police - kloroform (event)"},
+  {"type": "rule", "cond": "12003 AND NOT 120030", "out": "12003event", "desc": "Police - kloroform još tu"},
+  {"type": "event", "key": "12003event",
+    "logic": {"winnerStrategy": "priorityList", "priorityList": ["p1","p6","p2","p3","p4","p5"]},
+    "output": {
+      "winner": "Na policama su deterdženti i sredstva za čišćenje. Između boca primjećujete malu bočicu bez etikete s karakterističnim mirisom. Kloroform. Spremaš je diskretno.",
+      "others": "Na policama su deterdženti i sredstva za čišćenje. ${winnerN} uzima nešto s police.",
+      "p7": "Daj ${winnerD} kloroform (kartica 120030). Global +120030",
+      "kartica": "🧪 KLOROFORM — Između rundi možeš upotrijebiti na drugog igrača. Oba igrača preskaču sljedeću rundu. Uspavani igrač daje ti sve svoje kartice. Žrtva zna tko ju je uspavao. Može se koristiti jednom. Global +88784"
+    }},
+
+  {"type": "rule", "cond": "12003 AND 120030", "out": "12003", "desc": "Police - kloroform već uzet"},
+  {"type": "item", "key": "12003", "value": "Na policama su deterdženti i sredstva za čišćenje."},
+
+  {"type": "rule", "cond": "12003 AND 88771", "out": "120031", "desc": "Police - otisci"},
+  {"type": "item", "key": "120031", "value": "Otisci prstiju na policama: ⚫ Crni."},
+
+  {"type": "story", "story": "pod"},
+  {"type": "rule", "cond": "12004", "out": "12004", "desc": "Pod vešeraja"},
   {"type": "item", "key": "12004", "value": "Pod je mokar."},
+
+  {"type": "story", "story": "pegla i daska"},
+  {"type": "rule", "cond": "12005", "out": "12005", "desc": "Pegla i daska"},
   {"type": "item", "key": "12005", "value": "Pegla i daska stoje u kutu."},
+
+  {"type": "story", "story": "odvijac - Zeleni ga koristio za olabaviti ogradu balkona. Otisci uz pribor 88771."},
+  {"type": "rule", "cond": "12006 AND NOT 88771", "out": "12006", "desc": "Odvijač - nedavno korišten, bez otisaka"},
   {"type": "item", "key": "12006", "value": "Na polici u kutu stoji odvijač — izgleda kao da je nedavno korišten."},
-  {"type": "item", "key": "120061", "value": "Na polici u kutu stoji odvijač — izgleda kao da je nedavno korišten. Uzimate pribor za otiske i provjerate odvijač. Na njemu su jasni otisci prstiju.", "admin": "Otisci na odvijаču pripadaju Zelenom (Davoru)."}
+
+  {"type": "rule", "cond": "12006 AND 88771", "out": "120061", "desc": "Odvijač - s priborom, otisci Zelenog"},
+  {"type": "item", "key": "120061",
+    "value": "Na polici u kutu stoji odvijač — izgleda kao da je nedavno korišten. Uzimate pribor za otiske i provjeravate odvijač. Na njemu su jasni otisci prstiju \uD83D\uDFE2 Zelenog.",
+    "admin": "Otisci na odvijаču pripadaju Zelenom (Davoru)."}
 ]
