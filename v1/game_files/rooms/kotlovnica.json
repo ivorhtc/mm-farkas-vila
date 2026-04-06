@@ -1,11 +1,30 @@
 [
-  {"type": "story", "story": "kotlovnica"},
-  {"type": "rule", "cond": "11000", "out": "11000", "desc": "Kotlovnica"},
-  {"type": "rule", "cond": "11001", "out": "11001", "desc": "Kotlovi"},
+  {"type": "story", "story": "kotlovnica - Radomir je ovdje prtljao po peci i ventilima da napuni vinski podrum CO2. Otisci Crvenog svugdje."},
+
+  {"type": "rule", "cond": "11000", "out": "11000", "desc": "Kotlovnica - opis"},
+  {"type": "item", "key": "11000", "value": "Uska prostorija puna cijevi, bojlera i ventila. Sve je prašnjavo i staro osim jednog mjesta — netko je ovdje nedavno nešto dirao. Možete pretražiti: bojler (11001), cijevi (11002), ventile (11003).",
+    "p7": "Daj svim igračima karticu kotlovnice (kartica 11000).",
+    "kartica": "🌡️ KOTLOVNICA — Možete pretražiti: bojler (11001), cijevi (11002), ventile (11003)."},
+
+  {"type": "story", "story": "bojler - ocito prtljano, otisci Crvenog"},
+  {"type": "rule", "cond": "11001", "out": "11001", "desc": "Bojler - tragovi da je netko dirao"},
+  {"type": "item", "key": "11001", "value": "Bojler tiho zuji. Na površini su vidljivi tragovi prstiju u prašini — netko je nedavno dirao poklopac i bočne ventile."},
+
+  {"type": "rule", "cond": "11001 AND 88771", "out": "110011", "desc": "Bojler - otisci"},
+  {"type": "item", "key": "110011", "value": "Otisci prstiju na bojleru: 🔴 Crveni. Nema tuđih otisaka — samo jedna osoba je ovdje radila."},
+
+  {"type": "story", "story": "cijevi - vode prema vinskom podrumu"},
   {"type": "rule", "cond": "11002", "out": "11002", "desc": "Cijevi prema vinskom podrumu"},
-  {"type": "rule", "cond": "11003", "out": "11003", "desc": "Ventili - jedan namješten drugačije, admin flag 110031"},
-  {"type": "item", "key": "11000", "value": "Kotlovnica puna cijevi i bojlera. Možete pretražiti: kotlove (11001), cijevi (11002), ventile (11003)."},
-  {"type": "item", "key": "11001", "value": "Kotlovi tiho zuje."},
-  {"type": "item", "key": "11002", "value": "Cijevi vode prema vinskom podrumu."},
-  {"type": "item", "key": "11003", "value": "Ventili izgledaju kao da ih je netko nedavno dirao — jedan je namješten drugačije od ostalih.", "global": "110031"}
+  {"type": "item", "key": "11002", "value": "Cijevi vode prema vinskom podrumu. Jedna cijev je toplija od ostalih na dodir."},
+
+  {"type": "rule", "cond": "11002 AND 88771", "out": "110021", "desc": "Cijevi - otisci"},
+  {"type": "item", "key": "110021", "value": "Otisci prstiju na cijevima: 🔴 Crveni, ⚫ Crni."},
+
+  {"type": "story", "story": "ventili - jedan namjesten drugacije, kljucni trag za CO zamku"},
+  {"type": "rule", "cond": "11003", "out": "11003", "desc": "Ventili - jedan namješten drugačije"},
+  {"type": "item", "key": "11003", "value": "Ventili izgledaju kao da ih je netko nedavno dirao — jedan je namješten potpuno drugačije od ostalih. Kao da je netko namjerno preusmjerio protok prema vinskom podrumu.",
+    "global": "110031"},
+
+  {"type": "rule", "cond": "11003 AND 88771", "out": "110031otisci", "desc": "Ventili - otisci"},
+  {"type": "item", "key": "110031otisci", "value": "Otisci prstiju na ventilima: 🔴 Crveni. Samo jedna osoba je dirala ventile — i to više puta."}
 ]
