@@ -10,7 +10,7 @@
 	"key": "8000",
 	"value": "Radna soba s velikim stolom, policama knjiga i slikom na zidu. Na kauču uz prozor leži tijelo Zvonimira Farkaša. Možete pretražiti: stol (8001), ladice stola (8002), zaključanu ladicu (80023), sliku na zidu (8005), police s knjigama (8004), tijelo (8006).",
 	"p7": "Daj svim igračima karticu radne sobe (kartica 8000).",
-	"kartica": "📚 RADNA SOBA — Možete pretražiti: stol (8001), ladice stola (8002), slika na zidu (8005), police s knjigama (8004), tijelo (8006)."},
+	"kartica": "📚 RADNA SOBA — Možete pretražiti: stol (8001), ladice stola (8002), slika na zidu (8005), police s knjigama (8004), tijelo (8006), balkon (8100)."},
 
   {"type": "story",
 	"story": "stol - nova oporuka. Otisci Radomira i Zvonimira."},
