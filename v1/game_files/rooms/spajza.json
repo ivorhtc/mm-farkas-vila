@@ -1,14 +1,51 @@
 [
-  {"type": "story", "story": "spajza"},
-  {"type": "rule", "cond": "7000", "out": "7000", "desc": "Spajza"},
-  {"type": "rule", "cond": "7001", "out": "7001", "desc": "Police spajze"},
-  {"type": "rule", "cond": "7002", "out": "7002", "desc": "Tegle i konzerve"},
-  {"type": "rule", "cond": "7003", "out": "7003", "desc": "Pod spajze"},
-  {"type": "rule", "cond": "7004 AND NOT 40040", "out": "7004", "desc": "Ormar spajze - nalaze pajser, admin daje fizički pajser i flag 40040"},
-  {"type": "rule", "cond": "7004 AND 40040", "out": "7004", "desc": "Ormar spajze - pajser već nađen"},
-  {"type": "item", "key": "7000", "value": "Mala spajza puna tegli i konzervirane hrane. Možete pretražiti: police (7001), tegle i konzerve (7002), pod (7003), ormar (7004)."},
+  {"type": "story", "story": "spajza - police s tlocrtom (event), ormaric s cavcima, veliki ormar s pajserom, kutije s termosem"},
+
+  {"type": "rule", "cond": "7000", "out": "7000", "desc": "Spajza - opis"},
+  {"type": "item", "key": "7000", "value": "Mala spajza puna tegli i konzervirane hrane. Možete pretražiti: police (7001), ormarić (7002), veliki ormar (7003), kutije (7004).",
+    "p7": "Daj svim igračima karticu spajze (kartica 7000).",
+    "kartica": "🧹 SPAJZA — Možete pretražiti: police (7001), ormarić (7002), veliki ormar (7003), kutije (7004)."},
+
+  {"type": "story", "story": "police - tlocrt vile (event)"},
+  {"type": "rule", "cond": "7001 AND NOT 70010", "out": "7001event", "desc": "Police - tlocrt vile još tu"},
+  {"type": "event", "key": "7001event",
+    "logic": {"winnerStrategy": "priorityList", "priorityList": ["p1","p2","p3","p4","p5","p6"]},
+    "output": {
+      "winner": "Police su prepune hrane — konzerve, tegle, paketi tjestenine. Između paketa nalazite presavijeni papir — originalni tlocrt vile s ucrtanim svim prostorijama. Spremaš ga u džep.",
+      "others": "Police su prepune hrane. ${winnerN} uzima nešto između paketa.",
+      "p7": "Daj ${winnerD} tlocrt vile (kartica 70010). Global +70010",
+      "kartica": "🗺️ TLOCRT VILE — Originalni tlocrt s ucrtanim svim prostorijama. [voditelj: zamijeni s pravim tlocrtom]"
+    }},
+  {"type": "rule", "cond": "7001 AND 70010", "out": "7001", "desc": "Police - tlocrt već uzet"},
   {"type": "item", "key": "7001", "value": "Police su prepune hrane — konzerve, tegle, paketi tjestenine."},
-  {"type": "item", "key": "7002", "value": "Jedna tegla je pala i razbila se na podu, staklo je pometeno u kut."},
-  {"type": "item", "key": "7003", "value": "Na podu su sitne mrvice stakla od razbijene tegle."},
-  {"type": "item", "key": "7004", "value": "U ormaru su vreće brašna i šećera. Iza njih, naslonjen uz zid, stoji metalni pajser.", "p7": "Dajte igračima pajser. Global +40040"}
+
+  {"type": "story", "story": "ormaric - cavli i sarafi, nista posebno"},
+  {"type": "rule", "cond": "7002", "out": "7002", "desc": "Ormarić - čavli i šarafi"},
+  {"type": "item", "key": "7002", "value": "U ormariću su razni čavli, šarafi i sitni alat. Ništa posebno."},
+
+  {"type": "story", "story": "veliki ormar - pajser (flag 40040)"},
+  {"type": "rule", "cond": "7003 AND NOT 40040", "out": "7003event", "desc": "Veliki ormar - pajser još tu"},
+  {"type": "event", "key": "7003event",
+    "logic": {"winnerStrategy": "priorityList", "priorityList": ["p1","p3","p4","p5","p6","p2"]},
+    "output": {
+      "winner": "U ormaru su vreće brašna i šećera. Iza njih, naslonjen uz zid, stoji metalni pajser. Spremaš ga.",
+      "others": "U ormaru su vreće brašna i šećera. ${winnerN} uzima nešto iza vreća.",
+      "p7": "Daj ${winnerD} pajser (kartica 40040). Global +40040",
+      "kartica": "🔧 PAJSER — Možeš otvoriti nešto s njim (4004). Global +40040"
+    }},
+  {"type": "rule", "cond": "7003 AND 40040", "out": "7003", "desc": "Veliki ormar - pajser već uzet"},
+  {"type": "item", "key": "7003", "value": "U ormaru su vreće brašna i šećera. Iza vreća je prazan prostor."},
+
+  {"type": "story", "story": "kutije - crvena termosica od odvjetnickog ureda (inkriminira Radomira)"},
+  {"type": "rule", "cond": "7004 AND NOT 70040", "out": "7004event", "desc": "Kutije - termosica još tu"},
+  {"type": "event", "key": "7004event",
+    "logic": {"winnerStrategy": "priorityList", "priorityList": ["p1","p2","p3","p4","p5","p6"]},
+    "output": {
+      "winner": "Između kutija stoji crvena termosica. Na njoj je zalijepljena naljepnica: 'Hvala na originalnoj suradnji — Odvjetnički ured Šimić & partneri.' Spremaš je.",
+      "others": "Između kutija ${winnerN} uzima crvenu termosicu.",
+      "p7": "Daj ${winnerD} termosicu (kartica 70040). Global +70040",
+      "kartica": "☕ CRVENA TERMOSICA — Na naljepnici piše: 'Hvala na originalnoj suradnji — Odvjetnički ured Šimić & partneri.'"
+    }},
+  {"type": "rule", "cond": "7004 AND 70040", "out": "7004", "desc": "Kutije - termosica već uzeta"},
+  {"type": "item", "key": "7004", "value": "Kutije. Ništa posebno."}
 ]
