@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <title>Farkaš Vila — Pravila igre</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Crimson+Text:ital,wght@0,400;0,600;1,400&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1e1710;
+      min-height: 100vh;
+      padding: 48px 16px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .document {
+      max-width: 740px;
+      width: 100%;
+      background: #f5f0e4;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.4), 0 16px 48px rgba(0,0,0,0.5);
+      border-radius: 2px;
+      background-image:
+        repeating-linear-gradient(
+          0deg,
+          transparent,
+          transparent 31px,
+          rgba(180,160,100,0.1) 31px,
+          rgba(180,160,100,0.1) 32px
+        );
+    }
+
+    /* Zaglavlje */
+    .header {
+      background: #1e1710;
+      padding: 44px 56px 36px;
+      text-align: center;
+      border-bottom: 4px solid #8a6a2a;
+      position: relative;
+    }
+
+    .header-eyebrow {
+      font-family: 'Crimson Text', serif;
+      font-size: 11px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      color: #8a6a2a;
+      margin-bottom: 10px;
+    }
+
+    .header-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 46px;
+      color: #f5f0e4;
+      line-height: 1.1;
+      margin-bottom: 6px;
+    }
+
+    .header-sub {
+      font-family: 'Crimson Text', serif;
+      font-style: italic;
+      font-size: 17px;
+      color: #8a7a5a;
+    }
+
+    /* Layout s marginom */
+    .page {
+      display: grid;
+      grid-template-columns: 1fr 180px;
+      gap: 0;
+    }
+
+    .main-col {
+      padding: 48px 40px 48px 56px;
+      border-right: 1px solid rgba(138,106,42,0.2);
+    }
+
+    .margin-col {
+      padding: 48px 16px 48px 16px;
+      background: rgba(180,150,80,0.04);
+    }
+
+    /* Sekcije */
+    .section {
+      margin-bottom: 36px;
+    }
+
+    .section-eyebrow {
+      font-family: 'Crimson Text', serif;
+      font-size: 10px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: #8a6a2a;
+      margin-bottom: 4px;
+    }
+
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      color: #1a1410;
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 1.5px solid #1a1410;
+    }
+
+    p {
+      font-family: 'Crimson Text', serif;
+      font-size: 16px;
+      line-height: 1.85;
+      color: #2a2018;
+      margin-bottom: 12px;
+    }
+
+    /* Istaknuto */
+    .underline {
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+    }
+
+    .circled {
+      border: 1.5px solid #1a1410;
+      border-radius: 50%;
+      padding: 0 5px;
+      display: inline-block;
+      line-height: 1.4;
+    }
+
+    .hl { background: rgba(255,210,40,0.4); padding: 0 2px; }
+    .hl-red { background: rgba(200,60,60,0.12); padding: 0 2px; }
+    .bold { font-weight: 600; }
+
+    /* Pravilo box */
+    .rule-box {
+      border-left: 3px solid #8a6a2a;
+      padding: 10px 14px;
+      margin: 14px 0;
+      background: rgba(138,106,42,0.06);
+      font-family: 'Crimson Text', serif;
+      font-size: 15px;
+      line-height: 1.7;
+      color: #2a2018;
+    }
+
+    /* Korak lista */
+    .steps {
+      margin: 12px 0;
+      counter-reset: step;
+    }
+
+    .step {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 10px;
+      font-family: 'Crimson Text', serif;
+      font-size: 16px;
+      line-height: 1.7;
+      color: #2a2018;
+    }
+
+    .step-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 18px;
+      color: #8a6a2a;
+      min-width: 24px;
+      font-weight: 700;
+    }
+
+    /* Margina bilješke */
+    .margin-note {
+      font-family: 'Crimson Text', serif;
+      font-style: italic;
+      font-size: 12px;
+      color: #1a3a6a;
+      line-height: 1.6;
+      margin-bottom: 24px;
+      padding-left: 8px;
+      border-left: 2px solid rgba(26,58,106,0.3);
+    }
+
+    .margin-label {
+      font-family: 'Crimson Text', serif;
+      font-size: 10px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #8a6a2a;
+      margin-bottom: 6px;
+    }
+
+    .margin-symbol {
+      font-size: 20px;
+      text-align: center;
+      margin-bottom: 8px;
+      opacity: 0.6;
+    }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid rgba(138,106,42,0.25);
+      margin: 8px 0 32px;
+    }
+
+    /* Dice vizual */
+    .dice-row {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin: 14px 0;
+      padding: 14px 16px;
+      background: rgba(26,20,16,0.05);
+      border: 1px solid rgba(138,106,42,0.2);
+      border-radius: 4px;
+    }
+
+    .dice {
+      font-size: 36px;
+      line-height: 1;
+    }
+
+    .dice-text {
+      font-family: 'Crimson Text', serif;
+      font-size: 15px;
+      color: #2a2018;
+      line-height: 1.6;
+    }
+
+    /* Warning box */
+    .warning {
+      border: 1.5px solid rgba(160,40,40,0.4);
+      padding: 14px 16px;
+      margin: 14px 0;
+      background: rgba(160,40,40,0.04);
+      font-family: 'Crimson Text', serif;
+      font-size: 15px;
+      font-style: italic;
+      color: rgba(140,30,30,0.9);
+      line-height: 1.7;
+    }
+
+    /* Footer */
+    .footer {
+      background: #1e1710;
+      padding: 18px 56px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .footer-text {
+      font-family: 'Crimson Text', serif;
+      font-size: 11px;
+      color: #5a4a2a;
+      letter-spacing: 2px;
+    }
+  </style>
+</head>
+<body>
+
+<div class="document">
+
+  <div class="header">
+    <div class="header-eyebrow">Povjerljivo · samo za igrače</div>
+    <div class="header-title">Farkaš Vila</div>
+    <div class="header-sub">Pravila igre</div>
+  </div>
+
+  <div class="page">
+
+    <!-- GLAVNA KOLONA -->
+    <div class="main-col">
+
+      <!-- UVOD -->
+      <div class="section">
+        <div class="section-eyebrow">Situacija</div>
+        <div class="section-title">Zvonimir Farkaš je mrtav</div>
+        <p>
+          <span class="underline">Ne znate gjde je tijelo.</span>.
+          Vi ste jedini koji ste bili u vili — ili ste imali razlog biti tu.
+          Svi ste dobili istu poruku da dođete. Svi ste sumnjičavi.
+          <span class="hl">Ubojica je jedan od vas.</span>
+        </p>
+        <p>
+          Vaš zadatak: istražite vilu, pronađite dokaze i
+          <span class="circled">glasajte tko je ubojica</span> na kraju igre.
+          Ali pazite — netko možda pokušava podmetnuti vama.
+        </p>
+      </div>
+
+      <hr class="divider">
+
+      <!-- INICIJATIVA -->
+      <div class="section">
+        <div class="section-eyebrow">Početak svake runde</div>
+        <div class="section-title">Bacanje inicijative</div>
+
+        <p>Na početku svake runde svi bacaju <span class="bold">d20</span> — dvadesetostranu kockicu.</p>
+
+        <div class="dice-row">
+          <div class="dice">🎲</div>
+          <div class="dice-text">
+            Tko baci <span class="bold">najveći broj</span> — bira sobu <span class="underline">zadnji</span>.<br>
+            Tko baci <span class="bold">najmanji broj</span> — bira sobu <span class="underline">prvi</span>.
+          </div>
+        </div>
+
+        <p>
+          Biranje sobe <span class="hl">zadnji je velika prednost</span> — vidiš gdje su svi otišli
+          i možeš odlučiti koga pratiti ili koga izbjegavati.
+          Biranje prvo znači da istraživaš slobodno, ali bez informacija o drugima.
+        </p>
+
+        <div class="rule-box">
+          Redosljed biranja soba: od najmanjeg prema najvećem broju inicijative.
+          U slučaju izjednačenja — mlađi igrač bira prvi.
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- PRETRAŽIVANJE -->
+      <div class="section">
+        <div class="section-eyebrow">Tijekom runde</div>
+        <div class="section-title">Pretraživanje soba</div>
+
+        <p>
+          Svaka soba ima <span class="underline">numeriran sadržaj</span> koji možete pretražiti.
+          Kada uđete u sobu, dobivate karticu s popisom što se može pretražiti i pod kojim brojem.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1.</div>
+            <div>Svi istovremeno <span class="bold">pišu</span> što žele pretražiti — broj sobe i brojeve predmeta.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2.</div>
+            <div>Voditelj čita unesene brojeve i <span class="bold">glasno čita rezultate</span> svima.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3.</div>
+            <div>Neki rezultati su <span class="hl">privatni</span> — voditelj ih šapće samo dotičnom igraču.</div>
+          </div>
+        </div>
+
+        <div class="rule-box">
+          Možete upisati više brojeva odjednom, razdvojenih zarezom.<br>
+          Primjer: <em>8000, 8001, 8002</em> — ulazite u radnu sobu i pretražujete stol i ladice.
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- LAŽI I SOLO -->
+      <div class="section">
+        <div class="section-eyebrow">Važno pravilo</div>
+        <div class="section-title">Kad ste sami u sobi</div>
+
+        <p>
+          Ako ste <span class="circled">jedini igrač u sobi</span> —
+          <span class="hl-red">možete lagati</span>.
+        </p>
+        <p>
+          Možete reći da ste u sobi pronašli predmet koji ste zapravo
+          imali pri sebi od početka igre. Nitko nije bio s vama da to
+          provjeri. <span class="underline">Voditelj zna istinu</span> —
+          ali neće progovoriti osim ako ga netko uhvati u laži drugim dokazima.
+        </p>
+
+        <div class="warning">
+          Pazi na igrače koji odlaze sami. Tko god je sam u sobi —
+          mogao je nešto podmetnuti, sakriti ili uzeti bez svjedoka.
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- PREDMETI I KARTICE -->
+      <div class="section">
+        <div class="section-eyebrow">Kartice</div>
+        <div class="section-title">Predmeti i njihova upotreba</div>
+
+        <p>
+          Neke pretrage rezultiraju <span class="bold">fizičkom karticom</span>
+          koju voditelj daje igraču. Kartice se drže <span class="underline">tajno</span>
+          — nitko ne zna što imaš osim tebe i voditelja.
+        </p>
+        <p>
+          Kartice mogu biti <span class="hl">korisne</span> (daju prednost u igri)
+          ili <span class="hl-red">inkriminirajuće</span> (dokazuju tvoju krivnju).
+          Čuvaj ih dobro.
+        </p>
+
+        <div class="rule-box">
+          Postoje igrači koji te mogu <span class="bold">pretražiti</span> i uzeti sve tvoje kartice.
+          Ako te pretražuju — moraš predati sve kartice koje imaš pri sebi.
+          Ne možeš ništa sakriti.
+        </div>
+
+        <p>
+          Kada nekoga pretražiš, <span class="underline">oboje preskačete sljedeću rundu</span>
+          — ne upisujete brojeve i ne pretražujete ništa.
+        </p>
+      </div>
+
+      <hr class="divider">
+
+      <!-- SMRT -->
+      <div class="section">
+        <div class="section-eyebrow">Ako umreš</div>
+        <div class="section-title">Ponašanje nakon smrti</div>
+
+        <p>
+          Vila je opasna. <span class="hl-red">Možeš umrijeti</span> —
+          od nesreće, od otrova, ili nečijom rukom.
+          Ako umreš, igra za tebe ne završava potpuno.
+        </p>
+
+        <div class="steps">
+          <div class="step">
+            <div class="step-num">1.</div>
+            <div><span class="bold">Ne govoriš ništa</span> o igri — ne smješ davati savjete, nagovještaje niti informacije.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">2.</div>
+            <div><span class="bold">Pratiš igru</span> u tišini i možeš uživati u ostatku priče.</div>
+          </div>
+          <div class="step">
+            <div class="step-num">3.</div>
+            <div><span class="bold">Glasaš na kraju</span> — tvoj glas se računa pri otkrivanju ubojice.</div>
+          </div>
+        </div>
+
+        <div class="warning">
+          Mrtvi igrači mogu promatrati ali ne sudjeluju. Svaka informacija
+          koja procuri od mrtvog igrača poništava glasanje.
+        </div>
+      </div>
+
+      <hr class="divider">
+
+      <!-- GLASANJE -->
+      <div class="section">
+        <div class="section-eyebrow">Kraj igre</div>
+        <div class="section-title">Glasanje</div>
+
+        <p>
+          Na kraju igre svi <span class="underline">istovremeno glasaju</span>
+          tko je ubojica — živući i mrtvi igrači.
+          Svako glasanje je tajno, voditelj broji glasove.
+        </p>
+        <p>
+          <span class="hl">Tko dobije najviše glasova — optužen je.</span>
+          Je li to pravi ubojica? To saznajete odmah nakon glasanja.
+        </p>
+
+        <div class="rule-box">
+          Imate pravo na kratku završnu izjavu prije glasanja —
+          jednu minutu da objasnite zašto mislite tko je ubojica
+          ili da se branite od optužbi.
+        </div>
+      </div>
+
+    </div>
+
+    <!-- MARGINA -->
+    <div class="margin-col">
+
+      <div class="margin-symbol">🎲</div>
+      <div class="margin-label">Inicijativa</div>
+      <div class="margin-note">
+        Visok broj = biraš zadnji = vidiš gdje svi idu. Strateška prednost.
+      </div>
+
+      <div class="margin-symbol">🔍</div>
+      <div class="margin-label">Pretraživanje</div>
+      <div class="margin-note">
+        Uvijek pazi tko odlazi sam. Solo igrač može lagati bez svjedoka.
+      </div>
+
+      <div class="margin-symbol">🃏</div>
+      <div class="margin-label">Kartice</div>
+      <div class="margin-note">
+        Neke kartice daju prednost (+inicijativa, pretraživanje). Neke te kompromitiraju. Sve su tajne.
+      </div>
+
+      <div class="margin-symbol">💀</div>
+      <div class="margin-label">Smrt</div>
+      <div class="margin-note">
+        Ako umreš — šuti. Možeš glasati na kraju. Tvoj glas je važan.
+      </div>
+
+      <div class="margin-symbol">🗳️</div>
+      <div class="margin-label">Glasanje</div>
+      <div class="margin-note">
+        Svi glasaju istovremeno. Tajno. Mrtvi i živi.
+      </div>
+
+      <div class="margin-symbol">⚠️</div>
+      <div class="margin-label">Zapamti</div>
+      <div class="margin-note">
+        Voditelj zna sve. Svaki korak, svaki predmet, svaku laž. Ali neće progovoriti — osim ako ga dokazi natjeraju.
+      </div>
+
+    </div>
+
+  </div>
+
+  <div class="footer">
+    <span class="footer-text">Farkaš Vila · Pravila igre</span>
+    <span class="footer-text">sretno 🕯️</span>
+  </div>
+
+</div>
+
+</body>
+</html>
