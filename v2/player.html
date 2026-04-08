@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <title>Inventory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0e0e0e;
+      color: #eee;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      min-height: 100vh;
+    }
+
+    .header {
+      background: #161616;
+      border-bottom: 1px solid #2a2a2a;
+      padding: 48px 20px 16px;
+      text-align: center;
+    }
+
+    .player-icon { font-size: 48px; margin-bottom: 8px; }
+    .player-name { font-size: 24px; font-weight: 700; color: #d4b46e; }
+    .player-role { font-size: 13px; color: #555; margin-top: 4px; }
+
+    .content { padding: 20px 16px; max-width: 480px; margin: 0 auto; }
+
+    .section-title {
+      font-size: 11px;
+      color: #555;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .item-card {
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      font-size: 14px;
+      line-height: 1.6;
+      color: #ddd;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(6px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .empty {
+      text-align: center;
+      color: #333;
+      font-size: 15px;
+      padding: 48px 0;
+    }
+    .empty-icon { font-size: 48px; margin-bottom: 12px; opacity: 0.3; }
+
+    .refresh-btn {
+      display: block;
+      width: 100%;
+      margin-top: 20px;
+      padding: 12px;
+      background: #1e1e1e;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      color: #d4b46e;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      text-align: center;
+    }
+
+    .status {
+      font-size: 11px;
+      color: #444;
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .unknown {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      color: #444;
+      font-size: 16px;
+      gap: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<div id="app"></div>
+
+<script>
+const DB = 'https://mm-farkas-vila-default-rtdb.europe-west1.firebasedatabase.app';
+
+const PLAYERS = {
+  p1: { icon: '⚫', name: 'Crni', role: 'Samir' },
+  p2: { icon: '🟡', name: 'Žuti', role: 'Igor' },
+  p3: { icon: '🔵', name: 'Plavi', role: 'Viktor' },
+  p4: { icon: '🔴', name: 'Crveni', role: 'Radomir' },
+  p5: { icon: '🟢', name: 'Zeleni', role: 'Davor' },
+  p6: { icon: '🟣', name: 'Ljubičasti', role: 'Oliver' },
+};
+
+const params = new URLSearchParams(window.location.search);
+const pid = params.get('p');
+const player = PLAYERS[pid];
+
+if (!player) {
+  document.getElementById('app').innerHTML = `
+    <div class="unknown">
+      <div style="font-size:48px">🔒</div>
+      <div>Nepoznati igrač</div>
+      <div style="font-size:13px;color:#333">Koristi link koji ti je dao voditelj</div>
+    </div>`;
+} else {
+  renderShell();
+  loadItems();
+
+  // Auto-refresh svakih 15 sekundi
+  setInterval(loadItems, 15000);
+}
+
+function renderShell() {
+  document.title = player.name + ' — Inventory';
+  document.getElementById('app').innerHTML = `
+    <div class="header">
+      <div class="player-icon">${player.icon}</div>
+      <div class="player-name">${player.name}</div>
+      <div class="player-role">${player.role}</div>
+    </div>
+    <div class="content">
+      <div class="section-title">Tvoji predmeti</div>
+      <div id="item-list"></div>
+      <button class="refresh-btn" onclick="loadItems()">↻ Osvježi</button>
+      <div class="status" id="status">—</div>
+    </div>
+  `;
+}
+
+async function loadItems() {
+  try {
+    const res = await fetch(`${DB}/inventory/${pid}.json`);
+    const items = await res.json();
+    renderItems(items || []);
+    document.getElementById('status').textContent = 'Ažurirano: ' + new Date().toLocaleTimeString('hr');
+  } catch(e) {
+    document.getElementById('status').textContent = '❌ Greška pri učitavanju';
+  }
+}
+
+function renderItems(items) {
+  const list = document.getElementById('item-list');
+  if (!list) return;
+
+  if (!items || items.length === 0) {
+    list.innerHTML = `
+      <div class="empty">
+        <div class="empty-icon">🎒</div>
+        <div>Nemaš predmeta</div>
+      </div>`;
+    return;
+  }
+
+  list.innerHTML = items.map(item => `
+    <div class="item-card">${item}</div>
+  `).join('');
+}
+</script>
+</body>
+</html>
