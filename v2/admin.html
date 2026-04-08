@@ -1,0 +1,271 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <title>Voditelj — Inventory</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0e0e0e;
+      color: #eee;
+      font-family: "Segoe UI", system-ui, sans-serif;
+      padding: 20px 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    h1 { color: #d4b46e; font-size: 22px; margin-bottom: 4px; }
+    .subtitle { font-size: 12px; color: #555; margin-bottom: 24px; }
+
+    .player-section {
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+      margin-bottom: 16px;
+      overflow: hidden;
+    }
+
+    .player-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: #1e1e1e;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .player-name { font-size: 15px; font-weight: 600; }
+    .player-count { font-size: 12px; color: #555; }
+
+    .player-body { padding: 12px 16px; display: none; }
+    .player-body.open { display: block; }
+
+    .item-list { margin-bottom: 12px; }
+
+    .item-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 10px;
+      background: #1a1a1a;
+      border-radius: 6px;
+      margin-bottom: 6px;
+      font-size: 13px;
+    }
+
+    .item-text { flex: 1; line-height: 1.4; }
+
+    .delete-btn {
+      background: none;
+      border: none;
+      color: #c84b4b;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 0 0 0 10px;
+      line-height: 1;
+    }
+
+    .add-row {
+      display: flex;
+      gap: 8px;
+    }
+
+    .add-input {
+      flex: 1;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 6px;
+      color: #eee;
+      font-size: 13px;
+      padding: 8px 10px;
+      outline: none;
+    }
+    .add-input:focus { border-color: #d4b46e; }
+
+    .add-btn {
+      background: #d4b46e;
+      border: none;
+      border-radius: 6px;
+      color: #0e0e0e;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 8px 14px;
+      cursor: pointer;
+    }
+
+    .status {
+      font-size: 11px;
+      color: #555;
+      text-align: center;
+      margin-top: 20px;
+    }
+    .status.ok { color: #4caf50; }
+    .status.err { color: #c84b4b; }
+
+    .links-section {
+      margin-top: 28px;
+      padding: 16px;
+      background: #161616;
+      border: 1px solid #2a2a2a;
+      border-radius: 10px;
+    }
+    .links-title { font-size: 13px; color: #888; margin-bottom: 12px; letter-spacing: 1px; text-transform: uppercase; }
+    .link-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 8px 0;
+      border-bottom: 1px solid #1e1e1e;
+      font-size: 13px;
+    }
+    .link-row:last-child { border-bottom: none; }
+    .link-name { color: #aaa; }
+    .copy-btn {
+      background: #222;
+      border: 1px solid #333;
+      border-radius: 5px;
+      color: #d4b46e;
+      font-size: 11px;
+      padding: 4px 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+<h1>⚠️ Voditelj — Inventory</h1>
+<p class="subtitle">Farkaš Vila · upravljanje predmetima igrača</p>
+
+<div id="players-container"></div>
+
+<div class="links-section">
+  <div class="links-title">🔗 Linkovi za igrače</div>
+  <div id="links-list"></div>
+</div>
+
+<div class="status" id="status">Učitavanje...</div>
+
+<script>
+const DB = 'https://mm-farkas-vila-default-rtdb.europe-west1.firebasedatabase.app';
+
+const PLAYERS = [
+  { id: 'p1', name: '⚫ Crni — Samir' },
+  { id: 'p2', name: '🟡 Žuti — Igor' },
+  { id: 'p3', name: '🔵 Plavi — Viktor' },
+  { id: 'p4', name: '🔴 Crveni — Radomir' },
+  { id: 'p5', name: '🟢 Zeleni — Davor' },
+  { id: 'p6', name: '🟣 Ljubičasti — Oliver' },
+];
+
+let inventory = {};
+
+async function loadInventory() {
+  try {
+    const res = await fetch(`${DB}/inventory.json`);
+    const data = await res.json();
+    inventory = data || {};
+    render();
+    setStatus('✓ Učitano', 'ok');
+  } catch(e) {
+    setStatus('❌ Greška pri učitavanju', 'err');
+  }
+}
+
+async function savePlayer(pid) {
+  try {
+    await fetch(`${DB}/inventory/${pid}.json`, {
+      method: 'PUT',
+      body: JSON.stringify(inventory[pid] || [])
+    });
+    setStatus('✓ Spremljeno', 'ok');
+    setTimeout(() => setStatus('', ''), 2000);
+  } catch(e) {
+    setStatus('❌ Greška pri spremanju', 'err');
+  }
+}
+
+function render() {
+  const container = document.getElementById('players-container');
+  container.innerHTML = '';
+
+  PLAYERS.forEach(p => {
+    const items = inventory[p.id] || [];
+    const section = document.createElement('div');
+    section.className = 'player-section';
+
+    section.innerHTML = `
+      <div class="player-header" onclick="togglePlayer('${p.id}')">
+        <div class="player-name">${p.name}</div>
+        <div class="player-count">${items.length} predmeta</div>
+      </div>
+      <div class="player-body" id="body-${p.id}">
+        <div class="item-list" id="list-${p.id}">
+          ${items.map((item, i) => `
+            <div class="item-row">
+              <div class="item-text">${item}</div>
+              <button class="delete-btn" onclick="deleteItem('${p.id}', ${i})">×</button>
+            </div>
+          `).join('')}
+          ${items.length === 0 ? '<div style="color:#444;font-size:13px;padding:4px 0">Nema predmeta</div>' : ''}
+        </div>
+        <div class="add-row">
+          <input class="add-input" id="input-${p.id}" placeholder="Dodaj predmet..." onkeydown="if(event.key==='Enter') addItem('${p.id}')">
+          <button class="add-btn" onclick="addItem('${p.id}')">+</button>
+        </div>
+      </div>
+    `;
+    container.appendChild(section);
+  });
+
+  // Links
+  const linksList = document.getElementById('links-list');
+  const base = window.location.href.replace('admin.html', 'player.html');
+  linksList.innerHTML = PLAYERS.map(p => `
+    <div class="link-row">
+      <div class="link-name">${p.name}</div>
+      <button class="copy-btn" onclick="copyLink('${base}?p=${p.id}')">Kopiraj link</button>
+    </div>
+  `).join('');
+}
+
+function togglePlayer(pid) {
+  const body = document.getElementById('body-' + pid);
+  body.classList.toggle('open');
+}
+
+async function addItem(pid) {
+  const input = document.getElementById('input-' + pid);
+  const val = input.value.trim();
+  if (!val) return;
+  if (!inventory[pid]) inventory[pid] = [];
+  inventory[pid].push(val);
+  input.value = '';
+  render();
+  document.getElementById('body-' + pid).classList.add('open');
+  await savePlayer(pid);
+}
+
+async function deleteItem(pid, index) {
+  inventory[pid].splice(index, 1);
+  render();
+  document.getElementById('body-' + pid).classList.add('open');
+  await savePlayer(pid);
+}
+
+function copyLink(url) {
+  navigator.clipboard.writeText(url);
+  setStatus('✓ Link kopiran!', 'ok');
+  setTimeout(() => setStatus('', ''), 2000);
+}
+
+function setStatus(msg, cls) {
+  const el = document.getElementById('status');
+  el.textContent = msg;
+  el.className = 'status ' + cls;
+}
+
+loadInventory();
+</script>
+</body>
+</html>
