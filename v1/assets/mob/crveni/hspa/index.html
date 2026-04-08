@@ -2,13 +2,13 @@
 <html lang="hr">
 <head>
   <meta charset="utf-8">
-  <title>Photos</title>
+  <title>iPhone</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
     body {
-      background: #000;
+      background: #1c1c1e;
       min-height: 100vh;
       display: flex;
       justify-content: center;
@@ -22,7 +22,8 @@
       min-height: 100vh;
       background: #000;
       position: relative;
-      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
     /* Status bar */
@@ -32,21 +33,29 @@
       align-items: center;
       padding: 14px 20px 0;
       height: 44px;
+      flex-shrink: 0;
     }
+    .status-time { font-size: 15px; font-weight: 600; color: #fff; letter-spacing: -0.3px; }
+    .status-icons { display: flex; gap: 6px; align-items: center; font-size: 13px; color: #fff; }
 
-    .status-time {
-      font-size: 15px;
-      font-weight: 600;
-      color: #fff;
-      letter-spacing: -0.3px;
-    }
+    /* Screens */
+    .screen { display: none; flex: 1; flex-direction: column; overflow-y: auto; }
+    .screen.active { display: flex; }
 
-    .status-icons {
+    /* Placeholder screen */
+    .placeholder-screen {
+      flex: 1;
       display: flex;
-      gap: 6px;
-      align-items: center;
-      font-size: 13px;
-      color: #fff;
+      align-items: flex-start;
+      justify-content: center;
+      padding: 0;
+      overflow: hidden;
+    }
+    .placeholder-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: top;
     }
 
     /* Nav bar */
@@ -55,81 +64,37 @@
       justify-content: space-between;
       align-items: center;
       padding: 8px 20px 12px;
+      flex-shrink: 0;
     }
-
-    .nav-back {
-      color: #0a84ff;
-      font-size: 17px;
-      display: flex;
-      align-items: center;
-      gap: 4px;
-    }
-
-    .nav-title {
-      font-size: 17px;
-      font-weight: 600;
-      color: #fff;
-    }
-
-    .nav-select {
-      color: #0a84ff;
-      font-size: 17px;
-    }
+    .nav-back { color: #0a84ff; font-size: 17px; }
+    .nav-title { font-size: 17px; font-weight: 600; color: #fff; }
+    .nav-action { color: #0a84ff; font-size: 17px; }
 
     /* Section header */
-    .section-header {
-      padding: 4px 16px 8px;
-      font-size: 13px;
-      color: #8e8e93;
-      letter-spacing: 0.2px;
-    }
+    .section-header { padding: 4px 16px 8px; font-size: 13px; color: #8e8e93; flex-shrink: 0; }
 
-    /* Grid */
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 2px;
-      padding: 0 0 2px;
-    }
-
-    .photo-thumb {
-      aspect-ratio: 1;
-      overflow: hidden;
-      cursor: pointer;
-      position: relative;
-    }
-
-    .photo-thumb img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      display: block;
-      transition: opacity 0.15s;
-    }
-
-    .photo-thumb:active img {
-      opacity: 0.7;
-    }
+    /* Photo grid */
+    .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; }
+    .photo-thumb { aspect-ratio: 1; overflow: hidden; cursor: pointer; }
+    .photo-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; transition: opacity 0.15s; }
+    .photo-thumb:active img { opacity: 0.7; }
 
     /* Lightbox */
     .lightbox {
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
       background: #000;
-      z-index: 100;
+      z-index: 200;
       display: flex;
       flex-direction: column;
       transform: scale(0.95);
       opacity: 0;
       pointer-events: none;
       transition: transform 0.28s cubic-bezier(0.4,0,0.2,1), opacity 0.28s ease;
+      max-width: 390px;
+      margin: 0 auto;
     }
-
-    .lightbox.open {
-      transform: scale(1);
-      opacity: 1;
-      pointer-events: all;
-    }
+    .lightbox.open { transform: scale(1); opacity: 1; pointer-events: all; }
 
     .lightbox-bar {
       display: flex;
@@ -138,155 +103,101 @@
       padding: 54px 20px 12px;
       flex-shrink: 0;
     }
+    .lightbox-close { color: #0a84ff; font-size: 17px; cursor: pointer; }
+    .lightbox-date { font-size: 13px; color: #8e8e93; }
+    .lightbox-dots { color: #8e8e93; font-size: 20px; }
 
-    .lightbox-close {
-      color: #0a84ff;
-      font-size: 17px;
-      cursor: pointer;
-      padding: 4px 0;
-    }
+    .lightbox-img-wrap { flex: 1; display: flex; align-items: center; justify-content: center; padding: 0 0 20px; overflow: hidden; }
+    .lightbox-img-wrap img { max-width: 100%; max-height: 100%; object-fit: contain; }
 
-    .lightbox-date {
-      font-size: 13px;
-      color: #8e8e93;
-    }
-
-    .lightbox-dots {
-      color: #8e8e93;
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    .lightbox-img-wrap {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 0 0 20px;
-      overflow: hidden;
-    }
-
-    .lightbox-img-wrap img {
-      max-width: 100%;
-      max-height: 100%;
-      object-fit: contain;
-      border-radius: 2px;
-    }
-
-    /* Nav arrows */
-    .lightbox-nav {
-      position: absolute;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 44px;
-      height: 44px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      color: rgba(255,255,255,0.6);
-      font-size: 24px;
-      user-select: none;
-    }
-
+    .lightbox-nav { position: absolute; top: 50%; transform: translateY(-50%); width: 44px; height: 44px; display: flex; align-items: center; justify-content: center; cursor: pointer; color: rgba(255,255,255,0.6); font-size: 28px; }
     .lightbox-nav.prev { left: 4px; }
     .lightbox-nav.next { right: 4px; }
 
-    /* Bottom toolbar */
     .lightbox-toolbar {
       display: flex;
       justify-content: space-around;
-      align-items: center;
       padding: 12px 20px 34px;
       border-top: 0.5px solid #2c2c2e;
       flex-shrink: 0;
     }
-
-    .toolbar-btn {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 4px;
-      color: #0a84ff;
-      font-size: 11px;
-      cursor: pointer;
-    }
-
+    .toolbar-btn { display: flex; flex-direction: column; align-items: center; gap: 4px; color: #0a84ff; font-size: 11px; cursor: pointer; }
     .toolbar-icon { font-size: 22px; }
 
     /* Tab bar */
     .tab-bar {
-      position: sticky;
-      bottom: 0;
       display: flex;
       justify-content: space-around;
       align-items: center;
-      padding: 10px 0 24px;
-      background: rgba(28,28,30,0.92);
+      padding: 10px 0 28px;
+      background: rgba(28,28,30,0.95);
       backdrop-filter: blur(20px);
       border-top: 0.5px solid #2c2c2e;
+      flex-shrink: 0;
     }
-
-    .tab {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 3px;
-      font-size: 10px;
-      color: #636366;
-      cursor: pointer;
-    }
-
+    .tab { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; color: #636366; cursor: pointer; min-width: 60px; }
     .tab.active { color: #0a84ff; }
-    .tab-icon { font-size: 22px; }
+    .tab-icon { font-size: 24px; }
   </style>
 </head>
 <body>
-
 <div class="phone">
 
   <!-- Status bar -->
   <div class="status-bar">
     <div class="status-time">9:41</div>
-    <div class="status-icons">
-      <span>●●●</span>
-      <span>WiFi</span>
-      <span>🔋</span>
+    <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+  </div>
+
+  <!-- PHOTOS screen -->
+  <div class="screen active" id="screen-photos">
+    <div class="nav-bar">
+      <div class="nav-back">‹ Albumi</div>
+      <div class="nav-title">Recents</div>
+      <div class="nav-action">Select</div>
+    </div>
+    <div class="section-header">NEDAVNO DODANO</div>
+    <div class="photo-grid" id="grid"></div>
+  </div>
+
+  <!-- CALLS screen -->
+  <div class="screen" id="screen-calls">
+    <div class="placeholder-screen">
+      <img src="https://ivorhtc.github.io/mm-farkas-vila/v1/assets/call_history/VFCallHistory.png" alt="Calls">
     </div>
   </div>
 
-  <!-- Nav bar -->
-  <div class="nav-bar">
-    <div class="nav-back">‹ Albumi</div>
-    <div class="nav-title">Recents</div>
-    <div class="nav-select">Select</div>
+  <!-- MESSAGES screen -->
+  <div class="screen" id="screen-messages">
+    <div class="placeholder-screen">
+      <img src="https://ivorhtc.github.io/mm-farkas-vila/v1/assets/call_history/VFCallHistory.png" alt="Messages">
+    </div>
   </div>
 
-  <!-- Section -->
-  <div class="section-header">NEDAVNO DODANO</div>
-
-  <!-- Grid -->
-  <div class="photo-grid" id="grid">
-    <!-- Generirano JS-om -->
+  <!-- BANKING screen -->
+  <div class="screen" id="screen-banking">
+    <div class="placeholder-screen">
+      <img src="https://ivorhtc.github.io/mm-farkas-vila/v1/assets/call_history/VFCallHistory.png" alt="Banking">
+    </div>
   </div>
 
   <!-- Tab bar -->
   <div class="tab-bar">
-    <div class="tab">
-      <div class="tab-icon">📚</div>
-      <span>Library</span>
+    <div class="tab active" id="tab-photos" onclick="switchTab('photos')">
+      <div class="tab-icon">🖼️</div>
+      <span>Photos</span>
     </div>
-    <div class="tab">
-      <div class="tab-icon">🔍</div>
-      <span>For You</span>
+    <div class="tab" id="tab-calls" onclick="switchTab('calls')">
+      <div class="tab-icon">📞</div>
+      <span>Calls</span>
     </div>
-    <div class="tab active">
-      <div class="tab-icon">📷</div>
-      <span>Albums</span>
+    <div class="tab" id="tab-messages" onclick="switchTab('messages')">
+      <div class="tab-icon">💬</div>
+      <span>Messages</span>
     </div>
-    <div class="tab">
-      <div class="tab-icon">🔎</div>
-      <span>Search</span>
+    <div class="tab" id="tab-banking" onclick="switchTab('banking')">
+      <div class="tab-icon">🏦</div>
+      <span>Banking</span>
     </div>
   </div>
 
@@ -299,61 +210,28 @@
     <div class="lightbox-date" id="lb-date"></div>
     <div class="lightbox-dots">···</div>
   </div>
-
-  <div class="lightbox-img-wrap">
-    <img id="lb-img" src="" alt="">
-  </div>
-
+  <div class="lightbox-img-wrap"><img id="lb-img" src="" alt=""></div>
   <div class="lightbox-nav prev" onclick="navigate(-1)">‹</div>
   <div class="lightbox-nav next" onclick="navigate(1)">›</div>
-
   <div class="lightbox-toolbar">
-    <div class="toolbar-btn">
-      <div class="toolbar-icon">↑</div>
-      <span>Share</span>
-    </div>
-    <div class="toolbar-btn">
-      <div class="toolbar-icon">♥</div>
-      <span>Favorite</span>
-    </div>
-    <div class="toolbar-btn">
-      <div class="toolbar-icon">ℹ</div>
-      <span>Info</span>
-    </div>
-    <div class="toolbar-btn" style="color:#ff453a">
-      <div class="toolbar-icon">🗑</div>
-      <span>Delete</span>
-    </div>
+    <div class="toolbar-btn"><div class="toolbar-icon">↑</div><span>Share</span></div>
+    <div class="toolbar-btn"><div class="toolbar-icon">♥</div><span>Favorite</span></div>
+    <div class="toolbar-btn"><div class="toolbar-icon">ℹ</div><span>Info</span></div>
+    <div class="toolbar-btn" style="color:#ff453a"><div class="toolbar-icon">🗑</div><span>Delete</span></div>
   </div>
 </div>
 
 <script>
   const PHOTOS = [
-    {
-      src: "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/dr_fit/dr_fit1.png",
-      date: "Petak, 14. sij."
-    },
-    {
-      src: "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/dr_fit/dr_fit1.png",
-      date: "Petak, 14. sij."
-    },
-    {
-      src: "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/dr_fit/dr_fit1.png",
-      date: "Četvrtak, 13. sij."
-    },
-    {
-      src: "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/dr_fit/dr_fit1.png",
-      date: "Srijeda, 12. sij."
-    },
-    {
-      src: "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/dr_fit/dr_fit1.png",
-      date: "Utorak, 11. sij."
-    },
+    { src: "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/dr_fit/dr_fit1.png", date: "Petak, 14. sij." },
+    { src: "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/dr_fit/dr_fit1.png", date: "Petak, 14. sij." },
+    { src: "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/dr_fit/dr_fit1.png", date: "Četvrtak, 13. sij." },
+    { src: "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/dr_fit/dr_fit1.png", date: "Srijeda, 12. sij." },
+    { src: "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/dr_fit/dr_fit1.png", date: "Utorak, 11. sij." },
   ];
 
   let currentIndex = 0;
 
-  // Generiraj grid
   const grid = document.getElementById('grid');
   PHOTOS.forEach((photo, i) => {
     const div = document.createElement('div');
@@ -362,6 +240,13 @@
     div.addEventListener('click', () => openLightbox(i));
     grid.appendChild(div);
   });
+
+  function switchTab(name) {
+    document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.getElementById('screen-' + name).classList.add('active');
+    document.getElementById('tab-' + name).classList.add('active');
+  }
 
   function openLightbox(index) {
     currentIndex = index;
@@ -378,24 +263,20 @@
     currentIndex = (currentIndex + dir + PHOTOS.length) % PHOTOS.length;
     const img = document.getElementById('lb-img');
     img.style.opacity = '0';
+    img.style.transition = 'opacity 0.12s';
     setTimeout(() => {
       img.src = PHOTOS[currentIndex].src;
       document.getElementById('lb-date').textContent = PHOTOS[currentIndex].date;
       img.style.opacity = '1';
     }, 120);
-    img.style.transition = 'opacity 0.12s';
   }
 
-  // Swipe na lightboxu
   let touchStartX = 0;
-  document.getElementById('lightbox').addEventListener('touchstart', e => {
-    touchStartX = e.touches[0].clientX;
-  });
+  document.getElementById('lightbox').addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; });
   document.getElementById('lightbox').addEventListener('touchend', e => {
     const diff = touchStartX - e.changedTouches[0].clientX;
     if (Math.abs(diff) > 50) navigate(diff > 0 ? 1 : -1);
   });
 </script>
-
 </body>
 </html>
