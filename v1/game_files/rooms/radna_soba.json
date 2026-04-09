@@ -148,7 +148,7 @@
   {"type": "item",
 	"key": "8004",
 	"value": "Police su pune knjiga i mapa. Na polici stoji uokvirena fotografija — vila u izgradnji, skele i radnici. U donjem kutu piše: '2004. — prvi kamen.'",
-	"global": "80021"},
+	"global": "800211"},
   {"type": "rule",
 	"cond": "8004 AND 88771",
 	"out": "80041",
