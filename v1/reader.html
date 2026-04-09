@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <title>Game File Reader</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #0e0e0e;
+      color: #eee;
+      font-family: "Segoe UI", monospace, sans-serif;
+      padding: 20px 16px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 { color: #d4b46e; font-size: 20px; margin-bottom: 4px; }
+    .subtitle { font-size: 12px; color: #555; margin-bottom: 24px; }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 20px;
+      flex-wrap: wrap;
+    }
+    button {
+      background: #d4b46e;
+      border: none;
+      border-radius: 6px;
+      color: #0e0e0e;
+      font-weight: 600;
+      font-size: 13px;
+      padding: 8px 16px;
+      cursor: pointer;
+    }
+    button.secondary {
+      background: #222;
+      border: 1px solid #333;
+      color: #d4b46e;
+    }
+
+    .output {
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 12px;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      word-break: break-word;
+      color: #ccc;
+      max-height: 80vh;
+      overflow-y: auto;
+      user-select: all;
+    }
+
+    .file-section { margin-bottom: 8px; }
+    .file-header { color: #d4b46e; font-weight: bold; font-size: 13px; margin: 16px 0 4px; border-bottom: 1px solid #2a2a2a; padding-bottom: 4px; }
+    .type-rule { color: #85B7EB; }
+    .type-item { color: #97C459; }
+    .type-event { color: #F0997B; }
+    .type-story { color: #555; font-style: italic; }
+    .type-setting { color: #AFA9EC; }
+
+    #status { font-size: 12px; color: #555; margin-bottom: 12px; }
+
+    .copy-btn-wrap { margin-top: 12px; }
+  </style>
+</head>
+<body>
+
+<h1>📂 Game File Reader</h1>
+<p class="subtitle">Čita sve game_files i ispisuje sadržaj za analizu</p>
+
+<div id="status">Klikni "Učitaj sve" za početak</div>
+
+<div class="controls">
+  <button onclick="loadAll()">📂 Učitaj sve</button>
+  <button class="secondary" onclick="copyAll()">📋 Kopiraj sve</button>
+  <button class="secondary" onclick="document.getElementById('output').innerHTML=''">🗑 Očisti</button>
+</div>
+
+<div class="output" id="output"></div>
+
+<script>
+const DB_BASE = 'game_files';
+
+const ROOM_FILES = [
+  'settings',
+  'rooms/vila_izvana',
+  'rooms/radna_soba',
+  'rooms/kuhinja',
+  'rooms/teretana',
+  'rooms/blagovaonica',
+  'rooms/garaza',
+  'rooms/spavaca_soba',
+  'rooms/wc',
+  'rooms/spajza',
+  'rooms/balkon',
+  'rooms/soba_za_goste',
+  'rooms/vinski_podrum',
+  'rooms/kotlovnica',
+  'rooms/vesheraj',
+  'rooms/instagram',
+  'rooms/hakiranje',
+  'rooms/razgovori',
+];
+
+function formatObj(obj) {
+  const type = obj.type || '?';
+  let line = '';
+
+  if (type === 'story') {
+    return `<span class="type-story">// ${obj.story}</span>`;
+  }
+
+  if (type === 'setting') {
+    const keys = Object.keys(obj).filter(k => k !== 'type');
+    return `<span class="type-setting">[setting] ${JSON.stringify(obj)}</span>`;
+  }
+
+  if (type === 'rule') {
+    line = `<span class="type-rule">[rule]</span> cond: "${obj.cond}" → out: "${obj.out}"`;
+    if (obj.desc) line += `  <span style="color:#444">// ${obj.desc}</span>`;
+    if (obj.global) line += `  <span style="color:#d4b46e">+global:${obj.global}</span>`;
+    return line;
+  }
+
+  if (type === 'item') {
+    let val = obj.value || '';
+    if (val.length > 120) val = val.substring(0, 120) + '...';
+    line = `<span class="type-item">[item]</span> key: "${obj.key}"  "${val}"`;
+    const extras = [];
+    for (let i = 1; i <= 7; i++) {
+      if (obj['p'+i]) extras.push(`p${i}: "${String(obj['p'+i]).substring(0,60)}..."`);
+    }
+    if (obj.global) extras.push(`+global:${obj.global}`);
+    if (obj.admin) extras.push(`admin: "${String(obj.admin).substring(0,60)}"`);
+    if (obj.kartica) extras.push(`kartica: "${String(obj.kartica).substring(0,60)}"`);
+    if (extras.length) line += `\n         ${extras.join(' | ')}`;
+    return line;
+  }
+
+  if (type === 'event') {
+    line = `<span class="type-event">[event]</span> key: "${obj.key}"`;
+    if (obj.logic?.priorityList) line += `  priority: [${obj.logic.priorityList.join(',')}]`;
+    if (obj.output) {
+      const out = obj.output;
+      if (out.winner) line += `\n         winner: "${String(out.winner).substring(0,80)}..."`;
+      if (out.others) line += `\n         others: "${String(out.others).substring(0,80)}..."`;
+      if (out.p7) line += `\n         p7: "${String(out.p7).substring(0,80)}"`;
+      if (out.kartica) line += `\n         kartica: "${String(out.kartica).substring(0,80)}"`;
+    }
+    return line;
+  }
+
+  return JSON.stringify(obj).substring(0, 200);
+}
+
+async function loadAll() {
+  const output = document.getElementById('output');
+  const status = document.getElementById('status');
+  output.innerHTML = '';
+  status.textContent = 'Učitavanje...';
+
+  let totalRules = 0, totalItems = 0, totalEvents = 0;
+  let fullText = '';
+
+  for (const file of ROOM_FILES) {
+    try {
+      const res = await fetch(`${DB_BASE}/${file}.json`);
+      if (!res.ok) throw new Error('HTTP ' + res.status);
+      const data = await res.json();
+
+      const section = document.createElement('div');
+      section.className = 'file-section';
+
+      let html = `<div class="file-header">📄 ${file}.json (${data.length} objekata)</div>`;
+      let text = `\n\n=== ${file}.json ===\n`;
+
+      data.forEach(obj => {
+        const line = formatObj(obj);
+        html += line + '\n';
+        text += line.replace(/<[^>]+>/g, '') + '\n';
+
+        if (obj.type === 'rule') totalRules++;
+        if (obj.type === 'item') totalItems++;
+        if (obj.type === 'event') totalEvents++;
+      });
+
+      section.innerHTML = html;
+      output.appendChild(section);
+      fullText += text;
+
+    } catch(e) {
+      const err = document.createElement('div');
+      err.innerHTML = `<div class="file-header" style="color:#c84b4b">❌ ${file}.json — ${e.message}</div>`;
+      output.appendChild(err);
+    }
+  }
+
+  status.textContent = `✅ Učitano: ${totalRules} rules, ${totalItems} items, ${totalEvents} events`;
+  output._fullText = fullText;
+}
+
+function copyAll() {
+  const output = document.getElementById('output');
+  const text = output._fullText || output.innerText;
+  navigator.clipboard.writeText(text).then(() => {
+    document.getElementById('status').textContent = '✅ Kopirano u clipboard!';
+    setTimeout(() => {}, 2000);
+  });
+}
+</script>
+</body>
+</html>
