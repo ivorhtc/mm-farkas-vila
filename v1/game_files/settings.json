@@ -3,7 +3,13 @@
     "attr": { "icon": "⚫", "n": "Crni", "g": "Crnog", "d": "Crnom", "a": "Crnog", "v":"Crni", "l":"Crnom", "i":"Crnim" },
     "cards": [
       "🎰 KLADIONIČKA POTVRDA — Potvrda o dugu od 4.200€ prema kladionici. Inkriminirajuće.",
-      "☕ KAVA — Možeš iskoristiti jednom prije svoje runde za +5 na inicijativu. Kaži voditelju prije nego upišeš brojeve."
+      "☕ KAVA — Možeš iskoristiti jednom prije svoje runde za +5 na inicijativu. Kaži voditelju prije nego upišeš brojeve.",
+      "📋 RASPORED ČIŠĆENJA — Službeni raspored čišćenja Farkaš vile. Znaš gdje se što nalazi u svakoj prostoriji. Inkriminirajuće — znao si raspored kuće.",
+      "🔑 KLJUČEVI OD VILE — Službeni ključevi koje imaš kao čistač. Mogao si ući u vilu kad god si htio.",
+      {"url": "",
+        "text": "\uD83D\uDD11 KLJUČEVI OD VILE — Odključavaju glavni ulaz vile.",
+        "explanation":  "\uD83D\uDD11 KLJUČEVI OD VILE — Službeni ključevi koje imaš kao čistač. Mogao si ući u vilu kad god si htio."},
+      {}
     ]},
 
   {"p2": "Igor", "color": "#b4acac",

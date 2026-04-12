@@ -1,0 +1,338 @@
+<!doctype html>
+<html lang="hr">
+<head>
+    <meta charset="utf-8">
+    <title>Raspored čišćenja — Samir</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #2c2416;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 16px;
+            font-family: 'Courier Prime', monospace;
+        }
+
+        .paper {
+            background: #f5f0e4;
+            max-width: 520px;
+            width: 100%;
+            padding: 48px 52px;
+            border-radius: 2px;
+            box-shadow:
+                    0 2px 4px rgba(0,0,0,0.3),
+                    0 8px 24px rgba(0,0,0,0.4);
+            position: relative;
+
+            background-image:
+                    repeating-linear-gradient(
+                            0deg,
+                            transparent,
+                            transparent 27px,
+                            rgba(180,160,100,0.12) 27px,
+                            rgba(180,160,100,0.12) 28px
+                    );
+        }
+
+        /* Rupe za fascikl */
+        .hole {
+            position: absolute;
+            left: 20px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #2c2416;
+            box-shadow: inset 0 1px 3px rgba(0,0,0,0.5);
+        }
+        .hole-1 { top: 60px; }
+        .hole-2 { top: 50%; transform: translateY(-50%); }
+        .hole-3 { bottom: 60px; }
+
+        /* Rubna linija */
+        .margin-line {
+            position: absolute;
+            left: 44px;
+            top: 0; bottom: 0;
+            width: 1px;
+            background: rgba(200,100,100,0.2);
+        }
+
+        /* Žig */
+        .stamp {
+            position: absolute;
+            top: 28px;
+            right: 36px;
+            border: 2px solid rgba(40,80,160,0.4);
+            color: rgba(40,80,160,0.45);
+            font-family: 'Special Elite', cursive;
+            font-size: 11px;
+            letter-spacing: 3px;
+            padding: 3px 8px;
+            transform: rotate(-6deg);
+            text-transform: uppercase;
+        }
+
+        /* Logo / zaglavlje firme */
+        .company-header {
+            text-align: center;
+            margin-bottom: 28px;
+            padding-bottom: 16px;
+            border-bottom: 2px solid #1a1410;
+        }
+
+        .company-name {
+            font-family: 'Special Elite', cursive;
+            font-size: 18px;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #1a1410;
+            margin-bottom: 2px;
+        }
+
+        .company-sub {
+            font-size: 11px;
+            color: #8a7a5a;
+            letter-spacing: 2px;
+        }
+
+        /* Naslov */
+        .doc-title {
+            font-family: 'Special Elite', cursive;
+            font-size: 14px;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #2a1e10;
+            margin-bottom: 4px;
+        }
+
+        .meta {
+            font-size: 12px;
+            color: #5a4e3a;
+            margin-bottom: 24px;
+            line-height: 1.8;
+        }
+
+        /* Tjedna tablica */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 24px;
+        }
+
+        th {
+            font-family: 'Special Elite', cursive;
+            font-size: 11px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #2a1e10;
+            border-bottom: 1.5px solid #1a1410;
+            padding: 6px 8px;
+            text-align: left;
+        }
+
+        td {
+            font-size: 13px;
+            color: #2a1e10;
+            padding: 8px 8px;
+            border-bottom: 1px solid rgba(180,160,100,0.25);
+            line-height: 1.5;
+            vertical-align: top;
+        }
+
+        .day {
+            font-weight: 700;
+            width: 28%;
+            white-space: nowrap;
+        }
+
+        .time {
+            width: 26%;
+            color: #5a4e3a;
+            font-style: italic;
+        }
+
+        .location {
+            width: 46%;
+        }
+
+        /* Godišnji */
+        .godisnji {
+            color: #888;
+            font-style: italic;
+            text-decoration: line-through;
+            text-decoration-color: rgba(180,40,40,0.5);
+        }
+
+        .godisnji-label {
+            display: inline-block;
+            font-style: normal;
+            text-decoration: none;
+            color: rgba(180,40,40,0.7);
+            font-size: 11px;
+            margin-left: 4px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Highlight — Farkaš vila */
+        .farkas {
+            font-weight: 700;
+        }
+
+        /* Napomena */
+        .note {
+            font-size: 12px;
+            color: #5a4e3a;
+            line-height: 1.7;
+            margin-top: 8px;
+            padding-top: 14px;
+            border-top: 1px solid rgba(180,160,100,0.3);
+        }
+
+        .note strong {
+            color: #2a1e10;
+        }
+
+        /* Potpis */
+        .signature-section {
+            margin-top: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .sig-block {
+            font-size: 12px;
+            color: #5a4e3a;
+            line-height: 1.8;
+        }
+
+        .sig-line {
+            border-bottom: 1px solid #1a1410;
+            width: 140px;
+            margin-top: 20px;
+            margin-bottom: 4px;
+        }
+
+        .sig-name {
+            font-family: 'Special Elite', cursive;
+            font-size: 14px;
+            color: #1a3a6a;
+            transform: rotate(-2deg);
+            display: inline-block;
+            margin-top: -24px;
+            margin-left: 8px;
+        }
+
+        /* Handnote */
+        .handnote {
+            font-family: 'Special Elite', cursive;
+            font-size: 12px;
+            color: #1a3a6a;
+            font-style: italic;
+            margin-top: 12px;
+        }
+
+        .handnote::before { content: "→ "; }
+    </style>
+</head>
+<body>
+
+<div class="paper">
+    <div class="hole hole-1"></div>
+    <div class="hole hole-2"></div>
+    <div class="hole hole-3"></div>
+    <div class="margin-line"></div>
+    <div class="stamp">Tjedan 47</div>
+
+    <!-- Zaglavlje -->
+    <div class="company-header">
+        <div class="company-name">Kristal Čist d.o.o.</div>
+        <div class="company-sub">profesionalne usluge čišćenja · zagreb</div>
+    </div>
+
+    <div class="doc-title">Tjedni raspored — djelatnik</div>
+    <div class="meta">
+        <strong>Ime:</strong> Samir Hodžić &nbsp;|&nbsp; <strong>ID:</strong> KČ-047<br>
+        <strong>Tjedan:</strong> 18.11. – 22.11.<br>
+        <strong>Nadređeni:</strong> Marko Perić
+    </div>
+
+    <!-- Tablica -->
+    <table>
+        <thead>
+        <tr>
+            <th>Dan</th>
+            <th>Termin</th>
+            <th>Lokacija</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td class="day">Ponedjeljak</td>
+            <td class="time">07:00 – 10:00</td>
+            <td class="location"><span class="farkas">Farkaš vila</span><br><small>Tuškanac 14 · ulaz kroz garažu</small></td>
+        </tr>
+        <tr>
+            <td class="day">Utorak</td>
+            <td class="time">14:00 – 17:00</td>
+            <td class="location"><span class="farkas">Farkaš vila</span><br><small>Tuškanac 14 · redovno čišćenje</small></td>
+        </tr>
+        <tr>
+            <td class="day">Srijeda</td>
+            <td class="time">—</td>
+            <td class="location">
+                <span class="godisnji">Slobodan dan</span>
+                <span class="godisnji-label">GODIŠNJI</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="day">Četvrtak</td>
+            <td class="time">—</td>
+            <td class="location">
+                <span class="godisnji">Slobodan dan</span>
+                <span class="godisnji-label">GODIŠNJI</span>
+            </td>
+        </tr>
+        <tr>
+            <td class="day">Petak</td>
+            <td class="time">—</td>
+            <td class="location">
+                <span class="godisnji">Slobodan dan</span>
+                <span class="godisnji-label">GODIŠNJI</span>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="note">
+        <strong>Napomena:</strong> Djelatnik Hodžić odobren godišnji odmor Sr–Pe (20.–22.11.). Kombi vozilo KČ-03 ostaje u depu za vrijeme godišnjeg. Ključevi kombija predaju se koordinatoru po završetku utoračne smjene.
+    </div>
+
+    <div class="handnote">Samir — ne zaboravi ostaviti ključeve kombija u uredu!</div>
+
+    <!-- Potpis -->
+    <div class="signature-section">
+        <div class="sig-block">
+            <div>Nadređeni:</div>
+            <div class="sig-line"></div>
+            <div style="font-size:11px">Marko Perić, voditelj smjene</div>
+        </div>
+        <div class="sig-block">
+            <div>Djelatnik:</div>
+            <div class="sig-line">
+                <span class="sig-name">Samir H.</span>
+            </div>
+            <div style="font-size:11px">Samir Hodžić, KČ-047</div>
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,282 @@
+<!doctype html>
+<html lang="hr">
+<head>
+    <meta charset="utf-8">
+    <title>Kartice — Print</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Sans:wght@400;600&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #fff;
+            font-family: 'IBM Plex Sans', sans-serif;
+            padding: 0;
+        }
+
+        /* Print setup */
+        @page {
+            size: A4 portrait;
+            margin: 10mm 8mm;
+        }
+
+        @media print {
+            body { background: #fff; }
+            .no-print { display: none !important; }
+            .page-break { page-break-before: always; }
+        }
+
+        /* Screen controls */
+        .controls {
+            padding: 16px 24px;
+            background: #1a1a1a;
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        .controls button {
+            background: #d4b46e;
+            border: none;
+            border-radius: 6px;
+            color: #1a1a1a;
+            font-weight: 600;
+            font-size: 13px;
+            padding: 8px 16px;
+            cursor: pointer;
+        }
+        .controls span {
+            color: #888;
+            font-size: 12px;
+        }
+
+        /* Card table */
+        .card-table {
+            width: 100%;
+            border-collapse: collapse;
+            table-layout: fixed;
+        }
+
+        /* Column widths */
+        .col-id    { width: 14%; }
+        .col-img   { width: 30%; }
+        .col-text  { width: 56%; }
+
+        /* Row */
+        .card-row td {
+            padding: 6px 10px;
+            vertical-align: middle;
+            border-bottom: 1.5px dashed #aaa;
+        }
+
+        /* Divider between cards */
+        .card-row + .card-row td {
+            border-top: none;
+        }
+
+        /* ID cell */
+        .cell-id {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 28px;
+            color: #1a1a1a;
+            letter-spacing: 1px;
+            text-align: left;
+            border-right: 2px solid #1a1a1a;
+            white-space: nowrap;
+        }
+
+        /* Image cell */
+        .cell-img {
+            text-align: center;
+            border-right: 2px solid #1a1a1a;
+            padding: 8px 12px;
+        }
+
+        .cell-img img {
+            max-width: 100%;
+            max-height: 90px;
+            object-fit: contain;
+            display: block;
+            margin: 0 auto;
+        }
+
+        .cell-img .placeholder {
+            width: 90px;
+            height: 90px;
+            background: #f0f0f0;
+            border: 2px dashed #ccc;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px;
+            color: #999;
+            margin: 0 auto;
+            text-align: center;
+            padding: 8px;
+        }
+
+        /* Text cell */
+        .cell-text {
+            font-size: 15px;
+            line-height: 1.45;
+            color: #1a1a1a;
+            font-weight: 400;
+            padding: 10px 14px;
+        }
+
+        .cell-text strong {
+            font-weight: 600;
+        }
+
+        /* QR cell */
+        .cell-qr {
+            text-align: center;
+            padding: 8px 14px;
+        }
+
+        .cell-qr img {
+            width: 90px;
+            height: 90px;
+        }
+
+        /* Section header */
+        .section-header {
+            background: #1a1a1a;
+            color: #d4b46e;
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 16px;
+            letter-spacing: 3px;
+            padding: 6px 10px;
+            text-align: left;
+        }
+        .section-header td {
+            padding: 6px 10px;
+            border-bottom: none !important;
+        }
+
+        /* Thick divider between sections */
+        .section-divider td {
+            border-top: 3px solid #1a1a1a !important;
+            border-bottom: none !important;
+            padding: 0 !important;
+            height: 3px;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="controls no-print">
+    <button onclick="window.print()">🖨️ Print / Spremi PDF</button>
+    <span>A4 format · trakice za izrezivanje</span>
+</div>
+
+<table class="card-table" id="card-table">
+    <!-- Generirano JS-om -->
+</table>
+
+<script>
+    // QR helper - koristi api.qrserver.com
+    function qrUrl(url) {
+        return `https://api.qrserver.com/v1/create-qr-code/?size=90x90&data=${encodeURIComponent(url)}`;
+    }
+
+    // Placeholder slika
+    function placeholderImg(label) {
+        return `<div class="placeholder">${label}</div>`;
+    }
+
+    // Kartice - struktura: {id, url?, text?, qr?}
+    // url = slika predmeta, text = opis, qr = link za QR kod
+    // Ako nema url → placeholder s labelom
+    // Ako postoji qr → u trećem stupcu ide QR, inače text
+
+    const CARDS = [
+
+        // === SETTINGS - POČETNE KARTICE ===
+        {section: "⚫ CRNI — Samir"},
+        {id: "—", url: "", label: "🎰 Kladionička potvrda", text: "🎰 KLADIONIČKA POTVRDA — Potvrda o dugu od 4.200€ prema kladionici."},
+        {id: "—", url: "", label: "☕ Kava", text: "☕ KAVA — Možeš iskoristiti jednom prije svoje runde za +5 na inicijativu. Kaži voditelju prije nego upišeš brojeve."},
+        {id: "—", url: "", label: "📋 Raspored čišćenja", text: "📋 RASPORED ČIŠĆENJA — Službeni raspored čišćenja Farkaš vile. Znaš gdje se što nalazi u svakoj prostoriji."},
+        {id: "—", url: "", label: "🔑 Ključevi od vile", text: "🔑 KLJUČEVI OD VILE — Službeni ključevi koje imaš kao čistač. Mogao si ući u vilu kad god si htio."},
+
+        {section: "🟡 ŽUTI — Igor"},
+        {id: "—", url: "", label: "🧤 Rukavice", text: "🧤 RUKAVICE — Tanke crne rukavice. Objašnjava zašto nema tvojih otisaka nigdje."},
+        {id: "40046", url: "", label: "📱 Burner mobitel", text: "📱 BURNER MOBITEL — Drugi mobitel, nije registriran na tvoje ime. Može se haknuti (8007008). Global +40046"},
+        {id: "40045", url: "", label: "🔑 Ključevi kombija", text: "🔑 KLJUČEVI KOMBIJA — Ključevi firmenog kombija. Ako si sam u garaži, možeš otključati kombi. Global +40045"},
+        {id: "—", url: "", label: "🖼️ Polaroidi", text: "🖼️ POLAROIDI — Fotografije Crnog (Samira) na različitim lokacijama. Pratio si ga danima da mu namjestiš ubojstvo."},
+        {id: "40046", url: "", label: "🪪 Iskaznica vozača", text: "🪪 ISKAZNICA VOZAČA — Lažna iskaznica s fotografijom Crnog i njegovim imenom kao vozača firmenog kombija."},
+
+        {section: "🔵 PLAVI — Viktor"},
+        {id: "—", url: "", label: "💊 Tablete za srce", text: "💊 TABLETE ZA SRCE — Originalne tablete koje si uzeo iz noćnog ormara oca. Zašto ih još uvijek imaš pri sebi?"},
+        {id: "50030", url: "", label: "🖼️ Obiteljska fotografija", text: "🖼️ OBITELJSKA FOTOGRAFIJA — Zvonimir, Viktor i Viktorija — Minhen 2023. Na poleđini rukom pisano."},
+
+        {section: "🔴 CRVENI — Radomir"},
+        {id: "—", url: "", label: "🔑 Ključevi Radojkinog auta", text: "🔑 KLJUČEVI RADOJKINOG AUTA — Ključevi s privjeskom 'R.Š.' — nije tvoje prezime."},
+        {id: "—", url: "", label: "✈️ Avionske karte za Maldive", text: "✈️ AVIONSKE KARTE ZA MALDIVE — Dvije karte, polazak za 5 dana. Rezervirano na ime Radomir i Radojka."},
+
+        {section: "🟢 ZELENI — Davor"},
+        {id: "—", url: "", label: "🔧 Mali odvijač", text: "🔧 MALI ODVIJAČ — Koristio si ga za olabaviti vijke na ogradi balkona. Još ga imaš pri sebi."},
+        {id: "—", url: "", label: "💳 Vizitka", text: "💳 VIZITKA — Davor i Radojka Fit, personalni treninzi. Tvoja vlastita vizitka."},
+        {id: "—", url: "", label: "🍫 Proteinska pločica", text: "🍫 PROTEINSKA PLOČICA — Možeš iskoristiti jednom prije svoje runde za +5 na inicijativu. Kaži voditelju prije nego upišeš brojeve."},
+
+        {section: "🟣 LJUBIČASTI — Oliver"},
+        {id: "88782", url: "", label: "💉 Injekcija sa sedativima", text: "💉 INJEKCIJA SA SEDATIVIMA — Između rundi možeš upotrijebiti na drugog igrača. Oba igrača preskaču rundu. Žrtva zna tko ju je uspavao. Global +88782"},
+        {id: "88771", url: "", label: "🔍 Pribor za otiske", text: "🔍 PRIBOR ZA OTISKE — Kad pretraguješ sobu, dodaj +6 uz broj sobe da aktiviraš otiske. Global +88771"},
+        {id: "—", url: "", label: "🗺️ Tlocrt vile", text: "🗺️ TLOCRT VILE — Detaljan tlocrt svih prostorija. Znaš gdje se što nalazi od samog početka."},
+
+        // === KARTICE U SOBAMA ===
+        {section: "KARTICE U IGRI"},
+        {id: "10032", url: "", label: "💊 Tablete", text: "💊 TABLETE — Prije nečije runde možeš mu staviti tabletu u piće. Ta osoba preskače svoju rundu. Može se koristiti jednom u igri."},
+        {id: "20000", url: "", label: "📇 Vizitka DR FIT", qr: "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/dr_fit/dr_fit.html"},
+        {id: "30030", url: "", label: "⚡ Hell energetsko", text: "⚡ HELL — Možeš iskoristiti jednom prije svoje runde da povećaš svoju inicijativu za +5."},
+        {id: "3041", url: "", label: "🗝️ Ključ podruma", text: "🗝️ KLJUČ PODRUMA — Možeš otvoriti vrata prema podrumu (100). Global +100004"},
+        {id: "40010", url: "", label: "⚡ Taser", text: "⚡ TASER — Između rundi možeš upotrijebiti na drugog igrača. Oba igrača preskaču rundu. Uspavani igrač daje ti sve kartice. Žrtva zna tko ju je tasirao. Global +88783"},
+        {id: "40040", url: "", label: "🔧 Pajser", text: "🔧 PAJSER — Možeš otvoriti nešto s njim (4004). Global +40040"},
+        {id: "40041", url: "", label: "🪪 Iskaznica vozača", text: "🪪 ISKAZNICA VOZAČA — Identifikacijska kartica s fotografijom, imenom i prezimenom vozača kombija firme za čišćenje. Crni se zove Samir."},
+        {id: "50020", url: "", label: "📱 Zvonimirov mobitel", text: "📱 ZVONIMIROV MOBITEL — Možeš ga haknuti ako nađeš laptop (8007007). Global +50020"},
+        {id: "50030", url: "", label: "🖼️ Obiteljska fotografija", text: "🖼️ OBITELJSKA FOTOGRAFIJA — Na poleđini piše: Zvonimir, Viktor i Viktorija. Minhen 2023."},
+        {id: "50032", url: "", label: "🗝️ Ključ L2", text: "🗝️ KLJUČ L2 — Ključ od zaključane ladice u radnoj sobi. Global +50032"},
+        {id: "60010", url: "", label: "💧 Hladna voda", text: "💧 HLADNA VODA — Iduću rundu imaš +3 na inicijativu."},
+        {id: "60021", url: "", label: "💊 Aspirin", text: "💊 ASPIRIN — Iskoristi jednom prije svoje runde za +3 na inicijativu. Kaži voditelju prije nego upišeš brojeve."},
+        {id: "70010", url: "", label: "🗺️ Tlocrt vile", text: "🗺️ TLOCRT VILE — Originalni tlocrt s ucrtanim svim prostorijama."},
+        {id: "70040", url: "", label: "☕ Crvena termosica", text: "☕ CRVENA TERMOSICA — Na naljepnici piše: 'Hvala na originalnoj suradnji — Odvjetnički ured Šimić & partneri.'"},
+        {id: "80022", url: "", label: "🔫 Pištolj", text: "🔫 PIŠTOLJ — Jedan metak. Možeš koristiti jednom u igri. Pošalji poruku voditelju ili odigraj pred svima."},
+        {id: "80040", url: "", label: "🥃 Viski", text: "🥃 VISKI — Možeš popiti jednom prije svoje runde. -5 na inicijativu tu rundu. Kaži voditelju prije nego upišeš brojeve."},
+        {id: "120030", url: "", label: "🧪 Kloroform", text: "🧪 KLOROFORM — Između rundi možeš upotrijebiti na drugog igrača. Oba igrača preskaču rundu. Uspavani igrač daje ti sve kartice. Žrtva zna tko ju je uspavao. Global +88784"},
+    ];
+
+    // Render
+    const table = document.getElementById('card-table');
+    let html = '';
+    let inSection = false;
+
+    CARDS.forEach((card, idx) => {
+        if (card.section) {
+            if (inSection) {
+                html += `<tr class="section-divider"><td colspan="3"></td></tr>`;
+            }
+            html += `<tr class="section-header"><td colspan="3">${card.section}</td></tr>`;
+            inSection = true;
+            return;
+        }
+
+        const imgCell = card.url
+            ? `<img src="${card.url}" alt="${card.label}">`
+            : placeholderImg(card.label);
+
+        const contentCell = card.qr
+            ? `<div class="cell-qr"><img src="${qrUrl(card.qr)}" alt="QR"></div>`
+            : `<div class="cell-text">${card.text}</div>`;
+
+        html += `<tr class="card-row">
+    <td class="cell-id col-id">${card.id}</td>
+    <td class="cell-img col-img">${imgCell}</td>
+    <td class="col-text">${contentCell}</td>
+  </tr>`;
+    });
+
+    table.innerHTML = html;
+</script>
+</body>
+</html>
