@@ -1,0 +1,559 @@
+<!doctype html>
+<html lang="hr">
+<head>
+    <meta charset="utf-8">
+    <title>Boarding Pass</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:ital,wght@0,400;0,600;1,400&display=swap');
+
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+
+        body {
+            background: #1a1a2e;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 28px;
+            padding: 40px 16px;
+            font-family: 'IBM Plex Sans', sans-serif;
+        }
+
+        /* Boarding pass */
+        .pass {
+            width: 100%;
+            max-width: 680px;
+            display: flex;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 8px 40px rgba(0,0,0,0.5);
+            position: relative;
+        }
+
+        /* Main section */
+        .pass-main {
+            flex: 1;
+            background: #fff;
+            padding: 28px 28px 24px;
+            position: relative;
+        }
+
+        /* Tear line */
+        .pass-tear {
+            width: 24px;
+            background: #f0f0f0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px 0;
+            position: relative;
+        }
+
+        .pass-tear::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0; bottom: 0;
+            border-left: 2px dashed #ccc;
+            transform: translateX(-50%);
+        }
+
+        .pass-tear .circle {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            background: #1a1a2e;
+            z-index: 1;
+            flex-shrink: 0;
+        }
+
+        /* Stub */
+        .pass-stub {
+            width: 160px;
+            background: linear-gradient(135deg, #0f3460, #16213e);
+            padding: 24px 18px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        /* Airline header */
+        .airline {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            padding-bottom: 14px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .airline-name {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 22px;
+            letter-spacing: 2px;
+            color: #0f3460;
+        }
+
+        .airline-logo {
+            font-size: 28px;
+        }
+
+        /* Route */
+        .route {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 22px;
+        }
+
+        .airport {
+            text-align: center;
+        }
+
+        .airport-code {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 44px;
+            line-height: 1;
+            color: #0f3460;
+            letter-spacing: 2px;
+        }
+
+        .airport-name {
+            font-size: 10px;
+            color: #888;
+            letter-spacing: 0.5px;
+            margin-top: 2px;
+        }
+
+        .route-line {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .route-dots {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            width: 100%;
+        }
+
+        .dot { width: 6px; height: 6px; border-radius: 50%; background: #ccc; }
+        .line { flex: 1; height: 1px; background: #ddd; }
+        .plane { font-size: 18px; }
+
+        .route-duration {
+            font-size: 10px;
+            color: #aaa;
+            letter-spacing: 0.5px;
+        }
+
+        /* Details grid */
+        .details {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px 10px;
+            margin-bottom: 20px;
+        }
+
+        .detail-block { }
+
+        .detail-label {
+            font-size: 9px;
+            color: #aaa;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+
+        .detail-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 13px;
+            font-weight: 700;
+            color: #1a1a2e;
+            letter-spacing: 0.5px;
+        }
+
+        .detail-value.large {
+            font-size: 20px;
+            color: #0f3460;
+        }
+
+        /* Passenger name */
+        .passenger {
+            margin-bottom: 18px;
+        }
+        .passenger-label {
+            font-size: 9px;
+            color: #aaa;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 3px;
+        }
+        .passenger-name {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 17px;
+            font-weight: 700;
+            color: #1a1a2e;
+            letter-spacing: 1px;
+        }
+
+        /* Barcode */
+        .barcode {
+            display: flex;
+            gap: 2px;
+            height: 40px;
+            align-items: flex-end;
+        }
+
+        .bar {
+            background: #1a1a2e;
+            border-radius: 1px;
+        }
+
+        /* Stub content */
+        .stub-airline {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            letter-spacing: 2px;
+            color: rgba(255,255,255,0.5);
+            margin-bottom: 12px;
+        }
+
+        .stub-route {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 16px;
+        }
+
+        .stub-code {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 24px;
+            color: #fff;
+            letter-spacing: 2px;
+        }
+
+        .stub-arrow {
+            color: rgba(255,255,255,0.4);
+            font-size: 14px;
+        }
+
+        .stub-detail {
+            margin-bottom: 8px;
+        }
+        .stub-label {
+            font-size: 8px;
+            color: rgba(255,255,255,0.4);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            margin-bottom: 2px;
+        }
+        .stub-value {
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 12px;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .stub-name {
+            font-size: 10px;
+            color: rgba(255,255,255,0.7);
+            font-family: 'IBM Plex Mono', monospace;
+            margin-top: 16px;
+            line-height: 1.5;
+        }
+
+        /* QR in stub */
+        .stub-qr {
+            background: #fff;
+            padding: 6px;
+            border-radius: 4px;
+            display: inline-block;
+            margin-top: 8px;
+        }
+        .stub-qr img {
+            width: 60px;
+            height: 60px;
+            display: block;
+        }
+
+        /* Notch effect */
+        .pass::before,
+        .pass::after {
+            content: '';
+            position: absolute;
+            width: 24px;
+            height: 24px;
+            background: #1a1a2e;
+            border-radius: 50%;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 10;
+        }
+        .pass::before { left: calc(100% - 184px - 12px); }
+        .pass::after  { left: calc(100% - 184px - 12px); }
+
+        /* Title */
+        .page-title {
+            font-family: 'Bebas Neue', sans-serif;
+            font-size: 14px;
+            letter-spacing: 4px;
+            color: rgba(255,255,255,0.2);
+            text-transform: uppercase;
+        }
+
+        /* Boarding pass 2 — different color stub */
+        .pass:nth-child(3) .pass-stub {
+            background: linear-gradient(135deg, #1a472a, #0d2b17);
+        }
+        .pass:nth-child(3) .airport-code,
+        .pass:nth-child(3) .airline-name,
+        .pass:nth-child(3) .detail-value.large {
+            color: #1a472a;
+        }
+        .pass:nth-child(3) .pass-stub .stub-code,
+        .pass:nth-child(3) .pass-stub .stub-value {
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-title">✈ Boarding Pass</div>
+
+<!-- PASS 1 — Radomir Šimić -->
+<div class="pass" id="pass1">
+    <div class="pass-main">
+        <div class="airline">
+            <div class="airline-name">Adriatic Air</div>
+            <div class="airline-logo">✈</div>
+        </div>
+
+        <div class="passenger">
+            <div class="passenger-label">Passenger Name</div>
+            <div class="passenger-name">ŠIMIĆ/RADOMIR</div>
+        </div>
+
+        <div class="route">
+            <div class="airport">
+                <div class="airport-code">ZAG</div>
+                <div class="airport-name">Zagreb</div>
+            </div>
+            <div class="route-line">
+                <div class="route-dots">
+                    <div class="dot"></div>
+                    <div class="line"></div>
+                    <div class="plane">✈</div>
+                    <div class="line"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="route-duration">11h 40m · 1 stop</div>
+            </div>
+            <div class="airport">
+                <div class="airport-code">MLE</div>
+                <div class="airport-name">Malé, Maldivi</div>
+            </div>
+        </div>
+
+        <div class="details">
+            <div class="detail-block">
+                <div class="detail-label">Date</div>
+                <div class="detail-value">25 NOV</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Departure</div>
+                <div class="detail-value">07:15</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Flight</div>
+                <div class="detail-value">AA 2247</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Gate</div>
+                <div class="detail-value large">B7</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Seat</div>
+                <div class="detail-value large">14A</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Class</div>
+                <div class="detail-value">BUSINESS</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Boarding</div>
+                <div class="detail-value">06:45</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Bag</div>
+                <div class="detail-value">2 × 23kg</div>
+            </div>
+        </div>
+
+        <div class="barcode" id="bc1"></div>
+    </div>
+
+    <div class="pass-tear">
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <div class="pass-stub">
+        <div>
+            <div class="stub-airline">Adriatic Air</div>
+            <div class="stub-route">
+                <div class="stub-code">ZAG</div>
+                <div class="stub-arrow">→</div>
+                <div class="stub-code">MLE</div>
+            </div>
+            <div class="stub-detail">
+                <div class="stub-label">Flight</div>
+                <div class="stub-value">AA 2247</div>
+            </div>
+            <div class="stub-detail">
+                <div class="stub-label">Date</div>
+                <div class="stub-value">25 NOV</div>
+            </div>
+            <div class="stub-detail">
+                <div class="stub-label">Seat</div>
+                <div class="stub-value">14A</div>
+            </div>
+            <div class="stub-name">ŠIMIĆ<br>RADOMIR</div>
+        </div>
+        <div class="stub-qr">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=AA2247-SIMIC-14A-25NOV&margin=0" alt="QR">
+        </div>
+    </div>
+</div>
+
+<!-- PASS 2 — Radojka Špek -->
+<div class="pass" id="pass2">
+    <div class="pass-main">
+        <div class="airline">
+            <div class="airline-name">Adriatic Air</div>
+            <div class="airline-logo">✈</div>
+        </div>
+
+        <div class="passenger">
+            <div class="passenger-label">Passenger Name</div>
+            <div class="passenger-name">ŠPEK/RADOJKA</div>
+        </div>
+
+        <div class="route">
+            <div class="airport">
+                <div class="airport-code">ZAG</div>
+                <div class="airport-name">Zagreb</div>
+            </div>
+            <div class="route-line">
+                <div class="route-dots">
+                    <div class="dot"></div>
+                    <div class="line"></div>
+                    <div class="plane">✈</div>
+                    <div class="line"></div>
+                    <div class="dot"></div>
+                </div>
+                <div class="route-duration">11h 40m · 1 stop</div>
+            </div>
+            <div class="airport">
+                <div class="airport-code">MLE</div>
+                <div class="airport-name">Malé, Maldivi</div>
+            </div>
+        </div>
+
+        <div class="details">
+            <div class="detail-block">
+                <div class="detail-label">Date</div>
+                <div class="detail-value">25 NOV</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Departure</div>
+                <div class="detail-value">07:15</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Flight</div>
+                <div class="detail-value">AA 2247</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Gate</div>
+                <div class="detail-value large">B7</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Seat</div>
+                <div class="detail-value large">14B</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Class</div>
+                <div class="detail-value">BUSINESS</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Boarding</div>
+                <div class="detail-value">06:45</div>
+            </div>
+            <div class="detail-block">
+                <div class="detail-label">Bag</div>
+                <div class="detail-value">2 × 23kg</div>
+            </div>
+        </div>
+
+        <div class="barcode" id="bc2"></div>
+    </div>
+
+    <div class="pass-tear">
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <div class="pass-stub">
+        <div>
+            <div class="stub-airline">Adriatic Air</div>
+            <div class="stub-route">
+                <div class="stub-code">ZAG</div>
+                <div class="stub-arrow">→</div>
+                <div class="stub-code">MLE</div>
+            </div>
+            <div class="stub-detail">
+                <div class="stub-label">Flight</div>
+                <div class="stub-value">AA 2247</div>
+            </div>
+            <div class="stub-detail">
+                <div class="stub-label">Date</div>
+                <div class="stub-value">25 NOV</div>
+            </div>
+            <div class="stub-detail">
+                <div class="stub-label">Seat</div>
+                <div class="stub-value">14B</div>
+            </div>
+            <div class="stub-name">ŠPEK<br>RADOJKA</div>
+        </div>
+        <div class="stub-qr">
+            <img src="https://api.qrserver.com/v1/create-qr-code/?size=60x60&data=AA2247-SPEK-14B-25NOV&margin=0" alt="QR">
+        </div>
+    </div>
+</div>
+
+<script>
+    // Generiraj barcodes
+    function makeBarcode(id) {
+        const el = document.getElementById(id);
+        const widths = [3,1,2,1,3,2,1,1,2,3,1,2,1,3,1,1,2,1,3,2,1,1,2,1,3,1,2,2,1,3,1,2,1,1,3,2,1,2,3,1,1,2,1,3,1,2,1,1,2,3];
+        widths.forEach((w, i) => {
+            const bar = document.createElement('div');
+            bar.className = 'bar';
+            bar.style.width = w + 'px';
+            bar.style.height = (i % 3 === 0 ? 40 : 32) + 'px';
+            bar.style.opacity = i % 2 === 0 ? '1' : '0';
+            el.appendChild(bar);
+        });
+    }
+    makeBarcode('bc1');
+    makeBarcode('bc2');
+</script>
+
+</body>
+</html>
