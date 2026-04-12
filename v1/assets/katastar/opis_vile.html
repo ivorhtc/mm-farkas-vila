@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="hr">
+<head>
+    <meta charset="utf-8">
+    <title>Katastarski izvadak — Farkaš Vila</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Special+Elite&family=Courier+Prime:ital,wght@0,400;0,700;1,400&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body {
+            background: #2c2416;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-start;
+            justify-content: center;
+            padding: 40px 16px;
+            font-family: 'Courier Prime', monospace;
+        }
+        .paper {
+            background: #f0ead6;
+            max-width: 640px;
+            width: 100%;
+            padding: 48px 52px;
+            border-radius: 2px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3), 0 12px 32px rgba(0,0,0,0.4);
+            position: relative;
+            background-image: repeating-linear-gradient(0deg, transparent, transparent 27px, rgba(180,160,100,0.1) 27px, rgba(180,160,100,0.1) 28px);
+        }
+        .hole { position: absolute; left: 20px; width: 12px; height: 12px; border-radius: 50%; background: #2c2416; box-shadow: inset 0 1px 3px rgba(0,0,0,0.5); }
+        .hole-1 { top: 60px; }
+        .hole-2 { top: 50%; transform: translateY(-50%); }
+        .hole-3 { bottom: 60px; }
+        .margin-line { position: absolute; left: 44px; top: 0; bottom: 0; width: 1px; background: rgba(200,100,100,0.2); }
+        .stamp { position: absolute; top: 32px; right: 40px; border: 2.5px solid rgba(160,40,40,0.45); color: rgba(160,40,40,0.5); font-family: 'Special Elite', cursive; font-size: 11px; letter-spacing: 3px; padding: 4px 10px; transform: rotate(5deg); text-transform: uppercase; }
+        .grb { text-align: center; font-size: 32px; margin-bottom: 4px; opacity: 0.6; }
+        .header { text-align: center; margin-bottom: 28px; padding-bottom: 16px; border-bottom: 2.5px solid #1a1410; }
+        .header-top { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: #8a7a5a; margin-bottom: 6px; }
+        .header-title { font-family: 'Special Elite', cursive; font-size: 17px; letter-spacing: 2px; text-transform: uppercase; color: #1a1410; margin-bottom: 2px; }
+        .header-sub { font-size: 11px; color: #8a7a5a; letter-spacing: 1px; }
+        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; margin-bottom: 24px; padding-bottom: 16px; border-bottom: 1px solid rgba(180,160,100,0.4); font-size: 12px; }
+        .meta-row { display: flex; gap: 6px; }
+        .meta-label { color: #8a7a5a; white-space: nowrap; min-width: 80px; }
+        .meta-value { color: #1a1410; font-weight: 700; }
+        .section { margin-bottom: 22px; }
+        .section-title { font-family: 'Special Elite', cursive; font-size: 12px; letter-spacing: 2px; text-transform: uppercase; color: #1a1410; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid #1a1410; display: flex; align-items: center; gap: 8px; }
+        .floor-badge { background: #1a1410; color: #f0ead6; font-size: 9px; padding: 2px 6px; border-radius: 2px; letter-spacing: 1px; font-family: 'Courier Prime', monospace; }
+        table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 4px; }
+        thead th { font-size: 9px; letter-spacing: 1.5px; text-transform: uppercase; color: #8a7a5a; padding: 4px 8px; text-align: left; border-bottom: 1px solid rgba(180,160,100,0.4); }
+        tbody td { padding: 6px 8px; border-bottom: 1px solid rgba(180,160,100,0.2); vertical-align: top; color: #2a1e10; line-height: 1.4; }
+        tbody tr:last-child td { border-bottom: none; }
+        .room-name { font-weight: 700; }
+        .room-area { color: #5a4e3a; white-space: nowrap; }
+        .room-note { color: #7a6a4a; font-style: italic; font-size: 11px; }
+        .subtotal { font-size: 11px; color: #5a4e3a; text-align: right; padding: 4px 8px 0; font-style: italic; }
+        .total-section { margin-top: 20px; padding-top: 14px; border-top: 2px solid #1a1410; display: flex; justify-content: space-between; align-items: flex-end; }
+        .total-label { font-family: 'Special Elite', cursive; font-size: 13px; letter-spacing: 1px; color: #1a1410; }
+        .total-value { font-family: 'Special Elite', cursive; font-size: 16px; color: #1a1410; }
+        .footnote { font-size: 10px; color: #8a7a5a; line-height: 1.7; margin-top: 20px; padding-top: 12px; border-top: 1px solid rgba(180,160,100,0.3); }
+        .sig-section { margin-top: 24px; display: flex; justify-content: space-between; font-size: 11px; color: #5a4e3a; }
+        .sig-line { border-bottom: 1px solid #1a1410; width: 140px; margin-top: 18px; margin-bottom: 3px; }
+        .handnote { font-family: 'Special Elite', cursive; font-size: 12px; color: #1a3a6a; font-style: italic; margin-top: 14px; }
+        .handnote::before { content: "-> "; }
+        .year-highlight { display: inline-block; background: rgba(180,150,60,0.15); border: 1px solid rgba(180,150,60,0.4); padding: 0 4px; border-radius: 2px; font-weight: 700; }
+    </style>
+</head>
+<body>
+<div class="paper">
+    <div class="hole hole-1"></div>
+    <div class="hole hole-2"></div>
+    <div class="hole hole-3"></div>
+    <div class="margin-line"></div>
+    <div class="stamp">Izvadak · kopija</div>
+    <div class="grb">&#127963;</div>
+    <div class="header">
+        <div class="header-top">Republika Hrvatska · Državna geodetska uprava</div>
+        <div class="header-title">Katastarski izvadak nekretnine</div>
+        <div class="header-sub">Obrazac KI-3 · Opis građevine i prostorija</div>
+    </div>
+    <div class="meta-grid">
+        <div class="meta-row"><span class="meta-label">Katastarska čest.:</span><span class="meta-value">2847/1</span></div>
+        <div class="meta-row"><span class="meta-label">Katastarska općina:</span><span class="meta-value">Tuškanac</span></div>
+        <div class="meta-row"><span class="meta-label">Adresa:</span><span class="meta-value">Tuškanac 14, Zagreb</span></div>
+        <div class="meta-row"><span class="meta-label">Vlasnik:</span><span class="meta-value">Farkaš, Zvonimir</span></div>
+        <div class="meta-row"><span class="meta-label">Vrsta građevine:</span><span class="meta-value">Obiteljska vila</span></div>
+        <div class="meta-row"><span class="meta-label">Broj etaža:</span><span class="meta-value">3 (podrum + prizemlje + kat)</span></div>
+        <div class="meta-row"><span class="meta-label">Broj prostorija:</span><span class="meta-value">11</span></div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Podrum · suteren <span class="floor-badge">P0 · -1</span></div>
+        <table>
+            <thead><tr><th style="width:40%">Prostorija</th><th style="width:18%">Površina</th><th>Napomena</th></tr></thead>
+            <tbody>
+            <tr><td class="room-name">Kotlovnica</td><td class="room-area">14,20 m²</td><td class="room-note">Instalacije grijanja, bojler, razvodni ventili</td></tr>
+            <tr><td class="room-name">Vinski podrum</td><td class="room-area">28,50 m²</td><td class="room-note">Klimatizirana prostorija, police za vino, mali prozor</td></tr>
+            <tr><td class="room-name">Teretana</td><td class="room-area">32,00 m²</td><td class="room-note">Sportska oprema, prozori na razini tla</td></tr>
+            </tbody>
+        </table>
+        <div class="subtotal">Ukupno P0: 74,70 m²</div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Prizemlje <span class="floor-badge">P1 · 0</span></div>
+        <table>
+            <thead><tr><th style="width:40%">Prostorija</th><th style="width:18%">Površina</th><th>Napomena</th></tr></thead>
+            <tbody>
+            <tr><td class="room-name">Kuhinja</td><td class="room-area">24,30 m²</td><td class="room-note">Opremljena kuhinja, izlaz prema blagovaonici</td></tr>
+            <tr><td class="room-name">Blagovaonica</td><td class="room-area">36,80 m²</td><td class="room-note">Ulaz kroz kuhinju</td></tr>
+            <tr><td class="room-name">Garaža</td><td class="room-area">42,00 m²</td><td class="room-note">Dvostruka garaža, automatska vrata, ulaz s dvorišta</td></tr>
+            <tr><td class="room-name">Vešeraj / pomoćna prostorija</td><td class="room-area">9,60 m²</td><td class="room-note">Perilica, sušilica, police</td></tr>
+            </tbody>
+        </table>
+        <div class="subtotal">Ukupno P1: 112,70 m²</div>
+    </div>
+
+    <div class="section">
+        <div class="section-title">Kat <span class="floor-badge">P2 · +1</span></div>
+        <table>
+            <thead><tr><th style="width:40%">Prostorija</th><th style="width:18%">Površina</th><th>Napomena</th></tr></thead>
+            <tbody>
+            <tr><td class="room-name">Spavaća soba (glavna)</td><td class="room-area">28,40 m²</td><td class="room-note">Pogled na vrt</td></tr>
+            <tr><td class="room-name">Soba za goste</td><td class="room-area">18,20 m²</td><td class="room-note">Pogled na dvorište i garažu</td></tr>
+            <tr><td class="room-name">Radna soba</td><td class="room-area">22,50 m²</td><td class="room-note">Reprezentativni prostor, uzidani sef, izlaz na balkon</td></tr>
+            <tr><td class="room-name">Kupaona</td><td class="room-area">8,80 m²</td><td class="room-note">Hodnik kupaonica</td></tr>
+            <tr><td class="room-name">Špajza</td><td class="room-area">6,40 m²</td><td class="room-note">Skladišni prostor</td></tr>
+            <tr><td class="room-name">Balkon</td><td class="room-area">12,00 m²</td><td class="room-note">Metalna ograda, pogled na imanje</td></tr>
+            </tbody>
+        </table>
+        <div class="subtotal">Ukupno P2: 96,30 m²</div>
+    </div>
+
+    <div class="total-section">
+        <div>
+            <div class="total-label">Ukupna bruto površina:</div>
+            <div style="font-size:11px;color:#8a7a5a;margin-top:2px">neto stambena površina</div>
+        </div>
+        <div class="total-value">283,70 m²</div>
+    </div>
+
+    <div class="footnote">
+        Ovaj izvadak izdaje se isključivo u svrhu uvida u katastarski zapis i ne predstavlja pravovaljanu ispravu za promet nekretninama. Za pravno valjanu dokumentaciju potrebno je podnijeti zahtjev Uredu za katastar Grada Zagreba.<br><br>
+        Datum izdavanja: 14.03.2024. &nbsp;|&nbsp; Br. zahtjeva: ZG-2024-11847 &nbsp;|&nbsp; Referent: I. Kovač
+    </div>
+
+    <div class="sig-section">
+        <div>
+            <div>Ovjerio:</div>
+            <div class="sig-line"></div>
+            <div>Ovlašteni katastarski referent</div>
+        </div>
+        <div style="text-align:right">
+            <div>Pečat:</div>
+            <div style="width:60px;height:60px;border:1.5px solid rgba(180,40,40,0.3);border-radius:50%;margin-top:6px;margin-left:auto;display:flex;align-items:center;justify-content:center;font-size:8px;color:rgba(180,40,40,0.4);text-align:center;padding:6px;letter-spacing:0.5px">DGU<br>ZAGREB</div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
