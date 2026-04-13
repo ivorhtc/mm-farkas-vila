@@ -164,7 +164,9 @@
                 const location = pKey ? `Početna kartica — ${playerName}` : 'Nepoznato';
 
                 obj.cards.forEach(card => {
-                    const flag = extractFlag(card);
+                    // card može biti string ili objekt {text, url, qr}
+                    const cardText = typeof card === 'string' ? card : (card.text || card.url || JSON.stringify(card));
+                    const flag = extractFlag(cardText);
                     rows.push(makeRow('settings', location, playerName, card, flag, 'settings.json'));
                 });
             });
