@@ -1,0 +1,393 @@
+<!doctype html>
+<html lang="hr">
+<head>
+  <meta charset="utf-8">
+  <title>Assets — Farkaš Vila</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=IBM+Plex+Mono:wght@400;700&family=IBM+Plex+Sans:wght@400;600&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #0a0a0a;
+      color: #ccc;
+      font-family: 'IBM Plex Sans', sans-serif;
+      padding: 32px 20px;
+      min-height: 100vh;
+    }
+
+    h1 {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 32px;
+      color: #d4b46e;
+      letter-spacing: 4px;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #444;
+      letter-spacing: 2px;
+      margin-bottom: 32px;
+    }
+
+    /* Folder sekcija */
+    .folder {
+      margin-bottom: 28px;
+      border: 1px solid #1e1e1e;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .folder-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 16px;
+      background: #141414;
+      border-bottom: 1px solid #1e1e1e;
+      cursor: pointer;
+      user-select: none;
+    }
+
+    .folder-icon { font-size: 16px; }
+
+    .folder-name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: #d4b46e;
+      letter-spacing: 1px;
+      flex: 1;
+    }
+
+    .folder-count {
+      font-size: 11px;
+      color: #444;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .folder-toggle {
+      font-size: 12px;
+      color: #444;
+      transition: transform 0.2s;
+    }
+
+    .folder.collapsed .folder-toggle { transform: rotate(-90deg); }
+    .folder.collapsed .folder-body { display: none; }
+
+    .folder-body {
+      padding: 12px;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 10px;
+    }
+
+    /* Asset card */
+    .asset-card {
+      background: #111;
+      border: 1px solid #1e1e1e;
+      border-radius: 8px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+      text-decoration: none;
+    }
+
+    .asset-card:hover {
+      border-color: #333;
+      background: #161616;
+    }
+
+    /* Thumbnail */
+    .asset-thumb {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: #0d0d0d;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      border-bottom: 1px solid #1e1e1e;
+    }
+
+    .asset-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .asset-thumb .file-icon {
+      font-size: 36px;
+      opacity: 0.4;
+    }
+
+    /* Label */
+    .asset-label {
+      padding: 8px 10px;
+    }
+
+    .asset-name {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 11px;
+      color: #aaa;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .asset-type {
+      font-size: 10px;
+      color: #444;
+      margin-top: 2px;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .asset-type.html { color: #85B7EB; }
+    .asset-type.img  { color: #97C459; }
+    .asset-type.pdf  { color: #F0997B; }
+
+    /* Lightbox */
+    .lightbox {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.92);
+      z-index: 1000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+    .lightbox.open { display: flex; }
+    .lightbox img {
+      max-width: 100%;
+      max-height: 90vh;
+      object-fit: contain;
+      border-radius: 4px;
+      box-shadow: 0 8px 40px rgba(0,0,0,0.6);
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 20px; right: 24px;
+      font-size: 28px;
+      color: #aaa;
+      cursor: pointer;
+      z-index: 1001;
+      line-height: 1;
+    }
+    .lightbox-name {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 12px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Farkaš Vila</h1>
+<p class="subtitle">assets · klikni na sliku za pregled · HTML otvara u novom prozoru</p>
+
+<div id="root"></div>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox(event)">
+  <div class="lightbox-close" onclick="closeLightbox()">×</div>
+  <img id="lb-img" src="" alt="">
+  <div class="lightbox-name" id="lb-name"></div>
+</div>
+
+<script>
+// ============================================================
+// DEFINIRAJ ASSETE OVDJE
+// Struktura: { folder: 'naziv', files: [{name, path, type}] }
+// type: 'img' | 'html' | 'pdf'
+// ============================================================
+
+const ASSETS = [
+  {
+    folder: 'call_history',
+    files: [
+      { name: 'RadojkaSpek.png',     path: 'call_history/RadojkaSpek.png',     type: 'img' },
+      { name: 'VFCallHistory.png',   path: 'call_history/VFCallHistory.png',   type: 'img' },
+      { name: 'ViktorijaFarkas.png', path: 'call_history/ViktorijaFarkas.png', type: 'img' },
+      { name: 'ZvonimirFarkas.png',  path: 'call_history/ZvonimirFarkas.png',  type: 'img' },
+    ]
+  },
+  {
+    folder: 'cardiovex_dormex',
+    files: [
+      { name: 'biljeska.html', path: 'cardiovex_dormex/biljeska.html', type: 'html' },
+    ]
+  },
+  {
+    folder: 'dr_fit',
+    files: [
+      { name: 'dr_fit.html',  path: 'dr_fit/dr_fit.html',  type: 'html' },
+      { name: 'dr_fit1.png', path: 'dr_fit/dr_fit1.png', type: 'img' },
+      { name: 'dr_fit2.png', path: 'dr_fit/dr_fit2.png', type: 'img' },
+      { name: 'dr_fit3.png', path: 'dr_fit/dr_fit3.png', type: 'img' },
+    ]
+  },
+  {
+    folder: 'katastar',
+    files: [
+      // Dodaj fileove
+    ]
+  },
+  {
+    folder: 'ljetna_photo',
+    files: [
+      // Dodaj fileove
+    ]
+  },
+  {
+    folder: 'maldivi_karte',
+    files: [
+      // Dodaj fileove
+    ]
+  },
+  {
+    folder: 'mob/crveni/hspa',
+    files: [
+      // Dodaj fileove
+    ]
+  },
+  {
+    folder: 'pistolj',
+    files: [
+      // Dodaj fileove
+    ]
+  },
+  {
+    folder: 'players',
+    files: [
+      // Dodaj fileove
+    ]
+  },
+  {
+    folder: 'polaroidi',
+    files: [
+      // Dodaj fileove
+    ]
+  },
+  {
+    folder: 'pravila',
+    files: [
+      // Dodaj fileove
+    ]
+  },
+  {
+    folder: 'prica_za_kraj',
+    files: [
+      // Dodaj fileove
+    ]
+  },
+  {
+    folder: 'raspored_ciscenja',
+    files: [
+      { name: 'raspored.html',  path: 'raspored_ciscenja/raspored.html',  type: 'html' },
+      { name: 'raspored_qr.png', path: 'raspored_ciscenja/raspored_qr.png', type: 'img' },
+    ]
+  },
+];
+
+// ============================================================
+
+const IMG_EXTS  = ['png','jpg','jpeg','gif','webp','svg'];
+const HTML_EXTS = ['html','htm'];
+
+function getType(name) {
+  const ext = name.split('.').pop().toLowerCase();
+  if (IMG_EXTS.includes(ext))  return 'img';
+  if (HTML_EXTS.includes(ext)) return 'html';
+  return 'other';
+}
+
+function typeLabel(type) {
+  if (type === 'img')  return '<span class="asset-type img">📷 slika</span>';
+  if (type === 'html') return '<span class="asset-type html">🌐 html</span>';
+  return '<span class="asset-type">📄 file</span>';
+}
+
+function render() {
+  const root = document.getElementById('root');
+  root.innerHTML = '';
+
+  ASSETS.forEach(section => {
+    if (!section.files || section.files.length === 0) return;
+
+    const div = document.createElement('div');
+    div.className = 'folder';
+
+    div.innerHTML = `
+      <div class="folder-header" onclick="toggleFolder(this)">
+        <span class="folder-icon">📁</span>
+        <span class="folder-name">${section.folder}</span>
+        <span class="folder-count">${section.files.length} file${section.files.length !== 1 ? 's' : ''}</span>
+        <span class="folder-toggle">▾</span>
+      </div>
+      <div class="folder-body">
+        ${section.files.map(f => {
+          const type = f.type || getType(f.name);
+          const thumb = type === 'img'
+            ? `<img src="${f.path}" alt="${f.name}" loading="lazy">`
+            : `<div class="file-icon">${type === 'html' ? '🌐' : '📄'}</div>`;
+
+          if (type === 'img') {
+            return `
+              <div class="asset-card" onclick="openLightbox('${f.path}', '${f.name}')">
+                <div class="asset-thumb">${thumb}</div>
+                <div class="asset-label">
+                  <div class="asset-name">${f.name}</div>
+                  ${typeLabel(type)}
+                </div>
+              </div>`;
+          } else {
+            return `
+              <a class="asset-card" href="${f.path}" target="_blank">
+                <div class="asset-thumb">${thumb}</div>
+                <div class="asset-label">
+                  <div class="asset-name">${f.name}</div>
+                  ${typeLabel(type)}
+                </div>
+              </a>`;
+          }
+        }).join('')}
+      </div>
+    `;
+    root.appendChild(div);
+  });
+}
+
+function toggleFolder(header) {
+  header.parentElement.classList.toggle('collapsed');
+}
+
+function openLightbox(src, name) {
+  document.getElementById('lb-img').src = src;
+  document.getElementById('lb-name').textContent = name;
+  document.getElementById('lightbox').classList.add('open');
+}
+
+function closeLightbox(e) {
+  if (e && e.target !== document.getElementById('lightbox') &&
+      !e.target.classList.contains('lightbox-close')) return;
+  document.getElementById('lightbox').classList.remove('open');
+  document.getElementById('lb-img').src = '';
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') closeLightbox();
+});
+
+render();
+</script>
+</body>
+</html>
