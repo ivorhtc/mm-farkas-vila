@@ -218,8 +218,119 @@
 
   <!-- MESSAGES screen -->
   <div class="screen" id="screen-messages">
-    <div class="placeholder-screen">
-      <img src="https://ivorhtc.github.io/mm-farkas-vila/v1/assets/call_history/VFCallHistory.png" alt="Messages">
+    <div class="nav-bar">
+      <div class="nav-back">‹ Poruke</div>
+      <div style="display:flex;flex-direction:column;align-items:center;">
+        <div style="width:36px;height:36px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:18px;">👩</div>
+        <div style="font-size:13px;color:#fff;font-weight:600;margin-top:2px;">Radojka</div>
+      </div>
+      <div class="nav-action">ℹ</div>
+    </div>
+
+    <!-- Chat -->
+    <div style="flex:1;overflow-y:auto;padding:8px 12px;display:flex;flex-direction:column;gap:4px;" id="chat">
+
+      <!-- Datum -->
+      <div style="text-align:center;font-size:11px;color:#8e8e93;padding:8px 0 4px;">Ponedjeljak 18:22</div>
+
+      <!-- Radojka -->
+      <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">👩</div>
+        <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">Večeras dolaziš? 🙂</div>
+      </div>
+
+      <!-- Ja -->
+      <div style="display:flex;justify-content:flex-end;">
+        <div style="background:#0a84ff;color:#fff;padding:10px 14px;border-radius:18px 18px 4px 18px;max-width:70%;font-size:15px;line-height:1.4;">Kasnim malo, imam još jedan sastanak</div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-end;">
+        <div style="background:#0a84ff;color:#fff;padding:10px 14px;border-radius:18px 18px 4px 18px;max-width:70%;font-size:15px;line-height:1.4;">do 20h sam slobodan 🙂</div>
+      </div>
+
+      <!-- Radojka -->
+      <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">👩</div>
+        <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">ok čekam te ❤️</div>
+      </div>
+
+      <!-- Datum -->
+      <div style="text-align:center;font-size:11px;color:#8e8e93;padding:12px 0 4px;">Utorak 11:14</div>
+
+      <!-- Radojka -->
+      <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">👩</div>
+        <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">di si ljubavi, nisi se javio</div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;margin-top:2px;">
+        <div style="width:28px;flex-shrink:0;"></div>
+        <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">sve ok?</div>
+      </div>
+
+      <!-- Ja -->
+      <div style="display:flex;justify-content:flex-end;">
+        <div style="background:#0a84ff;color:#fff;padding:10px 14px;border-radius:18px 18px 4px 18px;max-width:70%;font-size:15px;line-height:1.4;">Evo dolazim, bio sam u sudu</div>
+      </div>
+
+      <!-- Radojka -->
+      <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">👩</div>
+        <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">Tu sam, dođi po kutije kad budeš u blizini 📦</div>
+      </div>
+
+      <!-- Ja -->
+      <div style="display:flex;justify-content:flex-end;">
+        <div style="background:#0a84ff;color:#fff;padding:10px 14px;border-radius:18px 18px 4px 18px;max-width:70%;font-size:15px;line-height:1.4;">Koje kutije?</div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;margin-top:2px;">
+        <div style="width:28px;flex-shrink:0;"></div>
+        <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">one od Zvonimira, zaboravio si prošli put 🙄</div>
+      </div>
+
+      <!-- Datum -->
+      <div style="text-align:center;font-size:11px;color:#8e8e93;padding:12px 0 4px;">Četvrtak 09:02</div>
+
+      <!-- Radojka -->
+      <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">👩</div>
+        <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">Maldivi su potvrđeni 🌴 jedva čekam</div>
+      </div>
+
+      <!-- Ja -->
+      <div style="display:flex;justify-content:flex-end;">
+        <div style="background:#0a84ff;color:#fff;padding:10px 14px;border-radius:18px 18px 4px 18px;max-width:70%;font-size:15px;line-height:1.4;">👍 sutra idem kod njega završiti papire</div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;margin-top:2px;">
+        <div style="width:28px;flex-shrink:0;"></div>
+        <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">samo završi to brzo 🙏</div>
+      </div>
+
+      <!-- Datum -->
+      <div style="text-align:center;font-size:11px;color:#8e8e93;padding:12px 0 4px;">Petak 21:33</div>
+
+      <!-- Radojka -->
+      <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;">
+        <div style="width:28px;height:28px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">👩</div>
+        <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">Jesi li gotov? Nema odgovora od tebe</div>
+      </div>
+
+      <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;margin-top:2px;">
+        <div style="width:28px;flex-shrink:0;"></div>
+        <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">Radomire???</div>
+      </div>
+
+      <!-- Spacer -->
+      <div style="height:8px;"></div>
+
+    </div>
+
+    <!-- Input bar -->
+    <div style="display:flex;align-items:center;gap:10px;padding:10px 14px 28px;border-top:0.5px solid #2c2c2e;flex-shrink:0;">
+      <div style="flex:1;background:#1c1c1e;border-radius:20px;padding:9px 14px;font-size:15px;color:#8e8e93;">iMessage</div>
+      <div style="width:32px;height:32px;border-radius:50%;background:#0a84ff;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;">↑</div>
     </div>
   </div>
 
@@ -269,7 +380,6 @@
           <div style="font-size:11px;color:#8e8e93;margin-top:1px;">EUR</div>
         </div>
       </div>
-
 
       <!-- Srijeda -->
       <div style="padding:10px 16px 4px;font-size:12px;font-weight:600;color:#8e8e93;letter-spacing:0.5px;">SRIJEDA, 20. STUDENOG</div>
