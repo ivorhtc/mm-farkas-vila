@@ -69,7 +69,7 @@
     </div>
 
     <!-- MESSAGES screen -->
-    <div class="screen active" id="screen-messages">
+    <div class="screen" id="screen-messages">
         <div class="nav-bar">
             <div class="nav-back">‹ Poruke</div>
             <div style="display:flex;flex-direction:column;align-items:center;">
@@ -144,7 +144,7 @@
     </div>
 
     <!-- CALLS screen -->
-    <div class="screen" id="screen-calls">
+    <div class="screen active" id="screen-calls">
         <div class="nav-bar">
             <div class="nav-back" style="color:#ff453a">Uredi</div>
             <div class="nav-title">Nedavni pozivi</div>
@@ -335,11 +335,11 @@
 
     <!-- Tab bar -->
     <div class="tab-bar">
-        <div class="tab" id="tab-calls" onclick="switchTab('calls')">
+        <div class="tab active" id="tab-calls" onclick="switchTab('calls')">
             <div class="tab-icon">📞</div>
             <span>Pozivi</span>
         </div>
-        <div class="tab active" id="tab-messages" onclick="switchTab('messages')">
+        <div class="tab" id="tab-messages" onclick="switchTab('messages')">
             <div class="tab-icon">💬</div>
             <span>Poruke</span>
         </div>
