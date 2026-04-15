@@ -1,0 +1,367 @@
+<!doctype html>
+<html lang="hr">
+<head>
+    <meta charset="utf-8">
+    <title>iPhone — Viktor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+        body {
+            background: #1c1c1e;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", sans-serif;
+        }
+        .phone {
+            width: 100%;
+            max-width: 390px;
+            min-height: 100vh;
+            background: #000;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 20px 0;
+            height: 44px;
+            flex-shrink: 0;
+        }
+        .status-time { font-size: 15px; font-weight: 600; color: #fff; letter-spacing: -0.3px; }
+        .status-icons { display: flex; gap: 6px; align-items: center; font-size: 13px; color: #fff; }
+        .screen { display: none; flex: 1; flex-direction: column; overflow-y: auto; }
+        .screen.active { display: flex; }
+        .nav-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 20px 12px;
+            flex-shrink: 0;
+        }
+        .nav-back { color: #0a84ff; font-size: 17px; }
+        .nav-title { font-size: 17px; font-weight: 600; color: #fff; }
+        .nav-action { color: #0a84ff; font-size: 17px; }
+        .tab-bar {
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            padding: 10px 0 28px;
+            background: rgba(28,28,30,0.95);
+            backdrop-filter: blur(20px);
+            border-top: 0.5px solid #2c2c2e;
+            flex-shrink: 0;
+        }
+        .tab { display: flex; flex-direction: column; align-items: center; gap: 3px; font-size: 10px; color: #636366; cursor: pointer; min-width: 60px; }
+        .tab.active { color: #0a84ff; }
+        .tab-icon { font-size: 24px; }
+    </style>
+</head>
+<body>
+<div class="phone">
+
+    <div class="status-bar">
+        <div class="status-time">9:41</div>
+        <div class="status-icons"><span>●●●</span><span>WiFi</span><span>🔋</span></div>
+    </div>
+
+    <!-- MESSAGES screen -->
+    <div class="screen active" id="screen-messages">
+        <div class="nav-bar">
+            <div class="nav-back">‹ Poruke</div>
+            <div style="display:flex;flex-direction:column;align-items:center;">
+                <div style="width:36px;height:36px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:18px;">👴</div>
+                <div style="font-size:13px;color:#fff;font-weight:600;margin-top:2px;">Tata</div>
+            </div>
+            <div class="nav-action">ℹ</div>
+        </div>
+
+        <div style="flex:1;overflow-y:auto;padding:8px 12px;display:flex;flex-direction:column;gap:4px;">
+
+            <div style="text-align:center;font-size:11px;color:#8e8e93;padding:8px 0 4px;">Ponedjeljak 11:47</div>
+
+            <!-- Tata -->
+            <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">👴</div>
+                <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">Viktor, dođi danas na ručak. Moram ti nešto reći.</div>
+            </div>
+
+            <!-- Viktor -->
+            <div style="display:flex;justify-content:flex-end;">
+                <div style="background:#0a84ff;color:#fff;padding:10px 14px;border-radius:18px 18px 4px 18px;max-width:70%;font-size:15px;line-height:1.4;">Mogu u 13h, ok?</div>
+            </div>
+
+            <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;">
+                <div style="width:28px;flex-shrink:0;"></div>
+                <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">Ok. 13h.</div>
+            </div>
+
+            <div style="text-align:center;font-size:11px;color:#8e8e93;padding:12px 0 4px;">Ponedjeljak 15:22</div>
+
+            <!-- Viktor -->
+            <div style="display:flex;justify-content:flex-end;">
+                <div style="background:#0a84ff;color:#fff;padding:10px 14px;border-radius:18px 18px 4px 18px;max-width:70%;font-size:15px;line-height:1.4;">Ozbiljno? Izbacuješ nas iz oporuke?</div>
+            </div>
+
+            <div style="display:flex;justify-content:flex-end;margin-top:2px;">
+                <div style="background:#0a84ff;color:#fff;padding:10px 14px;border-radius:18px 18px 4px 18px;max-width:70%;font-size:15px;line-height:1.4;">Nećeš valjda to napraviti. Nazovi me.</div>
+            </div>
+
+            <!-- Tata — nema odgovora -->
+            <div style="text-align:center;font-size:11px;color:#8e8e93;padding:12px 0 4px;">Utorak 09:15</div>
+
+            <div style="display:flex;justify-content:flex-end;">
+                <div style="background:#0a84ff;color:#fff;padding:10px 14px;border-radius:18px 18px 4px 18px;max-width:70%;font-size:15px;line-height:1.4;">Tata, molim te odgovori</div>
+            </div>
+
+            <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;margin-top:4px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">👴</div>
+                <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">Odluka je donešena. Odvjetnik dolazi idući tjedan.</div>
+            </div>
+
+            <div style="text-align:center;font-size:11px;color:#8e8e93;padding:12px 0 4px;">Petak 10:08</div>
+
+            <!-- Viktor traži ručak -->
+            <div style="display:flex;justify-content:flex-end;">
+                <div style="background:#0a84ff;color:#fff;padding:10px 14px;border-radius:18px 18px 4px 18px;max-width:70%;font-size:15px;line-height:1.4;">Mogu li doći na ručak? Samo razgovor.</div>
+            </div>
+
+            <div style="display:flex;justify-content:flex-start;align-items:flex-end;gap:6px;margin-top:4px;">
+                <div style="width:28px;height:28px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:14px;flex-shrink:0;">👴</div>
+                <div style="background:#2c2c2e;color:#fff;padding:10px 14px;border-radius:18px 18px 18px 4px;max-width:70%;font-size:15px;line-height:1.4;">Dođi u 13h.</div>
+            </div>
+
+            <div style="height:8px;"></div>
+        </div>
+
+        <div style="display:flex;align-items:center;gap:10px;padding:10px 14px 28px;border-top:0.5px solid #2c2c2e;flex-shrink:0;">
+            <div style="flex:1;background:#1c1c1e;border-radius:20px;padding:9px 14px;font-size:15px;color:#8e8e93;">iMessage</div>
+            <div style="width:32px;height:32px;border-radius:50%;background:#0a84ff;display:flex;align-items:center;justify-content:center;font-size:16px;color:#fff;">↑</div>
+        </div>
+    </div>
+
+    <!-- CALLS screen -->
+    <div class="screen" id="screen-calls">
+        <div class="nav-bar">
+            <div class="nav-back" style="color:#ff453a">Uredi</div>
+            <div class="nav-title">Nedavni pozivi</div>
+            <div class="nav-action">+</div>
+        </div>
+        <div style="display:flex;padding:0 16px 12px;flex-shrink:0;">
+            <div style="flex:1;text-align:center;padding:6px 0;color:#0a84ff;font-size:14px;font-weight:600;border-bottom:2px solid #0a84ff;">Svi</div>
+            <div style="flex:1;text-align:center;padding:6px 0;color:#8e8e93;font-size:14px;">Propušteni</div>
+        </div>
+        <div style="flex:1;overflow-y:auto;">
+
+            <div style="padding:6px 16px 4px;font-size:13px;font-weight:600;color:#8e8e93;">Ponedjeljak</div>
+
+            <div style="display:flex;align-items:center;padding:12px 16px;border-bottom:0.5px solid #2c2c2e;gap:14px;">
+                <div style="width:46px;height:46px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👴</div>
+                <div style="flex:1;">
+                    <div style="font-size:17px;color:#fff;">Tata</div>
+                    <div style="font-size:13px;margin-top:2px;"><span style="color:#30d158;">↙ Dolazni poziv</span><span style="color:#8e8e93;"> · 3:47</span></div>
+                </div>
+                <div style="text-align:right;">
+                    <div style="font-size:13px;color:#8e8e93;">15:44</div>
+                    <div style="font-size:20px;color:#0a84ff;margin-top:4px;">ℹ</div>
+                </div>
+            </div>
+
+            <div style="padding:6px 16px 4px;font-size:13px;font-weight:600;color:#8e8e93;">Utorak</div>
+
+            <div style="display:flex;align-items:center;padding:12px 16px;border-bottom:0.5px solid #2c2c2e;gap:14px;">
+                <div style="width:46px;height:46px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">🌏</div>
+                <div style="flex:1;">
+                    <div style="font-size:17px;color:#fff;">Viktorija</div>
+                    <div style="font-size:12px;color:#8e8e93;margin-top:1px;">Australija · +61 4XX XXX XXX</div>
+                    <div style="font-size:13px;margin-top:2px;"><span style="color:#8e8e93;">↗ Odlazni poziv · 47:12</span></div>
+                </div>
+                <div style="text-align:right;">
+                    <div style="font-size:13px;color:#8e8e93;">18:03</div>
+                    <div style="font-size:20px;color:#0a84ff;margin-top:4px;">ℹ</div>
+                </div>
+            </div>
+
+            <div style="padding:6px 16px 4px;font-size:13px;font-weight:600;color:#8e8e93;">Srijeda</div>
+
+            <div style="display:flex;align-items:center;padding:12px 16px;border-bottom:0.5px solid #2c2c2e;gap:14px;">
+                <div style="width:46px;height:46px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">💊</div>
+                <div style="flex:1;">
+                    <div style="font-size:17px;color:#fff;">Gradska Ljekarna</div>
+                    <div style="font-size:13px;margin-top:2px;"><span style="color:#8e8e93;">↗ Odlazni poziv · 1:23</span></div>
+                </div>
+                <div style="text-align:right;">
+                    <div style="font-size:13px;color:#8e8e93;">10:31</div>
+                    <div style="font-size:20px;color:#0a84ff;margin-top:4px;">ℹ</div>
+                </div>
+            </div>
+
+            <div style="padding:6px 16px 4px;font-size:13px;font-weight:600;color:#8e8e93;">Petak</div>
+
+            <div style="display:flex;align-items:center;padding:12px 16px;border-bottom:0.5px solid #2c2c2e;gap:14px;">
+                <div style="width:46px;height:46px;border-radius:50%;background:#2c2c2e;display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;">👴</div>
+                <div style="flex:1;">
+                    <div style="font-size:17px;color:#fff;">Tata</div>
+                    <div style="font-size:13px;margin-top:2px;"><span style="color:#8e8e93;">↗ Odlazni poziv · 0:48</span></div>
+                </div>
+                <div style="text-align:right;">
+                    <div style="font-size:13px;color:#8e8e93;">12:55</div>
+                    <div style="font-size:20px;color:#0a84ff;margin-top:4px;">ℹ</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- PHOTOS screen -->
+    <div class="screen" id="screen-photos">
+        <div class="nav-bar">
+            <div class="nav-back">‹ Albumi</div>
+            <div class="nav-title">Recents</div>
+            <div class="nav-action">Select</div>
+        </div>
+        <div style="padding:4px 16px 8px;font-size:13px;color:#8e8e93;flex-shrink:0;">NEDAVNO DODANO</div>
+        <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2px;">
+            <div style="aspect-ratio:1;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:11px;color:#444;text-align:center;padding:8px;">foto<br>1</div>
+            <div style="aspect-ratio:1;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:11px;color:#444;text-align:center;padding:8px;">foto<br>2</div>
+            <div style="aspect-ratio:1;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:11px;color:#444;text-align:center;padding:8px;">foto<br>3</div>
+            <div style="aspect-ratio:1;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:11px;color:#444;text-align:center;padding:8px;">foto<br>4</div>
+            <div style="aspect-ratio:1;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:11px;color:#444;text-align:center;padding:8px;">foto<br>5</div>
+            <div style="aspect-ratio:1;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:11px;color:#444;text-align:center;padding:8px;">foto<br>6</div>
+        </div>
+    </div>
+
+    <!-- BANKING screen -->
+    <div class="screen" id="screen-banking">
+        <div class="nav-bar">
+            <div class="nav-back">‹ Računi</div>
+            <div class="nav-title">Transakcije</div>
+            <div class="nav-action" style="font-size:13px;">↓ PDF</div>
+        </div>
+
+        <div style="padding:8px 20px 20px;flex-shrink:0;border-bottom:0.5px solid #2c2c2e;">
+            <div style="font-size:12px;color:#8e8e93;letter-spacing:0.5px;margin-bottom:4px;">TEKUĆI RAČUN · HR12 2490 0031 8823 4421 0</div>
+            <div style="font-size:36px;font-weight:700;color:#fff;letter-spacing:-1px;">8.340,12 <span style="font-size:20px;color:#8e8e93;">EUR</span></div>
+            <div style="font-size:12px;color:#8e8e93;margin-top:4px;">Raspoloživo stanje</div>
+        </div>
+
+        <div style="flex:1;overflow-y:auto;">
+
+            <div style="padding:10px 16px 4px;font-size:12px;font-weight:600;color:#8e8e93;letter-spacing:0.5px;">PETAK, 22. STUDENOG</div>
+
+            <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid #1c1c1e;gap:14px;">
+                <div style="width:42px;height:42px;border-radius:12px;background:#1a1a2e;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🍷</div>
+                <div style="flex:1;">
+                    <div style="font-size:15px;color:#fff;font-weight:500;">Vinoteka Bornstein</div>
+                    <div style="font-size:12px;color:#8e8e93;margin-top:2px;">POS terminal · Kaptol</div>
+                </div>
+                <div style="text-align:right;">
+                    <div style="font-size:16px;font-weight:600;color:#ff453a;">-64,00</div>
+                    <div style="font-size:11px;color:#8e8e93;margin-top:1px;">EUR</div>
+                </div>
+            </div>
+
+            <div style="padding:10px 16px 4px;font-size:12px;font-weight:600;color:#8e8e93;letter-spacing:0.5px;">ČETVRTAK, 21. STUDENOG</div>
+
+            <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid #1c1c1e;gap:14px;">
+                <div style="width:42px;height:42px;border-radius:12px;background:#1c3a1c;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🏢</div>
+                <div style="flex:1;">
+                    <div style="font-size:15px;color:#fff;font-weight:500;">Uplata plaće</div>
+                    <div style="font-size:12px;color:#8e8e93;margin-top:2px;">Farkaš Kapital d.o.o.</div>
+                </div>
+                <div style="text-align:right;">
+                    <div style="font-size:16px;font-weight:600;color:#30d158;">+4.200,00</div>
+                    <div style="font-size:11px;color:#8e8e93;margin-top:1px;">EUR</div>
+                </div>
+            </div>
+
+            <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid #1c1c1e;gap:14px;">
+                <div style="width:42px;height:42px;border-radius:12px;background:#2a1a0a;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">💊</div>
+                <div style="flex:1;">
+                    <div style="font-size:15px;color:#fff;font-weight:500;">Gradska Ljekarna</div>
+                    <div style="font-size:12px;color:#8e8e93;margin-top:2px;">POS terminal · Ilica 43</div>
+                </div>
+                <div style="text-align:right;">
+                    <div style="font-size:16px;font-weight:600;color:#ff453a;">-18,40</div>
+                    <div style="font-size:11px;color:#8e8e93;margin-top:1px;">EUR</div>
+                </div>
+            </div>
+
+            <div style="padding:10px 16px 4px;font-size:12px;font-weight:600;color:#8e8e93;letter-spacing:0.5px;">SRIJEDA, 20. STUDENOG</div>
+
+            <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid #1c1c1e;gap:14px;">
+                <div style="width:42px;height:42px;border-radius:12px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">⛽</div>
+                <div style="flex:1;">
+                    <div style="font-size:15px;color:#fff;font-weight:500;">INA Gorivo</div>
+                    <div style="font-size:12px;color:#8e8e93;margin-top:2px;">POS terminal · Ilica 156</div>
+                </div>
+                <div style="text-align:right;">
+                    <div style="font-size:16px;font-weight:600;color:#ff453a;">-52,30</div>
+                    <div style="font-size:11px;color:#8e8e93;margin-top:1px;">EUR</div>
+                </div>
+            </div>
+
+            <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid #1c1c1e;gap:14px;">
+                <div style="width:42px;height:42px;border-radius:12px;background:#1a1a1a;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🅿️</div>
+                <div style="flex:1;">
+                    <div style="font-size:15px;color:#fff;font-weight:500;">Zagreb Parking</div>
+                    <div style="font-size:12px;color:#8e8e93;margin-top:2px;">Online plaćanje</div>
+                </div>
+                <div style="text-align:right;">
+                    <div style="font-size:16px;font-weight:600;color:#ff453a;">-4,00</div>
+                    <div style="font-size:11px;color:#8e8e93;margin-top:1px;">EUR</div>
+                </div>
+            </div>
+
+            <div style="padding:10px 16px 4px;font-size:12px;font-weight:600;color:#8e8e93;letter-spacing:0.5px;">PONEDJELJAK, 18. STUDENOG</div>
+
+            <div style="display:flex;align-items:center;padding:14px 16px;border-bottom:0.5px solid #1c1c1e;gap:14px;">
+                <div style="width:42px;height:42px;border-radius:12px;background:#1a2a1a;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;">🍽️</div>
+                <div style="flex:1;">
+                    <div style="font-size:15px;color:#fff;font-weight:500;">Restoran Dubrovnik</div>
+                    <div style="font-size:12px;color:#8e8e93;margin-top:2px;">POS terminal · Gajeva 1</div>
+                </div>
+                <div style="text-align:right;">
+                    <div style="font-size:16px;font-weight:600;color:#ff453a;">-38,50</div>
+                    <div style="font-size:11px;color:#8e8e93;margin-top:1px;">EUR</div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Tab bar -->
+    <div class="tab-bar">
+        <div class="tab" id="tab-calls" onclick="switchTab('calls')">
+            <div class="tab-icon">📞</div>
+            <span>Pozivi</span>
+        </div>
+        <div class="tab active" id="tab-messages" onclick="switchTab('messages')">
+            <div class="tab-icon">💬</div>
+            <span>Poruke</span>
+        </div>
+        <div class="tab" id="tab-photos" onclick="switchTab('photos')">
+            <div class="tab-icon">🖼️</div>
+            <span>Photos</span>
+        </div>
+        <div class="tab" id="tab-banking" onclick="switchTab('banking')">
+            <div class="tab-icon">🏦</div>
+            <span>Banking</span>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    function switchTab(name) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+        document.getElementById('screen-' + name).classList.add('active');
+        document.getElementById('tab-' + name).classList.add('active');
+    }
+</script>
+</body>
+</html>
