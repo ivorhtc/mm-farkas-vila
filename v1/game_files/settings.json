@@ -2,30 +2,40 @@
   {"p1": "Samir", "color": "#b4acac",
     "attr": { "icon": "⚫", "n": "Crni", "g": "Crnog", "d": "Crnom", "a": "Crnog", "v":"Crni", "l":"Crnom", "i":"Crnim" },
     "cards": [
-      "🎰 KLADIONIČKA POTVRDA — Potvrda o dugu od 4.200€ prema kladionici. Inkriminirajuće.",
-      "☕ KAVA — Možeš iskoristiti jednom prije svoje runde za +5 na inicijativu. Kaži voditelju prije nego upišeš brojeve.",
+      "🎰 KLADIONIČKA POTVRDA — Potvrda o dugu od 4.200€ prema kladionici.",
+      "☕ KAVA — Možeš iskoristiti jednom prije svoje runde za +5 na inicijativi. Pokaži karticu prije bacanja kocke.",
       "📋 RASPORED ČIŠĆENJA — Službeni raspored čišćenja Farkaš vile. Znaš gdje se što nalazi u svakoj prostoriji. Inkriminirajuće — znao si raspored kuće.",
       "🔑 KLJUČEVI OD VILE — Službeni ključevi koje imaš kao čistač. Mogao si ući u vilu kad god si htio.",
-      {"url": "",
+      {
+        "url": "",
         "text": "\uD83D\uDD11 KLJUČEVI OD VILE — Odključavaju glavni ulaz vile.",
-        "explanation":  "\uD83D\uDD11 KLJUČEVI OD VILE — Službeni ključevi koje imaš kao čistač. Mogao si ući u vilu kad god si htio."},
-      {}
+        "explanation":  "\uD83D\uDD11 KLJUČEVI OD VILE — Službeni ključevi koje imaš kao čistač. Mogao si ući u vilu kad god si htio."
+      }, {
+        "url": "",
+        "qr": "../assets/raspored_ciscenja/raspored_qr.png",
+        "explanation": "\uD83D\uDCCB RASPORED ČIŠĆENJA — Službeni raspored čišćenja Farkaš vile. Znaš gdje se što nalazi u svakoj prostoriji. Inkriminirajuće — zasto si tu ako si na godišnjem?."
+      }
     ]},
 
   {"p2": "Igor", "color": "#b4acac",
     "attr": { "icon": "🟡", "n": "Zuti", "g": "Zutog", "d": "Zutom", "a": "Zutog", "v":"Zuti", "l":"Zutom", "i":"Zutim" },
     "cards": [
-      "🧤 RUKAVICE — Tanke crne rukavice. Objašnjava zašto nema tvojih otisaka nigdje.",
-      "📱 BURNER MOBITEL — Drugi mobitel, nije registriran na tvoje ime. Može se haknuti (8007008). Global +40046",
+      "🧤 RUKAVICE — Tanke rukavice. Tko ih nosi ne ostavlja otiske.",
+      "📱 BURNER MOBITEL — Još jedan mobitel, nije registriran na ničje ime. Može se hakirati (8007008). Global +40046",
       "🔑 KLJUČEVI KOMBIJA — Ključevi kombijakombija firme za čišćenje. Na privjesku je logo firme. Global +40045",
-      "🖼️ POLAROIDI — Nekoliko fotografija Crnog (Samira) na različitim lokacijama. Pratio si ga danima da mu namjestiš ubojstvo."
+      "🖼️ POLAROIDI — Nekoliko fotografija Crnog na različitim lokacijama. Pratio si ga danima da mu namjestiš ubojstvo.",
+      {
+        "url": "",
+        "text": "\uD83D\uDDBC\uFE0F POLAROIDI — Nekoliko fotografija Crnog na različitim lokacijama.",
+        "explanation":  "\uD83D\uDDBC\uFE0F POLAROIDI — Nekoliko fotografija Crnog na različitim lokacijama. Pratio si ga danima da mu namjestiš ubojstvo."
+      }
     ]},
 
   {"p3": "Viktor", "color": "#b4acac",
     "attr": { "icon": "🔵", "n": "Plavi", "g": "Plavog", "d": "Plavom", "a": "Plavog", "v":"Plavi", "l":"Plavom", "i":"Plavim" },
     "cards": [
-      "💊 TABLETE ZA SRCE — Originalne tablete koje si uzeo iz noćnog ormara oca. Zašto ih još uvijek imaš pri sebi?",
-      "🖼️ OBITELJSKA FOTOGRAFIJA — Stara fotografija Zvonimira, Viktora i Viktorije. Na poleđini piše 'Ljeto 2018.'"
+      "💊 TABLETE ZA SRCE — Cardiovex tablete za srce u kutiji od vitamnskih tableta.",
+      "🖼️ FOTOGRAFIJA — Stara fotografija Zvonimira, Plavog i neke žene. Na poleđini piše 'Ljeto 2018.'"
     ]},
 
   {"p4": "Radomir", "color": "#b4acac",
@@ -39,16 +49,16 @@
     "attr": { "icon": "🟢", "n": "Zeleni", "g": "Zelenog", "d": "Zelenom", "a": "Zelenog", "v":"Zeleni", "l":"Zelenom", "i":"Zelenim" },
     "cards": [
       "🔧 MALI ODVIJAČ — Koristio si ga za olabaviti vijke na ogradi balkona. Još ga imaš pri sebi.",
-      "💳 VIZITKA — Davor i Radojka Fit, personalni treninzi. Tvoja vlastita vizitka.",
+      "💳 VIZITKA — Davor i Radojka Fit, osobni treninzi. Tvoja vlastita vizitka.",
       "🍫 PROTEINSKA PLOČICA — Možeš iskoristiti jednom prije svoje runde za +5 na inicijativu. Kaži voditelju prije nego upišeš brojeve."
     ]},
 
   {"p6": "Oliver", "color": "#b4acac",
     "attr": { "icon": "🟣", "n": "Ljubicasti", "g": "Ljubicastog", "d": "Ljubicastom", "a": "Ljubicastog", "v":"Ljubicasti", "l":"Ljubicastom", "i":"Ljubicastim" },
     "cards": [
-      "💉 INJEKCIJA SA SEDATIVIMA — Između rundi možeš upotrijebiti na drugog igrača. Oba igrača preskaču sljedeću rundu. Uspavani igrač daje ti sve svoje kartice. Žrtva zna tko ju je uspavao. Može se koristiti jednom. Global +88782",
+      "💉 INJEKCIJA SA SEDATIVIMA — Možeš upotrijebiti između rundi na drugom igraču. Ti i on preskačete iduću rundu. Uspavani igrač daje ti sve svoje kartice. Žrtva zna tko ju je uspavao. Može se koristiti jednom.",
       "🔍 PRIBOR ZA OTISKE — Profesionalni set za uzimanje otisaka prstiju. Kad pretraguješ sobu, dodaj +6 uz broj sobe da aktiviraš otiske. Global +88771",
-      "🗺️ TLOCRT VILE — Detaljan tlocrt svih prostorija. Znaš gdje se što nalazi od samog početka."
+      "🗺️ OPIS VILE — Izvadak iz katastra. Znaš gdje se što nalazi od samog početka."
     ]},
 
   {"p7": "Voditelj", "color": "#E6E6FA",

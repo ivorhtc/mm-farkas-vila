@@ -7,6 +7,6 @@
   {"type": "rule", "cond": "1100 AND 80021", "out": "1101", "desc": "Vila izvana - vide godinu 2004"},
   {"type": "item", "key": "1101", "value": "Moderna vila okružena je visokim borovima i skrivena iza elegantne crne metalne ograde s velikim ulaznim vratima. Na vanjskom zidu pokraj glavnih vrata nalazi se mala metalna tabla s ugraviranom godinom: 2004.",
     "p7": "Daj svima karticu godine (kartica 800211).",
-    "kartica": "🏠 TABLA NA VILI — Godina izgradnje vile: 2004.",
+    "kartica": "🏠 TABLA NA VILI — Godina izgradnje vile: 2004. Global +800211",
     "global": "800211"}
 ]
