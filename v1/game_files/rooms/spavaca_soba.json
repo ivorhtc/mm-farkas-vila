@@ -11,7 +11,7 @@
     "output": {
       "winner": "Krevet je uredno pospremljen — jastuk ravan, deka zategnuta. Podižete jastuk i nalazite mali ključ s plavom etiketom na kojoj piše 'L2'.",
       "others": "Krevet je uredno pospremljen. ${winnerN} podiže jastuk i uzima nešto.",
-      "p7": "Daj ${winnerD} ključ ladice (kartica 50032). Global +50032",
+      "p7": "Daj ${winnerD} ključ ladice (kartica 50032).",
       "kartica": "🗝️ KLJUČ L2 — Ključ od zaključane ladice u radnoj sobi. Global +50032"
     }},
   {"type": "rule", "cond": "5001 AND 50032", "out": "5001", "desc": "Krevet - ključ već uzet"},

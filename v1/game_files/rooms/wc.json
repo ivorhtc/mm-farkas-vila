@@ -28,7 +28,7 @@
       "others": "U ormariću su ručnici i lijekovi. Primjećujete prazan prostor gdje je nešto nedavno izvađeno i zamijenjeno. ${winnerN} uzima nešto iz ormara.",
       "p6": "🧠 Vitamini u kutiji od Cardiovexa — netko je zamijenio tablete. Otisci na kutiji mogli bi reći tko.",
       "p7": "Daj ${winnerD} aspirin (kartica 60021). Global +60020",
-      "kartica": "💊 ASPIRIN — Iskoristi jednom prije svoje runde za +3 na inicijativu. Kaži voditelju prije nego upišeš brojeve."
+      "kartica": "💊 ASPIRIN — Iskoristi jednom prije svoje runde za +3 na inicijativu. Pokaži karticu prije bacanja kocke."
     }},
 
   {"type": "rule", "cond": "6002 AND 60020", "out": "6002", "desc": "Ormar - aspirin već uzet"},

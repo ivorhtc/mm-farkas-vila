@@ -28,7 +28,7 @@
       "winner": "Na policama su deterdženti i sredstva za čišćenje. Između boca primjećujete malu bočicu bez etikete s karakterističnim mirisom. Kloroform. Spremaš je diskretno.",
       "others": "Na policama su deterdženti i sredstva za čišćenje. ${winnerN} uzima nešto s police.",
       "p7": "Daj ${winnerD} kloroform (kartica 120030). Global +120030",
-      "kartica": "🧪 KLOROFORM — Između rundi možeš upotrijebiti na drugog igrača. Oba igrača preskaču sljedeću rundu. Uspavani igrač daje ti sve svoje kartice. Žrtva zna tko ju je uspavao. Može se koristiti jednom. Global +88784"
+      "kartica": "🧪 KLOROFORM — Između rundi možeš upotrijebiti na igraču s manjom inicijativom. Oba igrača preskaču sljedeću rundu. Uspavani igrač daje ti sve svoje kartice. Žrtva zna tko ju je uspavao. Može se koristiti jednom. Global +88784"
     }},
 
   {"type": "rule", "cond": "12003 AND 120030", "out": "12003", "desc": "Police - kloroform već uzet"},

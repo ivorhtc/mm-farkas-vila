@@ -31,7 +31,7 @@
       "winner": "U ormaru su vreće brašna i šećera. Iza njih, naslonjen uz zid, stoji metalni pajser. Spremaš ga.",
       "others": "U ormaru su vreće brašna i šećera. ${winnerN} uzima nešto iza vreća.",
       "p7": "Daj ${winnerD} pajser (kartica 40040). Global +40040",
-      "kartica": "🔧 PAJSER — Možeš otvoriti nešto s njim (4004). Global +40040"
+      "kartica": "🔧 PAJSER — Možeš otvoriti nešto s njim (hint 4004). Global +40040"
     }},
   {"type": "rule", "cond": "7003 AND 40040", "out": "7003", "desc": "Veliki ormar - pajser već uzet"},
   {"type": "item", "key": "7003", "value": "U ormaru su vreće brašna i šećera. Iza vreća je prazan prostor."},

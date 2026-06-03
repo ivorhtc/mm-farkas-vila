@@ -14,7 +14,7 @@
       "winner": "Na polici su uredno posloženi alati — čekić, odvijači, kliješta. U kutiji na kraju police nalazite električni taser. Spremaš ga u džep.",
       "others": "Na polici su uredno posloženi alati. ${winnerN} uzima nešto iz kutije na polici.",
       "p7": "Daj ${winnerD} taser (kartica 40010). Global +40010",
-      "kartica": "⚡ TASER — Između rundi možeš upotrijebiti na drugog igrača. Oba igrača preskaču sljedeću rundu. Uspavani igrač daje ti sve svoje kartice. Žrtva zna tko ju je tasirao. Može se koristiti jednom. Global +88783"
+      "kartica": "⚡ TASER — Između rundi možeš upotrijebiti na igraču s manjom inicijativom. Oba igrača preskaču sljedeću rundu. Uspavani igrač daje ti sve svoje kartice. Žrtva zna tko ju je tasirao. Može se koristiti jednom."
     }},
   {"type": "rule", "cond": "4001 AND 40010", "out": "4001", "desc": "Alat - taser već uzet"},
   {"type": "item", "key": "4001", "value": "Na polici su uredno posloženi alati — čekić, odvijači, kliješta. Kutija na kraju police je prazna."},
@@ -46,7 +46,7 @@
     "value": "Otključavate kombi ključevima. Prednja sjedala su nagnuta unazad — netko je tu spavao. Na stražnjim sjedalima nalazite: nekoliko torbi punih novca, tri zlatne poluge i jednu četvrtu polugu koja ima tragove krvi na vrhu. Na podu kombija leži osobna iskaznica.",
     "p1": "🧠 Uzimаš osobnu iskaznicu s poda — na njoj je tvoja slika, tvoje ime i prezime. To je TVOJA iskaznica. Kako je završila ovdje?",
     "p2": "🧠 Sve su našli. Moraš smisliti objašnjenje — i brzo.",
-    "p7": "Daj igracu s najvecom incijativom iskaznicu vozača (kartica 40046). Global +40041",
+    "p7": "Daj igracu s najvecom incijativom iskaznicu vozača (kartica 40047) i bilješku (kartica 40048). Global +40041",
     "kartica": "🪪 ISKAZNICA VOZAČA — Identifikacijska kartica s fotografijom, imenom i prezimenom vozača kombija firme za čišćenje. Crni se zove Samir ",
     "kartica_2": "📋 INTERNA BILJEŠKA — Farmakološka interakcija Cardiovex + Dormex. Ručne bilješke u plavom: \"topi se u vodi, bez boje i mirisa\" i \"stariji pacijenti s kroničnom srčanom terapijom — povećan rizik ×3\". Dokument nije potpisan.",
     "global": "40041"},
@@ -56,7 +56,7 @@
     "value": "Pajserom uspijevate otvoriti kombi. Prednja sjedala su nagnuta unazad — netko je tu spavao. Na stražnjim sjedalima nalazite: nekoliko torbi punih novca, tri zlatne poluge i jednu četvrtu polugu koja ima tragove krvi na vrhu. Na podu kombija leži osobna iskaznica.",
     "p1": "🧠 Uzimаš osobnu iskaznicu s poda — na njoj je tvoja slika, tvoje ime i prezime. To je TVOJA iskaznica. Kako je završila ovdje?",
     "p2": "🧠 Gotovo je. Sve su našli. Moraš smisliti objašnjenje — i brzo.",
-    "p7": "Daj igracu s najvecom incijativom iskaznicu vozača (kartica 40046). Global +40041",
+    "p7": "Daj igracu s najvecom incijativom iskaznicu vozača (kartica 40047) i bilješku (kartica 40048). Global +40041",
     "kartica": "🪪 ISKAZNICA VOZAČA — Identifikacijska kartica s fotografijom, imenom i prezimenom vozača kombija firme za čišćenje. Crni se zove Samir ",
     "kartica_2": "📋 INTERNA BILJEŠKA — Farmakološka interakcija Cardiovex + Dormex. Ručne bilješke u plavom: \"topi se u vodi, bez boje i mirisa\" i \"stariji pacijenti s kroničnom srčanom terapijom — povećan rizik ×3\". Dokument nije potpisan.",
     "global": "40041"},

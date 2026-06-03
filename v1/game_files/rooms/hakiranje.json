@@ -20,7 +20,7 @@
   {"type": "item", "key": "8007006", "value": "\uD83D\uDFE3📱 Oliverov mobitel:\n• Poruka automatskog sustava: popis tablica automobila koja su bila u Farkaš vili u petak\n• Interna baza — pretrage na sve prisutne osobe\n• Lokacija: dolazi iz smjera policijske postaje"},
 
   {"type": "rule", "cond": "8007007 AND 90031 AND 50020", "out": "8007007", "desc": "Zvonimirov mobitel - treba laptop I fizički mobitel nađen u spavaćoj"},
-  {"type": "item", "key": "8007007", "value": "📱 Zvonimirov mobitel:\n• Intimne fotografije s Radojkom Špek\n• Obiteljske fotografije s Viktorom i Viktorijom Farkaš — stare nekoliko godina\n• SMS odvjetniku u srijedu: 'Dođi u petak, mijenjamo oporuku'"},
+  {"type": "item", "key": "8007007", "value": "📱 Zvonimirov mobitel:\n• Intimne fotografije s Radojkom Špek\n• Obiteljske fotografije s Viktorom i Viktorijom Farkaš — stare nekoliko godina\n• SMS odvjetniku u srijedu: 'Dođi iduci tjedan, mijenjamo oporuku'"},
 
   {"type": "rule", "cond": "8007008 AND 90031 AND 40046", "out": "8007008", "desc": "Zutov burner mobitel - tajni SMS Viktoriji"},
   {"type": "item", "key": "8007008", "value": "📱 Burner mobitel:\n• SMS Viktoriji Farkaš: 'Posao je gotov. Novac i zlato su u kombiju. Čekam da se situacija smiri.'\n• Jedan kontakt u imeniku: 'V.F.'\n• Lokacija: isključena\n• Nema registracije na ime vlasnika"}
