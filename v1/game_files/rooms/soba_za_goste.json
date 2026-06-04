@@ -65,6 +65,7 @@
     "key": "9003zvonimir",
     "value": "Na stolu je laptop — otvoren i uključen. Na ekranu je otvorena kladionička stranica. Laptop je nezaključan. Možete hakirati mobitele svih prisutnih (8007001-8007006) i Zvonimirov mobitel (8007007).",
     "p1": "🧠 To je tvoj laptop. Ostavio si ga uključenog.",
+    "p7": "Daj svima laptop (90031)",
     "global": "90031"},
   {"type": "rule",
     "cond": "9003 AND 90031 AND NOT 50020",
