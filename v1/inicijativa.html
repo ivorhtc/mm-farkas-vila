@@ -242,7 +242,6 @@
     { id: 'p4', icon: '🦀', name: 'Crveni · Radomir' },
     { id: 'p5', icon: '🐍', name: 'Zeleni · Davor' },
     { id: 'p6', icon: '🍆', name: 'Ljubičasti · Oliver' },
-    { id: 'p7', icon: '⚠️', name: 'Voditelj' },
   ];
 
   const CONST_PLAYERS = [
@@ -252,7 +251,6 @@
     { id: 'p4', icon: '🦀', name: 'Crveni · Radomir' },
     { id: 'p5', icon: '🐍', name: 'Zeleni · Davor' },
     { id: 'p6', icon: '🍆', name: 'Ljubičasti · Oliver' },
-    { id: 'p7', icon: '⚠️', name: 'Voditelj' },
   ];
 
   const list = document.getElementById('initiative-list');
@@ -281,8 +279,8 @@
   // Generiraj redove
   CONST_PLAYERS.forEach(p => {
     const row = document.createElement('div');
-    row.className = 'player-row';
-    row.id = 'row-' + p.id;
+    row.className = 'input-row';
+    row.id = 'input-row-' + p.id;
     row.innerHTML = `
       <input class="init-input" id="init-${p.id}" placeholder="—" type="number" min="1" max="99">
       <div class="player-icon">${p.icon}</div>
