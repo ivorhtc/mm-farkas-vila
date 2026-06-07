@@ -245,10 +245,41 @@
     { id: 'p7', icon: '⚠️', name: 'Voditelj' },
   ];
 
+  const CONST_PLAYERS = [
+    { id: 'p1', icon: '🐈‍⬛', name: 'Crni · Samir' },
+    { id: 'p2', icon: '🐥', name: 'Žuti · Igor' },
+    { id: 'p3', icon: '🐋', name: 'Plavi · Viktor' },
+    { id: 'p4', icon: '🦀', name: 'Crveni · Radomir' },
+    { id: 'p5', icon: '🐍', name: 'Zeleni · Davor' },
+    { id: 'p6', icon: '🍆', name: 'Ljubičasti · Oliver' },
+    { id: 'p7', icon: '⚠️', name: 'Voditelj' },
+  ];
+
   const list = document.getElementById('initiative-list');
 
   // Generiraj redove
   PLAYERS.forEach(p => {
+    const row = document.createElement('div');
+    row.className = 'player-row';
+    row.id = 'row-' + p.id;
+    row.innerHTML = `
+      <div class="rank" id="rank-${p.id}">—</div>
+      <!-- <input class="init-input" id="init-${p.id}" placeholder="—" type="number" min="1" max="99"> -->
+      <div class="player-icon">${p.icon}</div>
+      <div class="player-name">${p.name}</div>
+      <!--<input class="room-input" id="${p.id}" placeholder="sobe / flagovi">
+      <div class="hint" id="desc-${p.id}"></div>-->
+    `;
+    list.appendChild(row);
+    if (p.id === 'p6') {
+      const div = document.createElement('hr');
+      div.className = 'divider';
+      list.appendChild(div);
+    }
+  });
+
+  // Generiraj redove
+  CONST_PLAYERS.forEach(p => {
     const row = document.createElement('div');
     row.className = 'player-row';
     row.id = 'row-' + p.id;
@@ -267,6 +298,7 @@
       list.appendChild(div);
     }
   });
+
 
   // Sortiranje po inicijativi
   function sortRows() {
