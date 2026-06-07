@@ -239,10 +239,10 @@
 
 <hr class="divider">
 
-<div class="globals-wrap">
-  <div class="globals-label">Globalni flagovi</div>
-  <input class="globals-input" id="p-globalNumbers" placeholder="npr. 80021, 90031, 100001">
+<div id="input-list">
+  <!-- Generirano JS-om -->
 </div>
+
 
 <button class="eval-btn" id="evalBtn">⚖ RESETIRAJ</button>
 
@@ -288,6 +288,9 @@
     }
   });
 
+    const inputList = document.getElementById('input-list');
+
+
   // Generiraj redove
   CONST_PLAYERS.forEach(p => {
     const row = document.createElement('div');
@@ -300,11 +303,11 @@
       <!--<input class="room-input" id="${p.id}" placeholder="sobe / flagovi">
       <div class="hint" id="desc-${p.id}"></div>-->
     `;
-    list.appendChild(row);
+    inputList.appendChild(row);
     if (p.id === 'p6') {
       const div = document.createElement('hr');
       div.className = 'divider';
-      list.appendChild(div);
+      inputList.appendChild(div);
     }
   });
 
