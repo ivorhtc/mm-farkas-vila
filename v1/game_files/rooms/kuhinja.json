@@ -15,7 +15,7 @@
   {"type": "rule", "cond": "1004", "out": "1004", "desc": "Sudoper"},
   {"type": "rule", "cond": "1004 AND 88771", "out": "10041", "desc": "Sudoper - s priborom za otiske"},
 
-  {"type": "item", "key": "1000", "value": "Prostrana moderna kuhinja s ladicama, policama i velikim srebrnim frižiderom. Možete pretražiti: ladice (1001), police sa začinima i čašama (1002), frižider (1003), sudoper (1004)."},
+  {"type": "item", "key": "1000", "value": "Prostrana moderna kuhinja s ladicama, policama i velikim srebrnim frižiderom. Možete pretražiti: ladice (1001), police sa začinima i čašama (1002), frižider (1003), sudoper (1004) i novu sobu (3000)."},
   {"type": "item", "key": "1001", "value": "U ladicama su noževi i kuhinjski pribor.", "p2": "Spremaš injekciju u džep bez da itko vidi.", "global": "1001771"},
   {"type": "item", "key": "1001881", "value": "U ladicama uz noževe i kuhinjski pribor nalazite praznu injekciju.", "global": "88772"},
   {"type": "item", "key": "1001882", "value": "U ladicama su noževi i kuhinjski pribor."},
