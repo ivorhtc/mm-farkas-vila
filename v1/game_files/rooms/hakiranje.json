@@ -2,26 +2,26 @@
   {"type": "story", "story": "hakiranje - dostupno uz laptop (90031). Zvonimirov mobitel trazi i flag 50020 (mobitel naden u spavacoj sobi)."},
 
   {"type": "rule", "cond": "8007001 AND 90031", "out": "8007001", "desc": "⚫Samirov mobitel"},
-  {"type": "item", "key": "8007001", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/hakiranje_mobitela/crne/cmce/index-html"},
+  {"type": "item", "key": "8007001", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/hakiranje_mobitela/crni/cmce/index.html"},
 
   {"type": "rule", "cond": "8007002 AND 90031", "out": "8007002", "desc": "\uD83D\uDFE1Igorov mobitel"},
-  {"type": "item", "key": "8007002", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/hakiranje_mobitela/zuti/mala/index-html"},
+  {"type": "item", "key": "8007002", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/hakiranje_mobitela/zuti/mala/index.html"},
 
   {"type": "rule", "cond": "8007003 AND 90031", "out": "8007003", "desc": "\uD83D\uDD35Viktorov mobitel"},
-  {"type": "item", "key": "8007003", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/hakiranje_mobitela/plavi/ftmp/index-html"},
+  {"type": "item", "key": "8007003", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/hakiranje_mobitela/plavi/ftmp/index.html"},
 
   {"type": "rule", "cond": "8007004 AND 90031", "out": "8007004", "desc": "\uD83D\uDD34Radomirov mobitel"},
-  {"type": "item", "key": "8007004", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/hakiranje_mobitela/crveni/rnde/index-html"},
+  {"type": "item", "key": "8007004", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/hakiranje_mobitela/crveni/rnde/index.html"},
 
   {"type": "rule", "cond": "8007005 AND 90031", "out": "8007005", "desc": "\uD83D\uDFE2Davorov mobitel"},
-  {"type": "item", "key": "8007005", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/hakiranje_mobitela/zeleni/lama/index-html"},
+  {"type": "item", "key": "8007005", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/hakiranje_mobitela/zeleni/lama/index.html"},
 
   {"type": "rule", "cond": "8007006 AND 90031", "out": "8007006", "desc": "\uD83D\uDFE3Oliverov mobitel"},
-  {"type": "item", "key": "8007006", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/hakiranje_mobitela/ljubicasti/llrr/index-html"},
+  {"type": "item", "key": "8007006", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/hakiranje_mobitela/ljubicasti/llrr/index.html"},
 
   {"type": "rule", "cond": "8007007 AND 90031 AND 50020", "out": "8007007", "desc": "Zvonimirov mobitel - treba laptop I fizički mobitel nađen u spavaćoj"},
-  {"type": "item", "key": "8007007", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/mob/zvonimir/rdka/index-html"},
+  {"type": "item", "key": "8007007", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/mob/zvonimir/rdka/index.html"},
 
   {"type": "rule", "cond": "8007008 AND 90031 AND 40046", "out": "8007008", "desc": "Zutov burner mobitel - tajni SMS Viktoriji"},
-  {"type": "item", "key": "8007008", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/mob/burner/index-html"}
+  {"type": "item", "key": "8007008", "value": "https://ivorhtc.github.io/mm-farkas-vila/v1/assets/mob/burner/index.html"}
 ]
