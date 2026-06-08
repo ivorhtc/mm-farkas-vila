@@ -1,5 +1,5 @@
 [
-  {"p1": "Samir", "color": "#b4acac",
+  {"p1": "⚫ Crni", "color": "#b4acac",
     "attr": { "icon": "⚫", "n": "Crni", "g": "Crnog", "d": "Crnom", "a": "Crnog", "v":"Crni", "l":"Crnom", "i":"Crnim" },
     "cards": [
       "🎰 KLADIONIČKA POTVRDA — Potvrda o dugu od 4.200€ prema kladionici.",
@@ -17,7 +17,7 @@
       }
     ]},
 
-  {"p2": "Igor", "color": "#b4acac",
+  {"p2": "🟡 Zuti", "color": "#b4acac",
     "attr": { "icon": "🟡", "n": "Zuti", "g": "Zutog", "d": "Zutom", "a": "Zutog", "v":"Zuti", "l":"Zutom", "i":"Zutim" },
     "cards": [
       "🧤 RUKAVICE — Tanke rukavice. Tko ih nosi ne ostavlja otiske.",
@@ -31,21 +31,21 @@
       }
     ]},
 
-  {"p3": "Viktor", "color": "#b4acac",
+  {"p3": "🔵 Plavi", "color": "#b4acac",
     "attr": { "icon": "🔵", "n": "Plavi", "g": "Plavog", "d": "Plavom", "a": "Plavog", "v":"Plavi", "l":"Plavom", "i":"Plavim" },
     "cards": [
       "💊 TABLETE ZA SRCE — Cardiovex tablete za srce u kutiji od vitamnskih tableta.",
       "🖼️ FOTOGRAFIJA — Stara fotografija Zvonimira, Plavog i neke žene. Na poleđini piše 'Ljeto 2018.'"
     ]},
 
-  {"p4": "Radomir", "color": "#b4acac",
+  {"p4": "🔴 Crveni", "color": "#b4acac",
     "attr": { "icon": "🔴", "n": "Crveni", "g": "Crvenog", "d": "Crvenom", "a": "Crvenog", "v":"Crveni", "l":"Crvenom", "i":"Crvenim" },
     "cards": [
       "🔑 KLJUČEVI RADOJKINOG AUTA — Ključevi s privjeskom 'R.Š.' — nije tvoje prezime.",
       "✈️ AVIONSKE KARTE ZA MALDIVE — Dvije karte, polazak za 5 dana. Rezervirano na ime Radomir i Radojka."
     ]},
 
-  {"p5": "Davor", "color": "#b4acac",
+  {"p5": "🟢 Zeleni", "color": "#b4acac",
     "attr": { "icon": "🟢", "n": "Zeleni", "g": "Zelenog", "d": "Zelenom", "a": "Zelenog", "v":"Zeleni", "l":"Zelenom", "i":"Zelenim" },
     "cards": [
       "🔧 MALI ODVIJAČ — Koristio si ga za olabaviti vijke na ogradi balkona. Još ga imaš pri sebi.",
@@ -53,7 +53,7 @@
       "🍫 PROTEINSKA PLOČICA — Možeš iskoristiti jednom prije svoje runde za +5 na inicijativu. Kaži voditelju prije nego upišeš brojeve."
     ]},
 
-  {"p6": "Oliver", "color": "#b4acac",
+  {"p6": "🟣 Ljubicasti", "color": "#b4acac",
     "attr": { "icon": "🟣", "n": "Ljubicasti", "g": "Ljubicastog", "d": "Ljubicastom", "a": "Ljubicastog", "v":"Ljubicasti", "l":"Ljubicastom", "i":"Ljubicastim" },
     "cards": [
       "💉 INJEKCIJA SA SEDATIVIMA — Možeš upotrijebiti između rundi na drugom igraču. Ti i on preskačete iduću rundu. Uspavani igrač daje ti sve svoje kartice. Žrtva zna tko ju je uspavao. Može se koristiti jednom.",
