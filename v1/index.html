@@ -150,8 +150,10 @@
       <div class="hint-box" id="desc-p-globalNumbers"></div>
     </div>
 
+    <!-- Evaluate button -->
     <div class="controls">
       <button id="evalBtn">⚖️ Evaluiraj</button>
+      <button id="copyRoundBtn" style="margin-left:10px;background:#4a7a4a;">📋 Copy round</button>
     </div>
 
     <h3>Rezultati</h3>
@@ -668,6 +670,53 @@ document.getElementById("evalBtn").addEventListener("click", async () => {
 // Učitaj settings odmah pri startu
 loadGameFiles().catch(e => {
   document.getElementById('loadStatus').textContent = '❌ Greška pri učitavanju: ' + e.message;
+});
+
+// ============================================================
+// COPY ROUND
+// ============================================================
+document.getElementById("copyRoundBtn").addEventListener("click", () => {
+  const playerNames = {
+    1: "⚫", 2: "🟡", 3: "🔵",
+    4: "🔴", 5: "🟢", 6: "🟣", 7: "Voditelj"
+  };
+
+  // Skupi sve unesene brojeve po igraču
+  const byNumber = {};
+  [1,2,3,4,5,6,7].forEach(n => {
+    const el = document.getElementById("p" + n);
+    if (!el || !el.value.trim()) return;
+    el.value.split(/[;,]/).map(x => x.trim()).filter(Boolean).forEach(num => {
+      if (!byNumber[num]) byNumber[num] = [];
+      byNumber[num].push(playerNames[n]);
+    });
+  });
+
+  // Sortiraj po broju
+  const sortedNums = Object.keys(byNumber).sort((a, b) => Number(a) - Number(b));
+
+  // Globalni flagovi
+  const globals = (document.getElementById("p-globalNumbers").value || "")
+          .split(",").map(x => x.trim()).filter(Boolean);
+
+  // Sastavi tekst
+  const lines = ["Runda __", ""];
+  sortedNums.forEach(num => {
+    lines.push(`${num} - ${byNumber[num].join(", ")}`);
+  });
+
+  if (globals.length > 0) {
+    lines.push("");
+    lines.push("Globalni brojevi (flagovi):");
+    lines.push(globals.join(", "));
+  }
+
+  const text = lines.join("\n");
+  navigator.clipboard.writeText(text);
+
+  const btn = document.getElementById("copyRoundBtn");
+  btn.textContent = "✅ Kopirano!";
+  setTimeout(() => btn.textContent = "📋 Copy round", 2000);
 });
 </script>
 </body>
