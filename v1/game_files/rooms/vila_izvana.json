@@ -8,5 +8,9 @@
   {"type": "item", "key": "1101", "value": "Moderna vila okružena je visokim borovima i skrivena iza elegantne crne metalne ograde s velikim ulaznim vratima. Na vanjskom zidu pokraj glavnih vrata nalazi se mala metalna tabla s ugraviranom godinom: 2004.",
     "p7": "Daj svima karticu godine (kartica 800211).",
     "kartica": "🏠 TABLA NA VILI — Godina izgradnje vile: 2004. Global +800211",
-    "global": "800211"}
+    "global": "800211"},
+
+  {"type": "rule", "cond": "1100", "out": "1102", "desc": "Netko ide van, tijela nema."},
+  {"type": "item", "key": "1102", "value": "",
+    "p7": "Dodaj \uD83D\uDFE2 Zelenom: Tijelo nije vani? Ti nisi ubojica! ⚠\uFE0F Tvoja tajna ostaje ista + sad ti je takoder cilj naci ubojicu + više ne želiš ubiti Inspektora.."}
 ]
