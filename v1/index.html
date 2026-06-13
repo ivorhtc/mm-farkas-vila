@@ -700,7 +700,11 @@ document.getElementById("copyRoundBtn").addEventListener("click", () => {
           .split(",").map(x => x.trim()).filter(Boolean);
 
   // Sastavi tekst
-  const lines = ["Runda __", ""];
+  const currentTime = new Date().toLocaleTimeString("en-GB", {
+    hour: "2-digit",
+    minute: "2-digit",
+  });
+  const lines = [currentTime, "Runda __", ""];
   sortedNums.forEach(num => {
     lines.push(`${num} - ${byNumber[num].join(", ")}`);
   });
