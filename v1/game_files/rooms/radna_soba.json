@@ -92,7 +92,7 @@
 	"value": "Na zidu visi velika uljana slika krajolika. Pomičete je i iza nje otkrivate uzidani sef.",
 	"p7": "Daj svim igračima karticu sefa (kartica 8005).",
 	"global": "800588",
-	"kartica": "🖼️ IZA SLIKE — Iza slike je uzidani sef. Možete ga otvoriti (8003). Global +800588"},
+	"kartica": "🖼️ IZA SLIKE — Iza slike je uzidani sef. Možete ga probati otvoriti (8003). Global +800588"},
 
   {"type": "story",
 	"story": "sef - otvara se samo ako su nasli sliku (8005) i znaju sifru (80021)"},
